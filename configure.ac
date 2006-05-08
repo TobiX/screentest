@@ -1,27 +1,24 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(screentest, 1.0)
+AC_INIT(screentest, 1.0)
+AC_CONFIG_SRCDIR([screentest.glade2])
+AM_INIT_AUTOMAKE([foreign])
 AM_CONFIG_HEADER(config.h)
 
 AC_ISC_POSIX
 AC_PROG_CC
-AM_PROG_CC_STDC
 AC_HEADER_STDC
 
-AM_PATH_GTK(1.2.0, ,
-	AC_MSG_ERROR(Cannot find GTK: Is gtk-config in path?))
+AM_PATH_GTK_2_0
 
 dnl Use -Wall if we have gcc.
-changequote(,)dnl
 if test "x$GCC" = "xyes"; then
   case " $CFLAGS " in
-  *[\ \	]-Wall[\ \	]*) ;;
+  *[[\ \	]]-Wall[[\ \	]]*) ;;
   *) CFLAGS="$CFLAGS -Wall" ;;
   esac
 fi
 
-changequote([,])dnl
-
-AC_OUTPUT(Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
 

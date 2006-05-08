@@ -1,0 +1,331 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
+
+<glade-interface>
+
+<widget class="GtkWindow" id="mainwin">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes">Screen test</property>
+  <property name="type">GTK_WINDOW_POPUP</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">True</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <property name="decorated">False</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
+  <signal name="realize" handler="on_mainwin_realize"/>
+
+  <child>
+    <widget class="GtkDrawingArea" id="area">
+      <property name="visible">True</property>
+      <property name="events">GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK</property>
+      <signal name="button_press_event" handler="on_area_button_press_event" last_modification_time="Mon, 08 May 2006 19:27:29 GMT"/>
+      <signal name="expose_event" handler="on_area_expose_event" last_modification_time="Mon, 08 May 2006 19:27:43 GMT"/>
+      <signal name="realize" handler="on_area_realize" last_modification_time="Mon, 08 May 2006 19:27:51 GMT"/>
+    </widget>
+  </child>
+</widget>
+
+<widget class="GtkMenu" id="popup">
+  <property name="visible">True</property>
+
+  <child>
+    <widget class="GtkMenuItem" id="mode">
+      <property name="visible">True</property>
+      <property name="label" translatable="yes">Mode</property>
+      <property name="use_underline">True</property>
+
+      <child>
+	<widget class="GtkMenu" id="mode_menu">
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="basic">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Basic</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">True</property>
+	      <signal name="activate" handler="on_mode_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="grid">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Grid</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">basic</property>
+	      <signal name="activate" handler="on_mode_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="horizontal">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Horizontal</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">basic</property>
+	      <signal name="activate" handler="on_mode_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="vertical">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Vertical</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">basic</property>
+	      <signal name="activate" handler="on_mode_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="blink">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Blink</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">basic</property>
+	      <signal name="activate" handler="on_mode_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="text">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Text</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">basic</property>
+	      <signal name="activate" handler="on_mode_change"/>
+	    </widget>
+	  </child>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkMenuItem" id="fg_color">
+      <property name="visible">True</property>
+      <property name="label" translatable="yes">Foreground Color</property>
+      <property name="use_underline">True</property>
+
+      <child>
+	<widget class="GtkMenu" id="fg_color_menu">
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_white">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">White</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">True</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_red">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Red</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">fg_white</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_green">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Green</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">fg_white</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_blue">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Blue</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">fg_white</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_cyan">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Cyan</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">fg_white</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_magenta">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Magenta</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">fg_white</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_yellow">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Yellow</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">fg_white</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="fg_black">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Black</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">fg_white</property>
+	      <signal name="activate" handler="on_color_change"/>
+	    </widget>
+	  </child>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkMenuItem" id="bg_color">
+      <property name="visible">True</property>
+      <property name="label" translatable="yes">Background Color</property>
+      <property name="use_underline">True</property>
+
+      <child>
+	<widget class="GtkMenu" id="bg_color_menu">
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_white">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">White</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_red">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Red</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">bg_white</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_green">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Green</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">bg_white</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_blue">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Blue</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">bg_white</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_cyan">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Cyan</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">bg_white</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_magenta">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Magenta</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">bg_white</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_yellow">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Yellow</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">False</property>
+	      <property name="group">bg_white</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkRadioMenuItem" id="bg_black">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Black</property>
+	      <property name="use_underline">True</property>
+	      <property name="active">True</property>
+	      <property name="group">bg_white</property>
+	      <signal name="activate" handler="on_bgcolor_change"/>
+	    </widget>
+	  </child>
+	</widget>
+      </child>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkSeparatorMenuItem" id="separator1">
+      <property name="visible">True</property>
+    </widget>
+  </child>
+
+  <child>
+    <widget class="GtkImageMenuItem" id="exit">
+      <property name="visible">True</property>
+      <property name="label">gtk-quit</property>
+      <property name="use_stock">True</property>
+      <signal name="activate" handler="gtk_main_quit" last_modification_time="Mon, 08 May 2006 14:35:42 GMT"/>
+    </widget>
+  </child>
+</widget>
+
+</glade-interface>

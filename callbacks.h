@@ -1,9 +1,8 @@
-/* $Id: callbacks.h,v 1.1.1.1 2001/08/20 18:10:55 kas Exp $ */
-
 /*
  *  Screentest - CRT monitor testing utility.
  *  http://www.fi.muni.cz/~kas/screentest/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
+ *  Copyright (C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -18,6 +17,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
+
 #include <gtk/gtk.h>
 
 enum test_mode {
@@ -75,14 +75,14 @@ on_area_expose_event(GtkWidget * widget,
 
 void on_area_realize(GtkWidget * widget, gpointer user_data);
 
-gboolean
-on_mainwin_key_press_event(GtkWidget * widget,
-			   GdkEventKey * event, gpointer user_data);
-
-void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
 void on_color_change(GtkMenuItem * menuitem, gpointer user_data);
 
 void on_mode_change(GtkMenuItem * menuitem, gpointer user_data);
 
 void on_bgcolor_change(GtkMenuItem * menuitem, gpointer user_data);
+
+
+gboolean
+on_area_key_press_event                (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data);

@@ -1,9 +1,8 @@
-/* $Id: callbacks.c,v 1.1.1.1 2001/08/20 18:10:55 kas Exp $ */
-
 /*
  *  Screentest - CRT monitor testing utility.
  *  http://www.fi.muni.cz/~kas/screentest/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
+ *  Copyright (C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -68,7 +67,7 @@ static void get_color(GdkColormap * cmap, gint num, gchar * name)
 
 static void get_gray(GdkColormap * cmap, gint num)
 {
-	GdkColor *col = grays + num;
+	GdkColor *col = &grays[num];
 
 	col->red = col->green = col->blue =
 	    num * ((1 << 16) - 1) / (GRAYS_MAX - 1);
@@ -96,8 +95,8 @@ void on_area_realize(GtkWidget * widget, gpointer user_data)
 
 	gdk_window_clear(w);
 
-	gdk_color_white(cmap, fgcolors + COLOR_WHITE);
-	gdk_color_black(cmap, fgcolors + COLOR_BLACK);
+	gdk_color_white(cmap, &fgcolors[COLOR_WHITE]);
+	gdk_color_black(cmap, &fgcolors[COLOR_BLACK]);
 
 	get_color(cmap, COLOR_RED, "#ff0000");
 	get_color(cmap, COLOR_GREEN, "#00ff00");
@@ -145,9 +144,9 @@ static void change_bgcolor(gint num)
 {
 	if (num >= COLOR_MAX || num < 0)
 		return;
-	gdk_gc_set_foreground(backgc, fgcolors + num);
-	gdk_gc_set_background(gc, fgcolors + num);
-	gdk_window_set_background(area->window, fgcolors + num);
+	gdk_gc_set_foreground(backgc, &fgcolors[num]);
+	gdk_gc_set_background(gc, &fgcolors[num]);
+	gdk_window_set_background(area->window, &fgcolors[num]);
 	bg_color = num;
 
 	if (current_test->draw != NULL)
@@ -171,10 +170,8 @@ on_area_button_press_event(GtkWidget * widget,
 		change_color(fg_color);
 		break;
 	case 3:
-		if (popup == NULL) {
+		if (popup == NULL)
 			popup = create_popup();
-			gtk_widget_show(popup);
-		}
 		gtk_menu_popup(GTK_MENU(popup), NULL, NULL, NULL, NULL,
 			       event->button, event->time);
 		break;
@@ -203,11 +200,6 @@ on_area_expose_event(GtkWidget * widget,
 	if (current_test->draw != NULL)
 		current_test->draw(widget, FALSE);
 	return FALSE;
-}
-
-void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gtk_main_quit();
 }
 
 void on_color_change(GtkMenuItem * menuitem, gpointer user_data)
@@ -266,3 +258,4 @@ void on_mode_change(GtkMenuItem * menuitem, gpointer user_data)
 		current_test->draw(area, TRUE);
 	}
 }
+

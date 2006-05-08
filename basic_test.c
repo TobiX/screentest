@@ -1,9 +1,8 @@
-/* $Id: basic_test.c,v 1.1.1.1 2001/08/20 18:10:55 kas Exp $ */
-
 /*
  *  Screentest - CRT monitor testing utility.
  *  http://www.fi.muni.cz/~kas/screentest/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
+ *  Copyright (C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -18,26 +17,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-/* $Id: basic_test.c,v 1.1.1.1 2001/08/20 18:10:55 kas Exp $ */
 
-/*
- *  Screentest - CRT monitor testing utility.
- *  http://www.fi.muni.cz/~kas/screentest/
- *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License version 2 as
- *  published by the Free Software Foundation.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- */
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -71,13 +51,13 @@ static void draw_boxes(GdkWindow * win, GdkColor * colors, gint ncols,
 	int i;
 
 	for (i = 0; i < ncols; i++) {
-		gdk_gc_set_foreground(gc, colors + i);
+		gdk_gc_set_foreground(gc, &colors[i]);
 
 		gdk_draw_rectangle(win, gc, TRUE, x, y, d, d);
 		x += d;
 	}
 
-	gdk_gc_set_foreground(gc, fgcolors + fg_color);
+	gdk_gc_set_foreground(gc, &fgcolors[fg_color]);
 }
 
 static void basic_draw(GtkWidget * widget, gboolean clear)
@@ -90,7 +70,7 @@ static void basic_draw(GtkWidget * widget, gboolean clear)
 	static gchar *text[] = {
 		"Screentest v" VERSION,
 		"(C) 2001 Jan \"Yenya\" Kasprzak <kas@fi.muni.cz>",
-		"http://www.fi.muni.cz/~kas/screentest/",
+		"(C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>",
 		"Left Button - param cycle, if any",
 		"Middle Button - color cycle",
 		"Right Button - menu",

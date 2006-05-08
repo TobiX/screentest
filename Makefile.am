@@ -1,13 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
 INCLUDES = \
-	@GTK_CFLAGS@
+	$(GTK_CFLAGS)
 
-EXTRA_DIST = screentest.glade NEW_TESTS screentest.spec install-sh \
-	mkinstalldirs missing
+EXTRA_DIST = screentest.glade2 NEW_TESTS screentest.spec
 
 bin_PROGRAMS = screentest
-noinst_PROGRAMS = screentest.static
 
 screentest_SOURCES = \
 	main.c \
@@ -18,9 +16,4 @@ screentest_SOURCES = \
 	vertical_test.c 
 
 
-screentest_LDADD = @GTK_LIBS@ -lpthread -lXdmcp -lXau
-
-screentest_static_SOURCES = $(screentest_SOURCES)
-screentest_static_LDADD = $(screentest_LDADD)
-screentest_static_LDFLAGS = -static -s
-
+screentest_LDADD = $(GTK_LIBS)
