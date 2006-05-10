@@ -206,7 +206,7 @@ void on_fg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 	if (fg_color_selector == NULL)
 		fg_color_selector = create_fg_color_selector();
-	//gtk_window_set_transient_for(GTK_WINDOW(mainwin), GTK_WINDOW(fg_color_selector));
+	gtk_window_set_transient_for(GTK_WINDOW(fg_color_selector), GTK_WINDOW(mainwin));
 
 	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(fg_color_selector)->colorsel);
 	gtk_color_selection_set_current_color(colorsel, fg_color);
@@ -231,7 +231,7 @@ void on_bg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 	if (bg_color_selector == NULL)
 		bg_color_selector = create_bg_color_selector();
-	//gtk_window_set_transient_for(GTK_WINDOW(mainwin), GTK_WINDOW(fg_color_selector));
+	gtk_window_set_transient_for(GTK_WINDOW(bg_color_selector), GTK_WINDOW(mainwin));
 
 	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(bg_color_selector)->colorsel);
 	gtk_color_selection_set_current_color(colorsel, bg_color);
