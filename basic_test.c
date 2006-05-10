@@ -60,7 +60,7 @@ static void draw_boxes(GdkWindow * win, GdkColor * colors, gint ncols,
 	gdk_gc_set_foreground(gc, &fgcolors[fg_color]);
 }
 
-static void basic_draw(GtkWidget * widget, gboolean clear)
+static void basic_draw(GtkWidget * widget)
 {
 	GdkWindow *win = widget->window;
 	gint w, h;
@@ -75,9 +75,6 @@ static void basic_draw(GtkWidget * widget, gboolean clear)
 		"Middle Button - color cycle",
 		"Right Button - menu",
 	};
-
-	if (clear)
-		gdk_window_clear(win);
 
 	gdk_window_get_size(win, &w, &h);
 

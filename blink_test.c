@@ -1,9 +1,8 @@
-/* $Id: blink_test.c,v 1.1.1.1 2001/08/20 18:10:55 kas Exp $ */
-
 /*
  *  Screentest - CRT monitor testing utility.
  *  http://www.fi.muni.cz/~kas/screentest/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
+ *  Copyright (C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -34,14 +33,11 @@ static guint timeout;
 static gint blink_type;
 static gint blink_step;
 
-static void blink_draw(GtkWidget * widget, gboolean clear)
+static void blink_draw(GtkWidget * widget)
 {
 	GdkWindow *win = widget->window;
 	gint w, h;
 	GdkGC *gc1, *gc2;
-
-	if (clear)
-		gdk_window_clear(win);
 
 	gdk_window_get_size(win, &w, &h);
 
@@ -75,7 +71,7 @@ static gboolean blink_timeout(gpointer data)
 {
 	GtkWidget *widget = (GtkWidget *) data;
 	blink_step = !blink_step;
-	blink_draw(widget, FALSE);
+	blink_draw(widget);
 	return TRUE;
 }
 

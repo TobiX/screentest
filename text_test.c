@@ -1,9 +1,8 @@
-/* $Id: text_test.c,v 1.1.1.1 2001/08/20 18:10:55 kas Exp $ */
-
 /*
  *  Screentest - CRT monitor testing utility.
  *  http://www.fi.muni.cz/~kas/screentest/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
+ *  Copyright (C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -72,14 +71,11 @@ static void text_init(GtkWidget * widget)
 	font_init(widget);
 }
 
-static void text_draw(GtkWidget * widget, gboolean clear)
+static void text_draw(GtkWidget * widget)
 {
 	GdkWindow *win = widget->window;
 	gint w, h;
 	gint x, y;
-
-	if (clear)
-		gdk_window_clear(win);
 
 	gdk_window_get_size(win, &w, &h);
 

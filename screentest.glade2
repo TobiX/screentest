@@ -5,8 +5,9 @@
 
 <widget class="GtkWindow" id="mainwin">
   <property name="visible">True</property>
+  <property name="events">GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK</property>
   <property name="title" translatable="yes">Screen test</property>
-  <property name="type">GTK_WINDOW_POPUP</property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">True</property>
   <property name="resizable">True</property>
@@ -19,15 +20,11 @@
   <property name="focus_on_map">True</property>
   <property name="urgency_hint">False</property>
   <signal name="realize" handler="on_mainwin_realize"/>
+  <signal name="expose_event" handler="on_mainwin_expose_event" last_modification_time="Tue, 09 May 2006 23:48:24 GMT"/>
+  <signal name="button_press_event" handler="on_mainwin_button_press_event" last_modification_time="Tue, 09 May 2006 23:48:43 GMT"/>
 
   <child>
-    <widget class="GtkDrawingArea" id="area">
-      <property name="visible">True</property>
-      <property name="events">GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK</property>
-      <signal name="button_press_event" handler="on_area_button_press_event" last_modification_time="Mon, 08 May 2006 19:27:29 GMT"/>
-      <signal name="expose_event" handler="on_area_expose_event" last_modification_time="Mon, 08 May 2006 19:27:43 GMT"/>
-      <signal name="realize" handler="on_area_realize" last_modification_time="Mon, 08 May 2006 19:27:51 GMT"/>
-    </widget>
+    <placeholder/>
   </child>
 </widget>
 

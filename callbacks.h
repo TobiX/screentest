@@ -32,7 +32,7 @@ enum test_mode {
 
 struct test_ops {
 	void (*init) (GtkWidget * widget);
-	void (*draw) (GtkWidget * widget, gboolean clear);
+	void (*draw) (GtkWidget * widget);
 	void (*cycle) (GtkWidget * widget);
 	void (*close) (GtkWidget * widget);
 };
@@ -62,18 +62,16 @@ extern GdkColor grays[];
 void on_mainwin_realize(GtkWidget * widget, gpointer user_data);
 
 gboolean
-on_area_button_press_event(GtkWidget * widget,
+on_mainwin_button_press_event(GtkWidget * widget,
 			   GdkEventButton * event, gpointer user_data);
 
 gboolean
-on_area_key_press_event(GtkWidget * widget,
+on_mainwin_key_press_event(GtkWidget * widget,
 			GdkEventKey * event, gpointer user_data);
 
 gboolean
-on_area_expose_event(GtkWidget * widget,
+on_mainwin_expose_event(GtkWidget * widget,
 		     GdkEventExpose * event, gpointer user_data);
-
-void on_area_realize(GtkWidget * widget, gpointer user_data);
 
 void on_color_change(GtkMenuItem * menuitem, gpointer user_data);
 
@@ -81,8 +79,3 @@ void on_mode_change(GtkMenuItem * menuitem, gpointer user_data);
 
 void on_bgcolor_change(GtkMenuItem * menuitem, gpointer user_data);
 
-
-gboolean
-on_area_key_press_event                (GtkWidget       *widget,
-                                        GdkEventKey     *event,
-                                        gpointer         user_data);

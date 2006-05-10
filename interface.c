@@ -30,34 +30,25 @@ GtkWidget*
 create_mainwin (void)
 {
   GtkWidget *mainwin;
-  GtkWidget *area;
 
-  mainwin = gtk_window_new (GTK_WINDOW_POPUP);
+  mainwin = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_set_events (mainwin, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
   gtk_window_set_title (GTK_WINDOW (mainwin), _("Screen test"));
   gtk_window_set_modal (GTK_WINDOW (mainwin), TRUE);
   gtk_window_set_decorated (GTK_WINDOW (mainwin), FALSE);
 
-  area = gtk_drawing_area_new ();
-  gtk_widget_show (area);
-  gtk_container_add (GTK_CONTAINER (mainwin), area);
-  gtk_widget_set_events (area, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
-
   g_signal_connect ((gpointer) mainwin, "realize",
                     G_CALLBACK (on_mainwin_realize),
                     NULL);
-  g_signal_connect ((gpointer) area, "button_press_event",
-                    G_CALLBACK (on_area_button_press_event),
+  g_signal_connect ((gpointer) mainwin, "expose_event",
+                    G_CALLBACK (on_mainwin_expose_event),
                     NULL);
-  g_signal_connect ((gpointer) area, "expose_event",
-                    G_CALLBACK (on_area_expose_event),
-                    NULL);
-  g_signal_connect ((gpointer) area, "realize",
-                    G_CALLBACK (on_area_realize),
+  g_signal_connect ((gpointer) mainwin, "button_press_event",
+                    G_CALLBACK (on_mainwin_button_press_event),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (mainwin, mainwin, "mainwin");
-  GLADE_HOOKUP_OBJECT (mainwin, area, "area");
 
   return mainwin;
 }

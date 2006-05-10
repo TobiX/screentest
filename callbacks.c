@@ -17,6 +17,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -37,15 +38,6 @@ GdkGC *gc, *backgc;
 static GtkWidget *popup = NULL;
 static GtkWidget *area = NULL;
 static struct test_ops *current_test = &basic_ops;
-
-void on_mainwin_realize(GtkWidget * widget, gpointer user_data)
-{
-	gint w, h;
-	w = gdk_screen_width();
-	h = gdk_screen_height();
-
-	gdk_window_resize(widget->window, w, h);
-}
 
 static void get_color(GdkColormap * cmap, gint num, gchar * name)
 {
@@ -81,19 +73,17 @@ static void get_gray(GdkColormap * cmap, gint num)
 	}
 }
 
-void on_area_realize(GtkWidget * widget, gpointer user_data)
+void on_mainwin_realize(GtkWidget * widget, gpointer user_data)
 {
-	GdkWindow *w = widget->window;
+	gint i;
 	GdkColormap *cmap = gdk_colormap_get_system();
-
 	GdkGCValues gcv;
 
-	int i;
-
-	area = widget;
-
-
-	gdk_window_clear(w);
+#ifdef DEBUG
+	gdk_window_resize(widget->window, 800, 600);
+#else
+	gtk_window_fullscreen(GTK_WINDOW(widget));
+#endif
 
 	gdk_color_white(cmap, &fgcolors[COLOR_WHITE]);
 	gdk_color_black(cmap, &fgcolors[COLOR_BLACK]);
@@ -105,25 +95,24 @@ void on_area_realize(GtkWidget * widget, gpointer user_data)
 	get_color(cmap, COLOR_MAGENTA, "#ff00ff");
 	get_color(cmap, COLOR_YELLOW, "#ffff00");
 
-	gdk_window_set_background(w, fgcolors + COLOR_BLACK);
-
 	for (i = 0; i < GRAYS_MAX; i++)
 		get_gray(cmap, i);
+
+	area = widget;
 
 	gcv.foreground = fgcolors[COLOR_WHITE];
 	gcv.background = fgcolors[COLOR_BLACK];
 	gcv.function = GDK_COPY;
 
-	gc = gdk_gc_new_with_values(w, &gcv, GDK_GC_FOREGROUND
+	gc = gdk_gc_new_with_values(area->window, &gcv, GDK_GC_FOREGROUND
 				    | GDK_GC_BACKGROUND | GDK_GC_FUNCTION);
 
 	gcv.foreground = fgcolors[COLOR_BLACK];
 	gcv.background = fgcolors[COLOR_WHITE];
-	backgc = gdk_gc_new_with_values(w, &gcv, GDK_GC_FOREGROUND
+	backgc = gdk_gc_new_with_values(area->window, &gcv, GDK_GC_FOREGROUND
 					| GDK_GC_BACKGROUND |
 					GDK_GC_FUNCTION);
 
-	current_test = &basic_ops;
 	if (current_test->init != NULL)
 		current_test->init(widget);
 }
@@ -136,8 +125,7 @@ static void change_color(gint num)
 	gdk_gc_set_background(backgc, &fgcolors[num]);
 	fg_color = num;
 
-	if (current_test->draw != NULL)
-		current_test->draw(area, TRUE);
+	gdk_window_invalidate_rect(area->window, NULL, FALSE);
 }
 
 static void change_bgcolor(gint num)
@@ -146,22 +134,20 @@ static void change_bgcolor(gint num)
 		return;
 	gdk_gc_set_foreground(backgc, &fgcolors[num]);
 	gdk_gc_set_background(gc, &fgcolors[num]);
-	gdk_window_set_background(area->window, &fgcolors[num]);
 	bg_color = num;
 
-	if (current_test->draw != NULL)
-		current_test->draw(area, TRUE);
+	gdk_window_invalidate_rect(area->window, NULL, FALSE);
 }
 
 gboolean
-on_area_button_press_event(GtkWidget * widget,
+on_mainwin_button_press_event(GtkWidget * widget,
 			   GdkEventButton * event, gpointer user_data)
 {
 	switch (event->button) {
 	case 1:
 		if (current_test->cycle != NULL) {
 			current_test->cycle(widget);
-			current_test->draw(widget, TRUE);
+			gdk_window_invalidate_rect(area->window, NULL, FALSE);
 		}
 		break;
 	case 2:
@@ -185,21 +171,23 @@ on_area_button_press_event(GtkWidget * widget,
  * KeyPress events. How to enable this?
  */
 gboolean
-on_area_key_press_event(GtkWidget * widget,
+on_mainwin_key_press_event(GtkWidget * widget,
 			GdkEventKey * event, gpointer user_data)
 {
-	printf("Key_press\n");
 	gtk_main_quit();
 	return FALSE;
 }
 
 gboolean
-on_area_expose_event(GtkWidget * widget,
+on_mainwin_expose_event(GtkWidget * widget,
 		     GdkEventExpose * event, gpointer user_data)
 {
+	gdk_window_set_background(area->window, &fgcolors[bg_color]);
+	gdk_window_clear(area->window);
+
 	if (current_test->draw != NULL)
-		current_test->draw(widget, FALSE);
-	return FALSE;
+		current_test->draw(widget);
+	return TRUE;
 }
 
 void on_color_change(GtkMenuItem * menuitem, gpointer user_data)
@@ -255,7 +243,7 @@ void on_mode_change(GtkMenuItem * menuitem, gpointer user_data)
 		if (current_test->init != NULL) {
 			current_test->init(area);
 		}
-		current_test->draw(area, TRUE);
+		on_mainwin_expose_event(area, NULL, NULL);
 	}
 }
 
