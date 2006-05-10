@@ -25,59 +25,27 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "callbacks.h"
 #include "interface.h"
 #include "support.h"
 
 GdkColor fgcolors[COLOR_MAX];
-gint fg_color = COLOR_WHITE, bg_color = COLOR_BLACK;
+GdkColor *fg_color, *bg_color;
 GdkColor grays[GRAYS_MAX];
 GdkGC *gc, *backgc;
+int fg_count = COLOR_WHITE;
 
 static GtkWidget *popup = NULL;
-static GtkWidget *area = NULL;
+static GtkWidget *mainwin = NULL;
+static GtkWidget *fg_color_selector = NULL;
+static GtkWidget *bg_color_selector = NULL;
 static struct test_ops *current_test = &basic_ops;
-
-static void get_color(GdkColormap * cmap, gint num, gchar * name)
-{
-	if (!gdk_color_parse(name, &fgcolors[num])) {
-		printf("Cannot find color %s\n", name);
-		exit(1);
-	}
-	if (!gdk_colormap_alloc_color(cmap, &fgcolors[num], FALSE, TRUE)) {
-		printf("Cannot allocate color %s - trying non-exact.\n",
-		       name);
-		if (!gdk_colormap_alloc_color(cmap, &fgcolors[num], FALSE,
-					      FALSE)) {
-			printf("Even non-exact alloc failed (%s)!\n",
-			       name);
-			exit(1);
-		}
-	}
-}
-
-static void get_gray(GdkColormap * cmap, gint num)
-{
-	GdkColor *col = &grays[num];
-
-	col->red = col->green = col->blue =
-	    num * ((1 << 16) - 1) / (GRAYS_MAX - 1);
-	if (!gdk_colormap_alloc_color(cmap, col, FALSE, TRUE)) {
-		printf("Cannot allocate gray %d - trying non-exact.\n",
-		       num);
-		if (!gdk_colormap_alloc_color(cmap, col, FALSE, FALSE)) {
-			printf("Even non-exact alloc failed (%d)!\n", num);
-			exit(1);
-		}
-	}
-}
 
 void on_mainwin_realize(GtkWidget * widget, gpointer user_data)
 {
 	gint i;
-	GdkColormap *cmap = gdk_colormap_get_system();
-	GdkGCValues gcv;
 
 #ifdef DEBUG
 	gdk_window_resize(widget->window, 800, 600);
@@ -85,75 +53,78 @@ void on_mainwin_realize(GtkWidget * widget, gpointer user_data)
 	gtk_window_fullscreen(GTK_WINDOW(widget));
 #endif
 
-	gdk_color_white(cmap, &fgcolors[COLOR_WHITE]);
-	gdk_color_black(cmap, &fgcolors[COLOR_BLACK]);
+	memset(fgcolors, 0, COLOR_MAX * sizeof(GdkColor));
 
-	get_color(cmap, COLOR_RED, "#ff0000");
-	get_color(cmap, COLOR_GREEN, "#00ff00");
-	get_color(cmap, COLOR_BLUE, "#0000ff");
-	get_color(cmap, COLOR_CYAN, "#00ffff");
-	get_color(cmap, COLOR_MAGENTA, "#ff00ff");
-	get_color(cmap, COLOR_YELLOW, "#ffff00");
+	fgcolors[COLOR_WHITE].red = fgcolors[COLOR_WHITE].green =
+		fgcolors[COLOR_WHITE].blue = 65535;
+
+	fgcolors[COLOR_RED].red = 65535;
+
+	fgcolors[COLOR_GREEN].green = 65535;
+
+	fgcolors[COLOR_BLUE].blue = 65535;
+
+	fgcolors[COLOR_CYAN].green = 65535;
+	fgcolors[COLOR_CYAN].blue = 65535;
+
+	fgcolors[COLOR_MAGENTA].red = 65535;
+	fgcolors[COLOR_MAGENTA].blue = 65535;
+
+	fgcolors[COLOR_YELLOW].red = 65535;
+	fgcolors[COLOR_YELLOW].green = 65535;
+
+	/* COLOR_BLACK is 0 already */
+
+	fg_color = gdk_color_copy(&fgcolors[COLOR_WHITE]);
+	bg_color = gdk_color_copy(&fgcolors[COLOR_BLACK]);
 
 	for (i = 0; i < GRAYS_MAX; i++)
-		get_gray(cmap, i);
+		grays[i].red = grays[i].green = grays[i].blue = i *
+			((1 << 16) - 1) / (GRAYS_MAX - 1);
 
-	area = widget;
+	mainwin = widget;
 
-	gcv.foreground = fgcolors[COLOR_WHITE];
-	gcv.background = fgcolors[COLOR_BLACK];
-	gcv.function = GDK_COPY;
-
-	gc = gdk_gc_new_with_values(area->window, &gcv, GDK_GC_FOREGROUND
-				    | GDK_GC_BACKGROUND | GDK_GC_FUNCTION);
-
-	gcv.foreground = fgcolors[COLOR_BLACK];
-	gcv.background = fgcolors[COLOR_WHITE];
-	backgc = gdk_gc_new_with_values(area->window, &gcv, GDK_GC_FOREGROUND
-					| GDK_GC_BACKGROUND |
-					GDK_GC_FUNCTION);
+	gc = gdk_gc_new(mainwin->window);
+	backgc = gdk_gc_new(mainwin->window);
 
 	if (current_test->init != NULL)
 		current_test->init(widget);
 }
 
-static void change_color(gint num)
+static void update_fg_color(void)
 {
-	if (num >= COLOR_MAX || num < 0)
-		return;
-	gdk_gc_set_foreground(gc, &fgcolors[num]);
-	gdk_gc_set_background(backgc, &fgcolors[num]);
-	fg_color = num;
+	gdk_gc_set_rgb_fg_color(gc, fg_color);
+	gdk_gc_set_rgb_bg_color(backgc, fg_color);
 
-	gdk_window_invalidate_rect(area->window, NULL, FALSE);
+	gdk_window_invalidate_rect(mainwin->window, NULL, FALSE);
 }
 
-static void change_bgcolor(gint num)
+static void update_bg_color(void)
 {
-	if (num >= COLOR_MAX || num < 0)
-		return;
-	gdk_gc_set_foreground(backgc, &fgcolors[num]);
-	gdk_gc_set_background(gc, &fgcolors[num]);
-	bg_color = num;
+	gdk_rgb_find_color(gtk_widget_get_colormap(GTK_WIDGET(mainwin)), bg_color);
+	gdk_gc_set_rgb_bg_color(gc, bg_color);
+	gdk_gc_set_rgb_fg_color(backgc, bg_color);
 
-	gdk_window_invalidate_rect(area->window, NULL, FALSE);
+	gdk_window_invalidate_rect(mainwin->window, NULL, FALSE);
 }
 
 gboolean
-on_mainwin_button_press_event(GtkWidget * widget,
-			   GdkEventButton * event, gpointer user_data)
+on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
+		gpointer user_data)
 {
 	switch (event->button) {
 	case 1:
 		if (current_test->cycle != NULL) {
 			current_test->cycle(widget);
-			gdk_window_invalidate_rect(area->window, NULL, FALSE);
+			gdk_window_invalidate_rect(mainwin->window, NULL, FALSE);
 		}
 		break;
 	case 2:
-		if (++fg_color >= COLOR_MAX)
-			fg_color = 0;
-		change_color(fg_color);
+		if (++fg_count >= COLOR_MAX)
+			fg_count = COLOR_WHITE;
+		gdk_color_free(fg_color);
+		fg_color = gdk_color_copy(&fgcolors[fg_count]);
+		update_fg_color();
 		break;
 	case 3:
 		if (popup == NULL)
@@ -171,44 +142,26 @@ on_mainwin_button_press_event(GtkWidget * widget,
  * KeyPress events. How to enable this?
  */
 gboolean
-on_mainwin_key_press_event(GtkWidget * widget,
-			GdkEventKey * event, gpointer user_data)
+on_mainwin_key_press_event(GtkWidget *widget, GdkEventKey *event,
+		gpointer user_data)
 {
 	gtk_main_quit();
 	return FALSE;
 }
 
 gboolean
-on_mainwin_expose_event(GtkWidget * widget,
-		     GdkEventExpose * event, gpointer user_data)
+on_mainwin_expose_event(GtkWidget *widget, GdkEventExpose *event,
+		gpointer user_data)
 {
-	gdk_window_set_background(area->window, &fgcolors[bg_color]);
-	gdk_window_clear(area->window);
+	gdk_window_set_background(mainwin->window, bg_color);
+	gdk_window_clear(mainwin->window);
 
 	if (current_test->draw != NULL)
 		current_test->draw(widget);
 	return TRUE;
 }
 
-void on_color_change(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkCheckMenuItem *checkmenuitem = GTK_CHECK_MENU_ITEM(menuitem);
-	if (!checkmenuitem->active)
-		return;
-
-	change_color((gint) user_data);
-}
-
-void on_bgcolor_change(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkCheckMenuItem *checkmenuitem = GTK_CHECK_MENU_ITEM(menuitem);
-	if (!checkmenuitem->active)
-		return;
-
-	change_bgcolor((gint) user_data);
-}
-
-void on_mode_change(GtkMenuItem * menuitem, gpointer user_data)
+void on_mode_change(GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkCheckMenuItem *checkmenuitem = GTK_CHECK_MENU_ITEM(menuitem);
 
@@ -216,7 +169,7 @@ void on_mode_change(GtkMenuItem * menuitem, gpointer user_data)
 
 	if (!checkmenuitem->active) {
 		if (current_test->close != NULL) {
-			current_test->close(area);
+			current_test->close(mainwin);
 			current_test = NULL;
 		}
 	} else {
@@ -241,9 +194,59 @@ void on_mode_change(GtkMenuItem * menuitem, gpointer user_data)
 			break;
 		}
 		if (current_test->init != NULL) {
-			current_test->init(area);
+			current_test->init(mainwin);
 		}
-		on_mainwin_expose_event(area, NULL, NULL);
+		on_mainwin_expose_event(mainwin, NULL, NULL);
 	}
+}
+
+void on_fg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	GtkColorSelection *colorsel;
+
+	if (fg_color_selector == NULL)
+		fg_color_selector = create_fg_color_selector();
+	//gtk_window_set_transient_for(GTK_WINDOW(mainwin), GTK_WINDOW(fg_color_selector));
+
+	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(fg_color_selector)->colorsel);
+	gtk_color_selection_set_current_color(colorsel, fg_color);
+	switch (gtk_dialog_run(GTK_DIALOG(fg_color_selector))) {
+		case GTK_RESPONSE_OK:
+			gtk_color_selection_get_current_color(colorsel,
+					fg_color);
+			update_fg_color();
+			break;
+		case GTK_RESPONSE_CANCEL:
+		case GTK_RESPONSE_DELETE_EVENT:
+			break;
+		default:
+			g_assert_not_reached();
+	}
+	gtk_widget_hide(fg_color_selector);
+}
+
+void on_bg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	GtkColorSelection *colorsel;
+
+	if (bg_color_selector == NULL)
+		bg_color_selector = create_bg_color_selector();
+	//gtk_window_set_transient_for(GTK_WINDOW(mainwin), GTK_WINDOW(fg_color_selector));
+
+	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(bg_color_selector)->colorsel);
+	gtk_color_selection_set_current_color(colorsel, bg_color);
+	switch (gtk_dialog_run(GTK_DIALOG(bg_color_selector))) {
+		case GTK_RESPONSE_OK:
+			gtk_color_selection_get_current_color(colorsel,
+					bg_color);
+			update_bg_color();
+			break;
+		case GTK_RESPONSE_CANCEL:
+		case GTK_RESPONSE_DELETE_EVENT:
+			break;
+		default:
+			g_assert_not_reached();
+	}
+	gtk_widget_hide(bg_color_selector);
 }
 

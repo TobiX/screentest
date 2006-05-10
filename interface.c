@@ -67,27 +67,9 @@ create_popup (void)
   GtkWidget *blink;
   GtkWidget *text;
   GtkWidget *fg_color;
-  GtkWidget *fg_color_menu;
-  GSList *fg_white_group = NULL;
-  GtkWidget *fg_white;
-  GtkWidget *fg_red;
-  GtkWidget *fg_green;
-  GtkWidget *fg_blue;
-  GtkWidget *fg_cyan;
-  GtkWidget *fg_magenta;
-  GtkWidget *fg_yellow;
-  GtkWidget *fg_black;
+  GtkWidget *image4;
   GtkWidget *bg_color;
-  GtkWidget *bg_color_menu;
-  GSList *bg_white_group = NULL;
-  GtkWidget *bg_white;
-  GtkWidget *bg_red;
-  GtkWidget *bg_green;
-  GtkWidget *bg_blue;
-  GtkWidget *bg_cyan;
-  GtkWidget *bg_magenta;
-  GtkWidget *bg_yellow;
-  GtkWidget *bg_black;
+  GtkWidget *image5;
   GtkWidget *separator1;
   GtkWidget *exit;
   GtkAccelGroup *accel_group;
@@ -134,101 +116,27 @@ create_popup (void)
   gtk_widget_show (text);
   gtk_container_add (GTK_CONTAINER (mode_menu), text);
 
-  fg_color = gtk_menu_item_new_with_mnemonic (_("Foreground Color"));
+  fg_color = gtk_image_menu_item_new_with_mnemonic (_("Foreground Color"));
   gtk_widget_show (fg_color);
   gtk_container_add (GTK_CONTAINER (popup), fg_color);
+  gtk_widget_add_accelerator (fg_color, "activate", accel_group,
+                              GDK_F, (GdkModifierType) GDK_CONTROL_MASK,
+                              GTK_ACCEL_VISIBLE);
 
-  fg_color_menu = gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (fg_color), fg_color_menu);
+  image4 = gtk_image_new_from_stock ("gtk-color-picker", GTK_ICON_SIZE_MENU);
+  gtk_widget_show (image4);
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (fg_color), image4);
 
-  fg_white = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("White"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_white));
-  gtk_widget_show (fg_white);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_white);
-  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (fg_white), TRUE);
-
-  fg_red = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("Red"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_red));
-  gtk_widget_show (fg_red);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_red);
-
-  fg_green = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("Green"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_green));
-  gtk_widget_show (fg_green);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_green);
-
-  fg_blue = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("Blue"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_blue));
-  gtk_widget_show (fg_blue);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_blue);
-
-  fg_cyan = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("Cyan"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_cyan));
-  gtk_widget_show (fg_cyan);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_cyan);
-
-  fg_magenta = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("Magenta"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_magenta));
-  gtk_widget_show (fg_magenta);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_magenta);
-
-  fg_yellow = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("Yellow"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_yellow));
-  gtk_widget_show (fg_yellow);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_yellow);
-
-  fg_black = gtk_radio_menu_item_new_with_mnemonic (fg_white_group, _("Black"));
-  fg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (fg_black));
-  gtk_widget_show (fg_black);
-  gtk_container_add (GTK_CONTAINER (fg_color_menu), fg_black);
-
-  bg_color = gtk_menu_item_new_with_mnemonic (_("Background Color"));
+  bg_color = gtk_image_menu_item_new_with_mnemonic (_("Background Color"));
   gtk_widget_show (bg_color);
   gtk_container_add (GTK_CONTAINER (popup), bg_color);
+  gtk_widget_add_accelerator (bg_color, "activate", accel_group,
+                              GDK_B, (GdkModifierType) GDK_CONTROL_MASK,
+                              GTK_ACCEL_VISIBLE);
 
-  bg_color_menu = gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (bg_color), bg_color_menu);
-
-  bg_white = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("White"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_white));
-  gtk_widget_show (bg_white);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_white);
-
-  bg_red = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("Red"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_red));
-  gtk_widget_show (bg_red);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_red);
-
-  bg_green = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("Green"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_green));
-  gtk_widget_show (bg_green);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_green);
-
-  bg_blue = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("Blue"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_blue));
-  gtk_widget_show (bg_blue);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_blue);
-
-  bg_cyan = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("Cyan"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_cyan));
-  gtk_widget_show (bg_cyan);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_cyan);
-
-  bg_magenta = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("Magenta"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_magenta));
-  gtk_widget_show (bg_magenta);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_magenta);
-
-  bg_yellow = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("Yellow"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_yellow));
-  gtk_widget_show (bg_yellow);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_yellow);
-
-  bg_black = gtk_radio_menu_item_new_with_mnemonic (bg_white_group, _("Black"));
-  bg_white_group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (bg_black));
-  gtk_widget_show (bg_black);
-  gtk_container_add (GTK_CONTAINER (bg_color_menu), bg_black);
-  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (bg_black), TRUE);
+  image5 = gtk_image_new_from_stock ("gtk-color-picker", GTK_ICON_SIZE_MENU);
+  gtk_widget_show (image5);
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (bg_color), image5);
 
   separator1 = gtk_separator_menu_item_new ();
   gtk_widget_show (separator1);
@@ -257,54 +165,12 @@ create_popup (void)
   g_signal_connect ((gpointer) text, "activate",
                     G_CALLBACK (on_mode_change),
                     MODE_TEXT);
-  g_signal_connect ((gpointer) fg_white, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_WHITE);
-  g_signal_connect ((gpointer) fg_red, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_RED);
-  g_signal_connect ((gpointer) fg_green, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_GREEN);
-  g_signal_connect ((gpointer) fg_blue, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_BLUE);
-  g_signal_connect ((gpointer) fg_cyan, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_CYAN);
-  g_signal_connect ((gpointer) fg_magenta, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_MAGENTA);
-  g_signal_connect ((gpointer) fg_yellow, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_YELLOW);
-  g_signal_connect ((gpointer) fg_black, "activate",
-                    G_CALLBACK (on_color_change),
-                    COLOR_BLACK);
-  g_signal_connect ((gpointer) bg_white, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_WHITE);
-  g_signal_connect ((gpointer) bg_red, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_RED);
-  g_signal_connect ((gpointer) bg_green, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_GREEN);
-  g_signal_connect ((gpointer) bg_blue, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_BLUE);
-  g_signal_connect ((gpointer) bg_cyan, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_CYAN);
-  g_signal_connect ((gpointer) bg_magenta, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_MAGENTA);
-  g_signal_connect ((gpointer) bg_yellow, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_YELLOW);
-  g_signal_connect ((gpointer) bg_black, "activate",
-                    G_CALLBACK (on_bgcolor_change),
-                    COLOR_BLACK);
+  g_signal_connect ((gpointer) fg_color, "activate",
+                    G_CALLBACK (on_fg_color_activate),
+                    NULL);
+  g_signal_connect ((gpointer) bg_color, "activate",
+                    G_CALLBACK (on_bg_color_activate),
+                    NULL);
   g_signal_connect ((gpointer) exit, "activate",
                     G_CALLBACK (gtk_main_quit),
                     NULL);
@@ -320,30 +186,94 @@ create_popup (void)
   GLADE_HOOKUP_OBJECT (popup, blink, "blink");
   GLADE_HOOKUP_OBJECT (popup, text, "text");
   GLADE_HOOKUP_OBJECT (popup, fg_color, "fg_color");
-  GLADE_HOOKUP_OBJECT (popup, fg_color_menu, "fg_color_menu");
-  GLADE_HOOKUP_OBJECT (popup, fg_white, "fg_white");
-  GLADE_HOOKUP_OBJECT (popup, fg_red, "fg_red");
-  GLADE_HOOKUP_OBJECT (popup, fg_green, "fg_green");
-  GLADE_HOOKUP_OBJECT (popup, fg_blue, "fg_blue");
-  GLADE_HOOKUP_OBJECT (popup, fg_cyan, "fg_cyan");
-  GLADE_HOOKUP_OBJECT (popup, fg_magenta, "fg_magenta");
-  GLADE_HOOKUP_OBJECT (popup, fg_yellow, "fg_yellow");
-  GLADE_HOOKUP_OBJECT (popup, fg_black, "fg_black");
+  GLADE_HOOKUP_OBJECT (popup, image4, "image4");
   GLADE_HOOKUP_OBJECT (popup, bg_color, "bg_color");
-  GLADE_HOOKUP_OBJECT (popup, bg_color_menu, "bg_color_menu");
-  GLADE_HOOKUP_OBJECT (popup, bg_white, "bg_white");
-  GLADE_HOOKUP_OBJECT (popup, bg_red, "bg_red");
-  GLADE_HOOKUP_OBJECT (popup, bg_green, "bg_green");
-  GLADE_HOOKUP_OBJECT (popup, bg_blue, "bg_blue");
-  GLADE_HOOKUP_OBJECT (popup, bg_cyan, "bg_cyan");
-  GLADE_HOOKUP_OBJECT (popup, bg_magenta, "bg_magenta");
-  GLADE_HOOKUP_OBJECT (popup, bg_yellow, "bg_yellow");
-  GLADE_HOOKUP_OBJECT (popup, bg_black, "bg_black");
+  GLADE_HOOKUP_OBJECT (popup, image5, "image5");
   GLADE_HOOKUP_OBJECT (popup, separator1, "separator1");
   GLADE_HOOKUP_OBJECT (popup, exit, "exit");
 
   gtk_menu_set_accel_group (GTK_MENU (popup), accel_group);
 
   return popup;
+}
+
+GtkWidget*
+create_fg_color_selector (void)
+{
+  GtkWidget *fg_color_selector;
+  GtkWidget *fg_color_ok;
+  GtkWidget *fg_color_cancel;
+  GtkWidget *fg_color_help;
+  GtkWidget *fg_color_selection;
+
+  fg_color_selector = gtk_color_selection_dialog_new (_("Select Foreground color"));
+  gtk_window_set_modal (GTK_WINDOW (fg_color_selector), TRUE);
+  gtk_window_set_resizable (GTK_WINDOW (fg_color_selector), FALSE);
+  gtk_window_set_type_hint (GTK_WINDOW (fg_color_selector), GDK_WINDOW_TYPE_HINT_DIALOG);
+
+  fg_color_ok = GTK_COLOR_SELECTION_DIALOG (fg_color_selector)->ok_button;
+  gtk_widget_show (fg_color_ok);
+  GTK_WIDGET_SET_FLAGS (fg_color_ok, GTK_CAN_DEFAULT);
+
+  fg_color_cancel = GTK_COLOR_SELECTION_DIALOG (fg_color_selector)->cancel_button;
+  gtk_widget_show (fg_color_cancel);
+  GTK_WIDGET_SET_FLAGS (fg_color_cancel, GTK_CAN_DEFAULT);
+
+  fg_color_help = GTK_COLOR_SELECTION_DIALOG (fg_color_selector)->help_button;
+  GTK_WIDGET_SET_FLAGS (fg_color_help, GTK_CAN_DEFAULT);
+
+  fg_color_selection = GTK_COLOR_SELECTION_DIALOG (fg_color_selector)->colorsel;
+  gtk_widget_show (fg_color_selection);
+  gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION (fg_color_selection), FALSE);
+  gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION (fg_color_selection), TRUE);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (fg_color_selector, fg_color_selector, "fg_color_selector");
+  GLADE_HOOKUP_OBJECT_NO_REF (fg_color_selector, fg_color_ok, "fg_color_ok");
+  GLADE_HOOKUP_OBJECT_NO_REF (fg_color_selector, fg_color_cancel, "fg_color_cancel");
+  GLADE_HOOKUP_OBJECT_NO_REF (fg_color_selector, fg_color_help, "fg_color_help");
+  GLADE_HOOKUP_OBJECT_NO_REF (fg_color_selector, fg_color_selection, "fg_color_selection");
+
+  return fg_color_selector;
+}
+
+GtkWidget*
+create_bg_color_selector (void)
+{
+  GtkWidget *bg_color_selector;
+  GtkWidget *bg_color_ok;
+  GtkWidget *bg_color_cancel;
+  GtkWidget *bg_color_help;
+  GtkWidget *bg_color_selection;
+
+  bg_color_selector = gtk_color_selection_dialog_new (_("Select Background color"));
+  gtk_window_set_modal (GTK_WINDOW (bg_color_selector), TRUE);
+  gtk_window_set_resizable (GTK_WINDOW (bg_color_selector), FALSE);
+  gtk_window_set_type_hint (GTK_WINDOW (bg_color_selector), GDK_WINDOW_TYPE_HINT_DIALOG);
+
+  bg_color_ok = GTK_COLOR_SELECTION_DIALOG (bg_color_selector)->ok_button;
+  gtk_widget_show (bg_color_ok);
+  GTK_WIDGET_SET_FLAGS (bg_color_ok, GTK_CAN_DEFAULT);
+
+  bg_color_cancel = GTK_COLOR_SELECTION_DIALOG (bg_color_selector)->cancel_button;
+  gtk_widget_show (bg_color_cancel);
+  GTK_WIDGET_SET_FLAGS (bg_color_cancel, GTK_CAN_DEFAULT);
+
+  bg_color_help = GTK_COLOR_SELECTION_DIALOG (bg_color_selector)->help_button;
+  GTK_WIDGET_SET_FLAGS (bg_color_help, GTK_CAN_DEFAULT);
+
+  bg_color_selection = GTK_COLOR_SELECTION_DIALOG (bg_color_selector)->colorsel;
+  gtk_widget_show (bg_color_selection);
+  gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION (bg_color_selection), FALSE);
+  gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION (bg_color_selection), TRUE);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (bg_color_selector, bg_color_selector, "bg_color_selector");
+  GLADE_HOOKUP_OBJECT_NO_REF (bg_color_selector, bg_color_ok, "bg_color_ok");
+  GLADE_HOOKUP_OBJECT_NO_REF (bg_color_selector, bg_color_cancel, "bg_color_cancel");
+  GLADE_HOOKUP_OBJECT_NO_REF (bg_color_selector, bg_color_help, "bg_color_help");
+  GLADE_HOOKUP_OBJECT_NO_REF (bg_color_selector, bg_color_selection, "bg_color_selection");
+
+  return bg_color_selector;
 }
 

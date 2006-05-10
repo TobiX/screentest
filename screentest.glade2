@@ -110,200 +110,44 @@
   </child>
 
   <child>
-    <widget class="GtkMenuItem" id="fg_color">
+    <widget class="GtkImageMenuItem" id="fg_color">
       <property name="visible">True</property>
       <property name="label" translatable="yes">Foreground Color</property>
       <property name="use_underline">True</property>
+      <signal name="activate" handler="on_fg_color_activate" last_modification_time="Wed, 10 May 2006 10:17:10 GMT"/>
+      <accelerator key="F" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
-      <child>
-	<widget class="GtkMenu" id="fg_color_menu">
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_white">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">White</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">True</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_red">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Red</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">fg_white</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_green">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Green</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">fg_white</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_blue">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Blue</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">fg_white</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_cyan">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Cyan</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">fg_white</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_magenta">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Magenta</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">fg_white</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_yellow">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Yellow</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">fg_white</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="fg_black">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Black</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">fg_white</property>
-	      <signal name="activate" handler="on_color_change"/>
-	    </widget>
-	  </child>
+      <child internal-child="image">
+	<widget class="GtkImage" id="image4">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-color-picker</property>
+	  <property name="icon_size">1</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
 	</widget>
       </child>
     </widget>
   </child>
 
   <child>
-    <widget class="GtkMenuItem" id="bg_color">
+    <widget class="GtkImageMenuItem" id="bg_color">
       <property name="visible">True</property>
       <property name="label" translatable="yes">Background Color</property>
       <property name="use_underline">True</property>
+      <signal name="activate" handler="on_bg_color_activate" last_modification_time="Wed, 10 May 2006 10:17:20 GMT"/>
+      <accelerator key="B" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
-      <child>
-	<widget class="GtkMenu" id="bg_color_menu">
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_white">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">White</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_red">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Red</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">bg_white</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_green">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Green</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">bg_white</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_blue">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Blue</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">bg_white</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_cyan">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Cyan</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">bg_white</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_magenta">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Magenta</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">bg_white</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_yellow">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Yellow</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">False</property>
-	      <property name="group">bg_white</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkRadioMenuItem" id="bg_black">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Black</property>
-	      <property name="use_underline">True</property>
-	      <property name="active">True</property>
-	      <property name="group">bg_white</property>
-	      <signal name="activate" handler="on_bgcolor_change"/>
-	    </widget>
-	  </child>
+      <child internal-child="image">
+	<widget class="GtkImage" id="image5">
+	  <property name="visible">True</property>
+	  <property name="stock">gtk-color-picker</property>
+	  <property name="icon_size">1</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
 	</widget>
       </child>
     </widget>
@@ -321,6 +165,114 @@
       <property name="label">gtk-quit</property>
       <property name="use_stock">True</property>
       <signal name="activate" handler="gtk_main_quit" last_modification_time="Mon, 08 May 2006 14:35:42 GMT"/>
+    </widget>
+  </child>
+</widget>
+
+<widget class="GtkColorSelectionDialog" id="fg_color_selector">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes">Select Foreground color</property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">True</property>
+  <property name="resizable">False</property>
+  <property name="destroy_with_parent">False</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
+
+  <child internal-child="ok_button">
+    <widget class="GtkButton" id="fg_color_ok">
+      <property name="visible">True</property>
+      <property name="can_default">True</property>
+      <property name="can_focus">True</property>
+      <property name="relief">GTK_RELIEF_NORMAL</property>
+      <property name="focus_on_click">True</property>
+    </widget>
+  </child>
+
+  <child internal-child="cancel_button">
+    <widget class="GtkButton" id="fg_color_cancel">
+      <property name="visible">True</property>
+      <property name="can_default">True</property>
+      <property name="can_focus">True</property>
+      <property name="relief">GTK_RELIEF_NORMAL</property>
+      <property name="focus_on_click">True</property>
+    </widget>
+  </child>
+
+  <child internal-child="help_button">
+    <widget class="GtkButton" id="fg_color_help">
+      <property name="can_default">True</property>
+      <property name="can_focus">True</property>
+      <property name="relief">GTK_RELIEF_NORMAL</property>
+      <property name="focus_on_click">True</property>
+    </widget>
+  </child>
+
+  <child internal-child="color_selection">
+    <widget class="GtkColorSelection" id="fg_color_selection">
+      <property name="visible">True</property>
+      <property name="has_opacity_control">False</property>
+      <property name="has_palette">True</property>
+    </widget>
+  </child>
+</widget>
+
+<widget class="GtkColorSelectionDialog" id="bg_color_selector">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes">Select Background color</property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">True</property>
+  <property name="resizable">False</property>
+  <property name="destroy_with_parent">False</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
+
+  <child internal-child="ok_button">
+    <widget class="GtkButton" id="bg_color_ok">
+      <property name="visible">True</property>
+      <property name="can_default">True</property>
+      <property name="can_focus">True</property>
+      <property name="relief">GTK_RELIEF_NORMAL</property>
+      <property name="focus_on_click">True</property>
+    </widget>
+  </child>
+
+  <child internal-child="cancel_button">
+    <widget class="GtkButton" id="bg_color_cancel">
+      <property name="visible">True</property>
+      <property name="can_default">True</property>
+      <property name="can_focus">True</property>
+      <property name="relief">GTK_RELIEF_NORMAL</property>
+      <property name="focus_on_click">True</property>
+    </widget>
+  </child>
+
+  <child internal-child="help_button">
+    <widget class="GtkButton" id="bg_color_help">
+      <property name="can_default">True</property>
+      <property name="can_focus">True</property>
+      <property name="relief">GTK_RELIEF_NORMAL</property>
+      <property name="focus_on_click">True</property>
+    </widget>
+  </child>
+
+  <child internal-child="color_selection">
+    <widget class="GtkColorSelection" id="bg_color_selection">
+      <property name="visible">True</property>
+      <property name="has_opacity_control">False</property>
+      <property name="has_palette">True</property>
     </widget>
   </child>
 </widget>

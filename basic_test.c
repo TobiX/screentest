@@ -51,13 +51,13 @@ static void draw_boxes(GdkWindow * win, GdkColor * colors, gint ncols,
 	int i;
 
 	for (i = 0; i < ncols; i++) {
-		gdk_gc_set_foreground(gc, &colors[i]);
+		gdk_gc_set_rgb_fg_color(gc, &colors[i]);
 
 		gdk_draw_rectangle(win, gc, TRUE, x, y, d, d);
 		x += d;
 	}
 
-	gdk_gc_set_foreground(gc, &fgcolors[fg_color]);
+	gdk_gc_set_rgb_fg_color(gc, fg_color);
 }
 
 static void basic_draw(GtkWidget * widget)
