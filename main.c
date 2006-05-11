@@ -31,7 +31,12 @@ int main(int argc, char *argv[])
 {
 	GtkWidget *mainwin;
 
-	gtk_set_locale();
+#ifdef ENABLE_NLS
+	bindtextdomain(PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(PACKAGE, "UTF-8");
+	textdomain(PACKAGE);
+#endif
+
 	gtk_init(&argc, &argv);
 
 	mainwin = create_mainwin();

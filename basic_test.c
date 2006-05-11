@@ -22,8 +22,8 @@
 #  include <config.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <stdio.h>
+#include <gtk/gtk.h>
 
 #include "callbacks.h"
 #include "interface.h"
@@ -71,9 +71,9 @@ static void basic_draw(GtkWidget * widget)
 		"Screentest v" VERSION,
 		"(C) 2001 Jan \"Yenya\" Kasprzak <kas@fi.muni.cz>",
 		"(C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>",
-		"Left Button - param cycle, if any",
-		"Middle Button - color cycle",
-		"Right Button - menu",
+		N_("Left Button - param cycle, if any"),
+		N_("Middle Button - color cycle"),
+		N_("Right Button - menu"),
 	};
 
 	gdk_window_get_size(win, &w, &h);
@@ -89,14 +89,14 @@ static void basic_draw(GtkWidget * widget)
 
 	maxheight = 0;
 	for (i = 0; i < 5; i++) {
-		int x = gdk_string_height(font, text[i]);
+		int x = gdk_string_height(font, gettext(text[i]));
 		if (x > maxheight)
 			maxheight = x;
 	}
 
 	maxwidth = 0;
 	for (i = 0; i < 6; i++) {
-		widths[i] = gdk_string_width(font, text[i]);
+		widths[i] = gdk_string_width(font, gettext(text[i]));
 		if (widths[i] > maxwidth)
 			maxwidth = widths[i];
 	}
@@ -116,18 +116,18 @@ static void basic_draw(GtkWidget * widget)
 			   4 * maxheight - 1);
 
 	gdk_draw_string(win, font, gc, (w - widths[0]) / 2,
-			d / 2 - 2 * maxheight / 3, text[0]);
+			d / 2 - 2 * maxheight / 3, gettext(text[0]));
 	gdk_draw_string(win, font, gc, (w - widths[1]) / 2,
-			d / 2 + maxheight / 3, text[1]);
+			d / 2 + maxheight / 3, gettext(text[1]));
 	gdk_draw_string(win, font, gc, (w - widths[2]) / 2,
-			d / 2 + 4 * maxheight / 3, text[2]);
+			d / 2 + 4 * maxheight / 3, gettext(text[2]));
 
 	gdk_draw_string(win, font, gc, (w - widths[3]) / 2,
-			h - d / 2 - 2 * maxheight / 3, text[3]);
+			h - d / 2 - 2 * maxheight / 3, gettext(text[3]));
 	gdk_draw_string(win, font, gc, (w - widths[4]) / 2,
-			h - d / 2 + maxheight / 3, text[4]);
+			h - d / 2 + maxheight / 3, gettext(text[4]));
 	gdk_draw_string(win, font, gc, (w - widths[5]) / 2,
-			h - d / 2 + 4 * maxheight / 3, text[5]);
+			h - d / 2 + 4 * maxheight / 3, gettext(text[5]));
 
 	b = 7 * d / 4;
 	draw_boxes(win, fgcolors, COLOR_MAX, (w - b) / 2,

@@ -4,3 +4,4 @@ main.c
 interface.c
 callbacks.c
 support.c
+basic_test.c
