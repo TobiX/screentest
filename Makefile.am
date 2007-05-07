@@ -4,7 +4,7 @@ SUBDIRS = po
 
 AM_CPPFLAGS = $(GTK_CFLAGS)
 
-EXTRA_DIST = screentest.glade2 NEW_TESTS screentest.spec
+EXTRA_DIST = screentest.glade NEW_TESTS screentest.spec
 
 bin_PROGRAMS = screentest
 

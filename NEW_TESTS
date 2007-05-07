@@ -88,7 +88,7 @@ GRAYS_MAX is #defined to COLOR_MAX, but do not depend on it.
 - in callbacks.h, add the "extern struct test_ops circle_ops;" declaration.
 - in callbacks.c, add the new mode to the on_mode_change() function.
 - use glade to add the new mode to the menu
-  (alternatively, edit interface.c and glade.screentest by hand).
+  (alternatively, edit interface.c and screentest.glade by hand).
 
 6. Run automake, autoconf, ./configure and make.
 
