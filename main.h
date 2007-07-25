@@ -18,51 +18,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#ifndef _MAIN_H
+#define _MAIN_H 1
 
-#include <gtk/gtk.h>
+#include <glade/glade.h>
 
-#include "callbacks.h"
+extern GladeXML *glade;
 
-#define GRID_STEP 64
-#define GRID_STEP_MIN 2
-
-static gint vertical_step;
-
-static void vertical_init(GtkWidget * widget)
-{
-	vertical_step = GRID_STEP;
-}
-
-static void vertical_cycle(GtkWidget * widget)
-{
-	vertical_step /= 2;
-	if (vertical_step < GRID_STEP_MIN)
-		vertical_step = GRID_STEP;
-}
-
-static void vertical_draw(GtkWidget * widget)
-{
-	GdkWindow *win = widget->window;
-	gint w, h;
-	gint i;
-	gint d;
-
-	gdk_window_get_size(win, &w, &h);
-
-	d = w / 4;
-	if (d > h / 4)
-		d = h / 4;
-
-	for (i = ((w - 1) % vertical_step) / 2; i < w; i += vertical_step)
-		gdk_draw_line(win, gc, i, 0, i, h - 1);
-}
-
-struct test_ops vertical_ops = {
-	init:vertical_init,
-	draw:vertical_draw,
-	cycle:vertical_cycle,
-	close:NULL
-};
+#endif /* _MAIN_H */

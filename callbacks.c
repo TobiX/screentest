@@ -26,10 +26,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <gtk/gtk.h>
+#include <glade/glade.h>
 
 #include "callbacks.h"
-#include "interface.h"
-#include "support.h"
+#include "main.h"
 
 GdkColor fgcolors[COLOR_MAX];
 GdkColor *fg_color, *bg_color;
@@ -37,10 +37,7 @@ GdkColor grays[GRAYS_MAX];
 GdkGC *gc, *backgc;
 int fg_count = COLOR_WHITE;
 
-static GtkWidget *popup = NULL;
 static GtkWidget *mainwin = NULL;
-static GtkWidget *fg_color_selector = NULL;
-static GtkWidget *bg_color_selector = NULL;
 static struct test_ops *current_test = &basic_ops;
 
 void on_mainwin_realize(GtkWidget * widget, gpointer user_data)
@@ -112,6 +109,8 @@ gboolean
 on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
 		gpointer user_data)
 {
+	GtkWidget *popup;
+
 	switch (event->button) {
 	case 1:
 		if (current_test->cycle != NULL) {
@@ -127,15 +126,13 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
 		update_fg_color();
 		break;
 	case 3:
-		if (popup == NULL)
-			popup = create_popup();
+		popup = glade_xml_get_widget(glade, "popup");
 		gtk_menu_popup(GTK_MENU(popup), NULL, NULL, NULL, NULL,
 			       event->button, event->time);
 		break;
 	}
 	return TRUE;
 }
-
 
 /*
  * FIXME: GTK_WINDOW_POPUP does not seem to be able to receive
@@ -153,8 +150,8 @@ gboolean
 on_mainwin_expose_event(GtkWidget *widget, GdkEventExpose *event,
 		gpointer user_data)
 {
-	gdk_window_set_background(mainwin->window, bg_color);
-	gdk_window_clear(mainwin->window);
+	gdk_window_set_background(widget->window, bg_color);
+	gdk_window_clear(widget->window);
 
 	if (current_test->draw != NULL)
 		current_test->draw(widget);
@@ -165,34 +162,27 @@ void on_mode_change(GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkCheckMenuItem *checkmenuitem = GTK_CHECK_MENU_ITEM(menuitem);
 
-	gint mode = (gint) user_data;
-
 	if (!checkmenuitem->active) {
 		if (current_test->close != NULL) {
 			current_test->close(mainwin);
 			current_test = NULL;
 		}
 	} else {
-		switch (mode) {
-		case MODE_BASIC:
+		const char *mode = glade_get_widget_name(GTK_WIDGET(menuitem));
+		if (strcmp(mode, "basic") == 0)
 			current_test = &basic_ops;
-			break;
-		case MODE_GRID:
+		else if (strcmp(mode, "grid") == 0)
 			current_test = &grid_ops;
-			break;
-		case MODE_HORIZONTAL:
+		else if (strcmp(mode, "horizontal") == 0)
 			current_test = &horizontal_ops;
-			break;
-		case MODE_VERTICAL:
+		else if (strcmp(mode, "vertical") == 0)
 			current_test = &vertical_ops;
-			break;
-		case MODE_BLINK:
+		else if (strcmp(mode, "blink") == 0)
 			current_test = &blink_ops;
-			break;
-		case MODE_TEXT:
+		else if (strcmp(mode, "text") == 0)
 			current_test = &text_ops;
-			break;
-		}
+		else
+			g_assert_not_reached();
 		if (current_test->init != NULL) {
 			current_test->init(mainwin);
 		}
@@ -203,10 +193,9 @@ void on_mode_change(GtkMenuItem *menuitem, gpointer user_data)
 void on_fg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkColorSelection *colorsel;
+	GtkWidget *fg_color_selector;
 
-	if (fg_color_selector == NULL)
-		fg_color_selector = create_fg_color_selector();
-	gtk_window_set_transient_for(GTK_WINDOW(fg_color_selector), GTK_WINDOW(mainwin));
+	fg_color_selector = glade_xml_get_widget(glade, "fg_color_selector");
 
 	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(fg_color_selector)->colorsel);
 	gtk_color_selection_set_current_color(colorsel, fg_color);
@@ -228,10 +217,9 @@ void on_fg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
 void on_bg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkColorSelection *colorsel;
+	GtkWidget *bg_color_selector;
 
-	if (bg_color_selector == NULL)
-		bg_color_selector = create_bg_color_selector();
-	gtk_window_set_transient_for(GTK_WINDOW(bg_color_selector), GTK_WINDOW(mainwin));
+	bg_color_selector = glade_xml_get_widget(glade, "bg_color_selector");
 
 	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(bg_color_selector)->colorsel);
 	gtk_color_selection_set_current_color(colorsel, bg_color);

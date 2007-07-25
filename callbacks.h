@@ -58,20 +58,3 @@ extern GdkGC *gc, *backgc;
 extern GdkColor fgcolors[];
 extern GdkColor *fg_color;
 extern GdkColor grays[];
-
-void on_mainwin_realize(GtkWidget *widget, gpointer user_data);
-
-gboolean on_mainwin_button_press_event(GtkWidget *widget,
-		GdkEventButton *event, gpointer user_data);
-
-gboolean on_mainwin_key_press_event(GtkWidget *widget,
-		GdkEventKey *event, gpointer user_data);
-
-gboolean on_mainwin_expose_event(GtkWidget *widget,
-		GdkEventExpose *event, gpointer user_data);
-
-void on_mode_change(GtkMenuItem *menuitem, gpointer user_data);
-
-void on_fg_color_activate(GtkMenuItem *menuitem, gpointer user_data);
-
-void on_bg_color_activate(GtkMenuItem *menuitem, gpointer user_data);

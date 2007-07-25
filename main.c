@@ -22,26 +22,41 @@
 #  include <config.h>
 #endif
 
+#include <stdlib.h>
 #include <gtk/gtk.h>
+#include <glade/glade.h>
 
-#include "interface.h"
-#include "support.h"
+#include "main.h"
+#include "gettext.h"
+#define _(String) gettext(String)
+
+GladeXML *glade;
 
 int main(int argc, char *argv[])
 {
-	GtkWidget *mainwin;
-
-#ifdef ENABLE_NLS
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(PACKAGE, "UTF-8");
 	textdomain(PACKAGE);
-#endif
 
 	gtk_init(&argc, &argv);
 
-	mainwin = create_mainwin();
-	gtk_widget_show(mainwin);
+	glade = glade_xml_new(DATADIR "/screentest.glade", NULL, NULL);
+	if (glade == NULL)
+		glade = glade_xml_new("screentest.glade", NULL, NULL);
+	if (glade == NULL) {
+		GtkWidget *dialog = gtk_message_dialog_new(NULL,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
+			_("The GLADE interface definition file was not found.\n"
+			"Please make sure this program is installed correctly."));
+		gtk_window_set_title(GTK_WINDOW(dialog), PACKAGE_NAME);
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		exit(1);
+	}
 
+	glade_xml_signal_autoconnect(glade);
+
+	gtk_widget_show(glade_xml_get_widget(glade, "mainwin"));
 	gtk_main();
 	return 0;
 }

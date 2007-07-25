@@ -26,8 +26,6 @@
 #include <gtk/gtk.h>
 
 #include "callbacks.h"
-#include "interface.h"
-#include "support.h"
 
 static gchar *fontnames[] = {
 	"-adobe-times-medium-r-normal-*-*-80-*-*-p-*-iso8859-1",

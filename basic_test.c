@@ -26,8 +26,9 @@
 #include <gtk/gtk.h>
 
 #include "callbacks.h"
-#include "interface.h"
-#include "support.h"
+#include "gettext.h"
+#define _(String) gettext(String)
+#define N_(String) gettext_noop(String)
 
 #define BASIC_STEP 40
 

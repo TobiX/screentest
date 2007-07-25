@@ -25,8 +25,6 @@
 #include <gtk/gtk.h>
 
 #include "callbacks.h"
-#include "interface.h"
-#include "support.h"
 
 #define GRID_STEP 64
 #define GRID_STEP_MIN 2
