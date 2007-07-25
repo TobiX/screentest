@@ -1,7 +1,6 @@
-$Id: README,v 1.1.1.1 2001/08/20 18:10:54 kas Exp $
-
-This is a program for tesing the quality of CRT screens. It displays
-various patterns and allows you to estimate the quality of your CRT monitor.
+This is a program for tesing the quality of CRT/LCD screens. It displays
+various patterns and allows you to estimate the quality of your CRT/LCD
+monitor.
 
 This is a postcardware (see the top of the file COPYING).
 
@@ -11,7 +10,7 @@ See the file NEW_TESTS for details on adding a new test screens.
 
 The homepage of this program is
 
-	http://www.fi.muni.cz/~kas/screentest/
+	http://screentest.sourceforge.net/
 
--Jan "Yenya" Kasprzak
-
+- Tobias Gruetzmacher (current maintainer)
+- Jan "Yenya" Kasprzak (previous maintainer)

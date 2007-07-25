@@ -1,46 +1,30 @@
-$Id: INSTALL,v 1.1.1.1 2001/08/20 18:10:54 kas Exp $
-
 The installation of this program is pretty straightforward:
 
 0. PREREQUISITIES
 ==============
 You will need the following libraries to compile this program:
 
-- GTK+ >= 1.2 (tested on 1.2.10)
-- glib >= 1.2 (tested on 1.2.10)
+- GTK+ >= 2.0 (tested on 2.10.13)
+- glib >= 2.0 (tested on 2.12.13)
 
 You will need both the libraries (either in static or dynamic form),
 and their header files (which may not be installed on your system
 by default; for example, check for gtk+-devel, glib-devel and XFree86-devel
 packages on Red Hat Linux or Mandrake Linux). This also assumes that the
-"gtk-config" command is in your PATH.
+"pkg-config" command is in your PATH.
 
 The source of screentest is available at the screentest homepage:
-    http://www.fi.muni.cz/~kas/screentest/
-Alternative location is the author's FTP directory:
-    ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/screentest/
+    http://screentest.sourceforge.net/
 
 You will also need the ISO C9x-compliant C compiler. This program uses
 ISO C9x-style structure initializers, so this is a NECESSARY CONDITION.
-You can use for example gcc-2.9x compiler, which is available on most
+You can use for example gcc-3 or later, which is available on most
 Unices.
 
-The build process has been tested on Red Hat Linux 7.1 system (www.redhat.com),
+The build process has been tested on Debian unstable (www.debian.org),
 but should work on any recent version of UNIX-compatible system.
 
-1a. BUILDING/INSTALLING ON RPM-BASED SYSTEM
-=======================================
-You will need the rpm-build package installed on your system.
-Then (probably as root) run the following command:
-    rpm -ta screentest-<version>.tar.gz
-If everything works OK, the file
-    /usr/src/redhat/RPMS/<arch>/screentest-<version>-<rel>.<arch>.rpm
-will be created. Then you can (as root) install it using the following command:
-    rpm -Uvh /usr/src/redhat/RPMS/<arch>/screentest-<version>-<rel>.<arch>.rpm
-The <arch> is usually "i386", the <rel> is usually "1" and <version> is the
-version of this program.
-
-1b. PREPARING THE SOURCES
+1. PREPARING THE SOURCES
 =========================
 Unpack the distribution using the following command:
     zcat screentest-<version>.tar.gz
@@ -52,10 +36,9 @@ You can run "./configure --help" for details of the configuration process.
 
 2. COMPILING THE PROGRAM
 ========================
-Run "make". This will compile the "screentest" and "screentest.static"
-programs. Since the programs are standalone, you can now verify their
-function by running them in the current directory ("./screentest" or
-"./screentest.static" commands).
+Run "make". This will compile the "screentest" programs. Since the program is
+mostly standalone, you can now verify their function by running them in the
+current directory (calling "./screentest").
 
 3. INSTALLING
 =============
@@ -70,9 +53,10 @@ so I can estimate the userbase and portability of the program.
 4b. IF YOU DON'T LIKE IT
 ========================
 Please let me know what can I do for improving screentest. Use the
-e-mail <kas@fi.muni.cz>. If you want to add new modes, see the NEW_TESTS
+e-mail <tobias@portfolio16.de>. If you want to add new modes, see the NEW_TESTS
 file for details.
 
 	Hope you find this program useful.
 
--Jan "Yenya" Kasprzak
+- Tobias Gruetzmacher (current maintainer)
+- Jan "Yenya" Kasprzak (previous maintainer)

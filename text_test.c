@@ -1,8 +1,8 @@
 /*
- *  Screentest - CRT monitor testing utility.
- *  http://www.fi.muni.cz/~kas/screentest/
+ *  Screentest - CRT/LCD monitor testing utility.
+ *  http://screentest.sourceforge.net/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
- *  Copyright (C) 2006 Tobias Gruetzmacher <tobias@portfolio16.de>
+ *  Copyright (C) 2006-2007 Tobias Gruetzmacher <tobias@portfolio16.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -42,7 +42,7 @@ static gchar *fontnames[] = {
 static gint font_num;
 
 static gchar text[] =
-    "The Screentest home page: http://www.fi.muni.cz/~kas/screentest/";
+    "The Screentest home page: http://screentest.sourceforge.net/";
 
 GdkFont *font;
 gint baselineskip, textwidth;
