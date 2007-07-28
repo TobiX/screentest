@@ -31,12 +31,12 @@
 
 static gint grid_step;
 
-static void grid_init(GtkWidget * widget)
+static void grid_init(G_GNUC_UNUSED GtkWidget * widget)
 {
 	grid_step = GRID_STEP;
 }
 
-static void grid_cycle(GtkWidget * widget)
+static void grid_cycle(G_GNUC_UNUSED GtkWidget * widget)
 {
 	grid_step /= 2;
 	if (grid_step < GRID_STEP_MIN)

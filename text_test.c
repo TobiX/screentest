@@ -45,7 +45,7 @@ static gchar text[] =
 GdkFont *font;
 gint baselineskip, textwidth;
 
-static void font_init(GtkWidget * widget)
+static void font_init(G_GNUC_UNUSED GtkWidget * widget)
 {
 	gint lbear, rbear, width, asc, desc;
 
@@ -83,7 +83,7 @@ static void text_draw(GtkWidget * widget)
 			gdk_draw_string(win, font, gc, x, y, text);
 }
 
-static void text_close(GtkWidget * widget)
+static void text_close(G_GNUC_UNUSED GtkWidget * widget)
 {
 	gdk_font_unref(font);
 }

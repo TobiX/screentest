@@ -36,7 +36,7 @@ static gchar fontname[] =
     "-adobe-helvetica-bold-r-normal-*-14-*-*-*-p-*-iso8859-1";
 static GdkFont *font;
 
-static void basic_init(GtkWidget * widget)
+static void basic_init(G_GNUC_UNUSED GtkWidget * widget)
 {
 	font = gdk_font_load(fontname);
 
@@ -145,7 +145,7 @@ static void basic_draw(GtkWidget * widget)
 		     360 * 64);
 }
 
-static void basic_close(GtkWidget * widget)
+static void basic_close(G_GNUC_UNUSED GtkWidget * widget)
 {
 	gdk_font_unref(font);
 }

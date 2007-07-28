@@ -40,7 +40,7 @@ int fg_count = COLOR_WHITE;
 static GtkWidget *mainwin = NULL;
 static struct test_ops *current_test = &basic_ops;
 
-void on_mainwin_realize(GtkWidget * widget, gpointer user_data)
+void on_mainwin_realize(GtkWidget * widget, G_GNUC_UNUSED gpointer user_data)
 {
 	gint i;
 
@@ -107,7 +107,7 @@ static void update_bg_color(void)
 
 gboolean
 on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
-		gpointer user_data)
+		G_GNUC_UNUSED gpointer user_data)
 {
 	GtkWidget *popup;
 
@@ -139,16 +139,17 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
  * KeyPress events. How to enable this?
  */
 gboolean
-on_mainwin_key_press_event(GtkWidget *widget, GdkEventKey *event,
-		gpointer user_data)
+on_mainwin_key_press_event(G_GNUC_UNUSED GtkWidget *widget,
+		G_GNUC_UNUSED GdkEventKey *event,
+		G_GNUC_UNUSED gpointer user_data)
 {
 	gtk_main_quit();
 	return FALSE;
 }
 
 gboolean
-on_mainwin_expose_event(GtkWidget *widget, GdkEventExpose *event,
-		gpointer user_data)
+on_mainwin_expose_event(GtkWidget *widget, G_GNUC_UNUSED GdkEventExpose *event,
+		G_GNUC_UNUSED gpointer user_data)
 {
 	gdk_window_set_background(widget->window, bg_color);
 	gdk_window_clear(widget->window);
@@ -158,7 +159,7 @@ on_mainwin_expose_event(GtkWidget *widget, GdkEventExpose *event,
 	return TRUE;
 }
 
-void on_mode_change(GtkMenuItem *menuitem, gpointer user_data)
+void on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 {
 	GtkCheckMenuItem *checkmenuitem = GTK_CHECK_MENU_ITEM(menuitem);
 
@@ -190,7 +191,8 @@ void on_mode_change(GtkMenuItem *menuitem, gpointer user_data)
 	}
 }
 
-void on_fg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
+void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
+		G_GNUC_UNUSED gpointer user_data)
 {
 	GtkColorSelection *colorsel;
 	GtkWidget *fg_color_selector;
@@ -214,7 +216,8 @@ void on_fg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
 	gtk_widget_hide(fg_color_selector);
 }
 
-void on_bg_color_activate(GtkMenuItem *menuitem, gpointer user_data)
+void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
+		G_GNUC_UNUSED gpointer user_data)
 {
 	GtkColorSelection *colorsel;
 	GtkWidget *bg_color_selector;

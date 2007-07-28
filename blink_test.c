@@ -80,12 +80,12 @@ static void blink_init(GtkWidget * widget)
 	timeout = gtk_timeout_add(1000, blink_timeout, widget);
 }
 
-void blink_cycle(GtkWidget * widget)
+void blink_cycle(G_GNUC_UNUSED GtkWidget * widget)
 {
 	blink_type = !blink_type;
 }
 
-static void blink_close(GtkWidget * widget)
+static void blink_close(G_GNUC_UNUSED GtkWidget * widget)
 {
 	gtk_timeout_remove(timeout);
 }

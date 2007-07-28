@@ -31,12 +31,12 @@
 
 static gint horizontal_step;
 
-static void horizontal_init(GtkWidget * widget)
+static void horizontal_init(G_GNUC_UNUSED GtkWidget * widget)
 {
 	horizontal_step = GRID_STEP;
 }
 
-static void horizontal_cycle(GtkWidget * widget)
+static void horizontal_cycle(G_GNUC_UNUSED GtkWidget * widget)
 {
 	horizontal_step /= 2;
 	if (horizontal_step < GRID_STEP_MIN)
