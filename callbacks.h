@@ -20,16 +20,6 @@
 
 #include <gtk/gtk.h>
 
-enum test_mode {
-	MODE_BASIC,
-	MODE_GRID,
-	MODE_HORIZONTAL,
-	MODE_VERTICAL,
-	MODE_BLINK,
-	MODE_TEXT,
-	MODE_MAX
-};
-
 struct test_ops {
 	void (*init) (GtkWidget * widget);
 	void (*draw) (GtkWidget * widget);

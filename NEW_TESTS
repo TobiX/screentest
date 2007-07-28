@@ -27,8 +27,9 @@ variable in Makefile.am.
 
 3. In circle_test.c you have to define the (non-static!) structure
 	struct test_ops circle_ops
-This structure, which have four member functions, defines the basic operations
-of your test mode. The structure members are:
+Make sure the name of the structure ends in "_ops". This structure, which have
+four member functions, defines the basic operations of your test mode. The
+structure members are:
 
 	void circle_init(GtkWidget *widget);
 This function is called when screentest is switched to your "circle" test.
@@ -82,13 +83,9 @@ The GdkColor array with pixels preinitialized to the shades of gray.
 grays[0] is black, grays[GRAYS_MAX-1] is white. Currently the
 GRAYS_MAX is #defined to COLOR_MAX, but do not depend on it.
 
-5. Add the circle test to the appropriate structures:
-
-- in callbacks.h, extend the enum test_mode by adding CIRCLE_TEST element.
-- in callbacks.h, add the "extern struct test_ops circle_ops;" declaration.
-- in callbacks.c, add the new mode to the on_mode_change() function.
-- use glade to add the new mode to the menu
-  (alternatively, edit interface.c and screentest.glade by hand).
+5. Use glade to add the new mode to the menu (alternatively, edit
+screentest.glade by hand). Make sure the name of the menu item is the name of
+your "<test>_ops" struct without the "_ops" ending.
 
 6. Run automake, autoconf, ./configure and make.
 
@@ -100,7 +97,7 @@ of all your modifications. See the file COPYING for details.
 You must make the circle_test.c available, but you don't have to send it
 to the author of this program. However, author of this program kindly asks
 you to contribute any modifications. Please send your modifications
-to the author of screentest, Jan "Yenya" Kasprzak <kas@fi.muni.cz>.
+to the author of screentest, Tobias Gruetzmacher <tobias@portfolio16.de>.
 The preferred form of the contribution is an unified diff (see the diff(1)
 manual page. To make a unified diff, follow these steps:
 
@@ -115,5 +112,6 @@ manual page. To make a unified diff, follow these steps:
 
 	Thanks,
 
--Jan "Yenya" Kasprzak <kas@fi.muni.cz>
+- Tobias Gruetzmacher <tobias@portfolio16.de> (current maintainer)
+- Jan "Yenya" Kasprzak <kas@fi.muni.cz> (previous maintainer)
 

@@ -30,6 +30,8 @@
 
 #include "callbacks.h"
 #include "main.h"
+#include "gettext.h"
+#define _(String) gettext(String)
 
 GdkColor fgcolors[COLOR_MAX];
 GdkColor *fg_color, *bg_color;
@@ -154,7 +156,7 @@ on_mainwin_expose_event(GtkWidget *widget, G_GNUC_UNUSED GdkEventExpose *event,
 	gdk_window_set_background(widget->window, bg_color);
 	gdk_window_clear(widget->window);
 
-	if (current_test->draw != NULL)
+	if (current_test && current_test->draw)
 		current_test->draw(widget);
 	return TRUE;
 }
@@ -169,21 +171,23 @@ void on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 			current_test = NULL;
 		}
 	} else {
-		const char *mode = glade_get_widget_name(GTK_WIDGET(menuitem));
-		if (strcmp(mode, "basic") == 0)
-			current_test = &basic_ops;
-		else if (strcmp(mode, "grid") == 0)
-			current_test = &grid_ops;
-		else if (strcmp(mode, "horizontal") == 0)
-			current_test = &horizontal_ops;
-		else if (strcmp(mode, "vertical") == 0)
-			current_test = &vertical_ops;
-		else if (strcmp(mode, "blink") == 0)
-			current_test = &blink_ops;
-		else if (strcmp(mode, "text") == 0)
-			current_test = &text_ops;
-		else
-			g_assert_not_reached();
+		const char *test_name = glade_get_widget_name(GTK_WIDGET(menuitem));
+		g_assert(test_name != NULL);
+		GModule *exe = g_module_open(NULL, 0);
+		g_assert(exe != NULL);
+		gchar *test_struct = g_strconcat(test_name, "_ops", NULL);
+		if (g_module_symbol(exe, test_struct, (gpointer) &current_test) != TRUE) {
+			GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(mainwin),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
+				_("No implementation for the test \"%s\" found."),
+				test_name);
+			gtk_window_set_title(GTK_WINDOW(dialog), PACKAGE_NAME);
+			gtk_dialog_run(GTK_DIALOG(dialog));
+			gtk_main_quit();
+		}
+		free(test_struct);
+		g_module_close(exe);
 		if (current_test->init != NULL) {
 			current_test->init(mainwin);
 		}
