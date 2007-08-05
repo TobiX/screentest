@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(screentest, 1.1)
+AC_INIT(screentest, 2.0)
 AC_CONFIG_SRCDIR([screentest.glade])
 AM_INIT_AUTOMAKE([foreign])
 AM_MAINTAINER_MODE
