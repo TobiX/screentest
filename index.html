@@ -1,62 +1,93 @@
-<HTML>
-<HEAD><TITLE>Screentest - monitor testing utility</TITLE></HEAD>
-<BODY BACKGROUND="grid.gif"  TEXT=#f0f0f0 LINK=#fccc3c VLINK=#e9b340 ALINK=#c00000>
-<a href="http://sourceforge.net"><img align=right src="http://sourceforge.net/sflogo.php?group_id=87454&amp;type=3" width="125" height="37" border="0" alt="SourceForge.net Logo" /></a>
-<CENTER><H1>Welcome to the Screentest Home Page</H1></CENTER>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<title>Screentest - monitor testing utility</title>
+<meta name="MSSmartTagsPreventParsing" content="TRUE">
+<meta http-equiv="imagetoolbar" content="no">
+<style type="text/css">
+body {
+	background: url(grid.gif);
+	background-color: black;
+	color: #f0f0f0;
+}
 
-<H2>What is Screentest?</H2>
-Screentest is a CRT and LCD screen testing utility. Ever wondered how good the
+a {
+	color: #fccc3c;
+}
+
+a:visited {
+	color: #e9b340;
+}
+
+a:active {
+	color: #c00000;
+}
+
+h1, #screenshot {
+	text-align: center;
+}
+
+#logo {
+	text-align: right;
+}
+
+pre {
+	padding: 1em;
+	background-color: black;
+	border: solid 1px white;
+}
+</style>
+</head>
+<body>
+<p id="logo"><a href="http://sourceforge.net"><img
+	src="http://sourceforge.net/sflogo.php?group_id=87454&amp;type=3"
+	width="125" height="37" alt="SourceForge.net Logo" /></a></p>
+<h1>Welcome to the Screentest Home Page</h1>
+
+<h2>What is Screentest?</h2>
+<p>Screentest is a CRT and LCD screen testing utility. Ever wondered how good the
 quality (sharpness, linearity, convergence, etc.) of your CRT/LCD monitor is?
 Screentest displays the testing patterns which you can use to evaluate the
-quality of your monitor.
-<BR CLEAR=ALL>
+quality of your monitor.</p>
 
-<HR>
-<H2>How can I get Screentest?</H2>
+<hr>
+<h2>How can I get Screentest?</h2>
 
-Use the <A HREF=https://sourceforge.net/project/showfiles.php?group_id=87454&release_id=176625">Downloads page</A>.
-You will find there the source tarball, binary and source RPM, and even a
-statically linked i386 binary.
+<p>Use the <A HREF=https://sourceforge.net/project/showfiles.php?group_id=87454&release_id=176625">SF Downloads page</A>.
+<!-- You will find there the source tarball, binary and source RPM, and even a
+statically linked i386 binary. --></p>
 
-<P>
-The RPM packages are signed by Jan "Yenya" Kasprzak's <A HREF="http://www.fi.muni.cz/~kas/pgp.html">PGP key</A>.
+<!-- <P>
+The RPM packages are signed by Jan "Yenya" Kasprzak's <A HREF="http://www.fi.muni.cz/~kas/pgp.html">PGP key</A>. -->
 
-<!-- not yet
-<HR>
-<H2>CVS repository</H2>
+<h2>Development repository</h2>
 
-You can browse the development tree in CVS using our
-<A HREF="cvsweb.cgi">CVSweb interface</A>.
+<p>The screentest sources are maintained in a <a
+	href="http://darcs.net/">darcs</a> repository. You can get the sources
+with darcs using this command:</p>
 
-<HR>
-<H2>Documentation</H2>
+<pre>darcs get http://darcs.portfolio16.de/screentest/</pre>
 
-<UL>
-<LI><A HREF="cvsweb.cgi/README?rev=HEAD">README</A> file.
-<LI><A HREF="cvsweb.cgi/INSTALL?rev=HEAD">INSTALL</A> file (instalation tutorial).
-<LI><A HREF="cvsweb.cgi/NEW_TESTS?rev=HEAD">NEW_TESTS</A> file (how to add the new screen test).
-<LI><A HREF="cvsweb.cgi/ChangeLog?rev=HEAD">ChangeLog</A> file - please read it before reporting a bug, it may have been already fixed in the development tree.
-</UL>
--->
+<p>You can also browse the repository with <a
+	href="http://darcs.portfolio16.de/?r=screentest;a=summary">darcsweb</a>.</p>
 
-<HR>
-<H2>Screenshot</H2>
+<hr>
+<h2>Screenshot</h2>
 
-<BR>
-<CENTER>
-<A HREF="screentest.png"><IMG SRC="screentest-preview.png" ALT="screenshot"></A>
-</CENTER>
-Click for a bigger picture.
+<p id="screenshot">
+<a HREF="screentest.png"><img src="screentest-preview.png" alt="screenshot"></a>
+<br>Click for a bigger picture.
+</p>
 
-<HR>
-<H2>License</H2>
+<hr>
+<h2>License</h2>
 
-Screentest is a postcardware+GPL: if you like it, you can send me a postcard
+<p>Screentest is a postcardware+GPL: if you like it, you can send me a postcard
 (see the file AUTHORS in the distribution packages for my snail-mail address).
 The postcard is optional. The package is distributed under the terms of
-GNU General Public License, version 2.
+GNU General Public License, version 2.</p>
 
-<HR>
-<EM><A HREF="http://www.fi.muni.cz/~kas/">Jan "Yenya" Kasprzak</A></EM>
-</BODY>
-</HTML>
+<hr>
+<p><address><a href="http://portfolio16.de/">Tobias Gruetzmacher</a></address></p>
+</body>
+</html>
