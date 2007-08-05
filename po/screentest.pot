@@ -1,91 +1,88 @@
-# Translation of screentest to german.
+# screentest translation.
 # Copyright (C) 2007 Tobias Gruetzmacher <tobias@portfolio16.de>
 # This file is distributed under the same license as the screentest package.
-#
-#
 # Tobias Gruetzmacher <tobias@portfolio16.de>, 2007.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: de\n"
+"Project-Id-Version: screentest 2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-05 21:15+0200\n"
-"PO-Revision-Date: 2007-08-05 21:39+0200\n"
-"Last-Translator: Tobias Gruetzmacher <tobias@portfolio16.de>\n"
-"Language-Team: german <de@li.org>\n"
+"PO-Revision-Date: 2007-08-05 21:20+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
 
 #: main.c:50
 msgid ""
 "The GLADE interface definition file was not found.\n"
 "Please make sure this program is installed correctly."
 msgstr ""
-"Die GLADE-Interface-Definitions-Datei wurde nicht gefunden.\n"
-"Bitte stellen Sie sicher, dass dieses Programm korrekt installiert wurde."
 
 #: callbacks.c:183
 #, c-format
 msgid "No implementation for the test \"%s\" found."
-msgstr "Keine Implementierung für den Test \"%s\" gefunden."
+msgstr ""
 
 #: basic_test.c:75
 msgid "Left Button - param cycle, if any"
-msgstr "Linke Taste - Param. wechseln, wenn vorhanden"
+msgstr ""
 
 #: basic_test.c:76
 msgid "Middle Button - color cycle"
-msgstr "Mittlere Taste - Farbe wechseln"
+msgstr ""
 
 #: basic_test.c:77
 msgid "Right Button - menu"
-msgstr "Rechte Taste - Menü"
+msgstr ""
 
 #: screentest.glade:7
 msgid "Screen test"
-msgstr "Bildschirmprüfung"
+msgstr ""
 
 #: screentest.glade:27
 msgid "Mode"
-msgstr "Modus"
+msgstr ""
 
 #: screentest.glade:34
 msgid "Basic"
-msgstr "Einfach"
+msgstr ""
 
 #: screentest.glade:43
 msgid "Grid"
-msgstr "Gitter"
+msgstr ""
 
 #: screentest.glade:52
 msgid "Horizontal"
-msgstr "Horizontal"
+msgstr ""
 
 #: screentest.glade:61
 msgid "Vertical"
-msgstr "Vertikal"
+msgstr ""
 
 #: screentest.glade:70
 msgid "Blink"
-msgstr "Blinken"
+msgstr ""
 
 #: screentest.glade:79
 msgid "Text"
-msgstr "Text"
+msgstr ""
 
 #: screentest.glade:92
 msgid "Foreground Color"
-msgstr "Vordergrundfarbe"
+msgstr ""
 
 #: screentest.glade:108
 msgid "Background Color"
-msgstr "Hintergrundfarbe"
+msgstr ""
 
 #: screentest.glade:144
 msgid "Select Foreground color"
-msgstr "Wähle Vordergrundfarbe"
+msgstr ""
 
 #: screentest.glade:180
 msgid "Select Background color"
-msgstr "Wähle Hintergrundfarbe"
+msgstr ""
