@@ -3,4 +3,4 @@
 main.c
 callbacks.c
 basic_test.c
-screentest.glade
+[type: gettext/glade] screentest.ui

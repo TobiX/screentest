@@ -26,7 +26,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 
 #include "callbacks.h"
 #include "main.h"
@@ -46,9 +45,7 @@ void on_mainwin_realize(GtkWidget * widget, G_GNUC_UNUSED gpointer user_data)
 {
 	gint i;
 
-#ifdef DEBUG
-	gdk_window_resize(widget->window, 800, 600);
-#else
+#ifndef DEBUG
 	gtk_window_fullscreen(GTK_WINDOW(widget));
 #endif
 
@@ -111,7 +108,7 @@ gboolean
 on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
 		G_GNUC_UNUSED gpointer user_data)
 {
-	GtkWidget *popup;
+	GObject *popup;
 
 	switch (event->button) {
 	case 1:
@@ -128,7 +125,7 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
 		update_fg_color();
 		break;
 	case 3:
-		popup = glade_xml_get_widget(glade, "popup");
+		popup = gtk_builder_get_object(builder, "popup");
 		gtk_menu_popup(GTK_MENU(popup), NULL, NULL, NULL, NULL,
 			       event->button, event->time);
 		break;
@@ -171,7 +168,7 @@ void on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 			current_test = NULL;
 		}
 	} else {
-		const char *test_name = glade_get_widget_name(GTK_WIDGET(menuitem));
+		const char *test_name = gtk_widget_get_name(GTK_WIDGET(menuitem));
 		g_assert(test_name != NULL);
 		GModule *exe = g_module_open(NULL, 0);
 		g_assert(exe != NULL);
@@ -199,9 +196,9 @@ void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 		G_GNUC_UNUSED gpointer user_data)
 {
 	GtkColorSelection *colorsel;
-	GtkWidget *fg_color_selector;
+	GObject *fg_color_selector;
 
-	fg_color_selector = glade_xml_get_widget(glade, "fg_color_selector");
+	fg_color_selector = gtk_builder_get_object(builder, "fg_color_selector");
 
 	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(fg_color_selector)->colorsel);
 	gtk_color_selection_set_current_color(colorsel, fg_color);
@@ -217,16 +214,16 @@ void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 		default:
 			g_assert_not_reached();
 	}
-	gtk_widget_hide(fg_color_selector);
+	gtk_widget_hide(GTK_WIDGET(fg_color_selector));
 }
 
 void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 		G_GNUC_UNUSED gpointer user_data)
 {
 	GtkColorSelection *colorsel;
-	GtkWidget *bg_color_selector;
+	GObject *bg_color_selector;
 
-	bg_color_selector = glade_xml_get_widget(glade, "bg_color_selector");
+	bg_color_selector = gtk_builder_get_object(builder, "bg_color_selector");
 
 	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(bg_color_selector)->colorsel);
 	gtk_color_selection_set_current_color(colorsel, bg_color);
@@ -242,6 +239,6 @@ void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 		default:
 			g_assert_not_reached();
 	}
-	gtk_widget_hide(bg_color_selector);
+	gtk_widget_hide(GTK_WIDGET(bg_color_selector));
 }
 

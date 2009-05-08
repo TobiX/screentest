@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-05 21:15+0200\n"
+"POT-Creation-Date: 2009-05-08 19:44+0200\n"
 "PO-Revision-Date: 2007-08-05 21:39+0200\n"
 "Last-Translator: Tobias Gruetzmacher <tobias@portfolio16.de>\n"
 "Language-Team: german <de@li.org>\n"
@@ -17,75 +17,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: main.c:50
+#: ../main.c:52
+#, fuzzy
 msgid ""
-"The GLADE interface definition file was not found.\n"
+"The interface definition file was not found.\n"
 "Please make sure this program is installed correctly."
 msgstr ""
 "Die GLADE-Interface-Definitions-Datei wurde nicht gefunden.\n"
 "Bitte stellen Sie sicher, dass dieses Programm korrekt installiert wurde."
 
-#: callbacks.c:183
+#: ../callbacks.c:180
 #, c-format
 msgid "No implementation for the test \"%s\" found."
 msgstr "Keine Implementierung für den Test \"%s\" gefunden."
 
-#: basic_test.c:75
+#: ../basic_test.c:75
 msgid "Left Button - param cycle, if any"
 msgstr "Linke Taste - Param. wechseln, wenn vorhanden"
 
-#: basic_test.c:76
+#: ../basic_test.c:76
 msgid "Middle Button - color cycle"
 msgstr "Mittlere Taste - Farbe wechseln"
 
-#: basic_test.c:77
+#: ../basic_test.c:77
 msgid "Right Button - menu"
 msgstr "Rechte Taste - Menü"
 
-#: screentest.glade:7
-msgid "Screen test"
-msgstr "Bildschirmprüfung"
-
-#: screentest.glade:27
-msgid "Mode"
-msgstr "Modus"
-
-#: screentest.glade:34
-msgid "Basic"
-msgstr "Einfach"
-
-#: screentest.glade:43
-msgid "Grid"
-msgstr "Gitter"
-
-#: screentest.glade:52
-msgid "Horizontal"
-msgstr "Horizontal"
-
-#: screentest.glade:61
-msgid "Vertical"
-msgstr "Vertikal"
-
-#: screentest.glade:70
-msgid "Blink"
-msgstr "Blinken"
-
-#: screentest.glade:79
-msgid "Text"
-msgstr "Text"
-
-#: screentest.glade:92
-msgid "Foreground Color"
-msgstr "Vordergrundfarbe"
-
-#: screentest.glade:108
+#: ../screentest.ui.h:1
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
 
-#: screentest.glade:144
+#: ../screentest.ui.h:2
+msgid "Basic"
+msgstr "Einfach"
+
+#: ../screentest.ui.h:3
+msgid "Blink"
+msgstr "Blinken"
+
+#: ../screentest.ui.h:4
+msgid "Foreground Color"
+msgstr "Vordergrundfarbe"
+
+#: ../screentest.ui.h:5
+msgid "Grid"
+msgstr "Gitter"
+
+#: ../screentest.ui.h:6
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: ../screentest.ui.h:7
+msgid "Mode"
+msgstr "Modus"
+
+#: ../screentest.ui.h:8
+msgid "Screen test"
+msgstr "Bildschirmprüfung"
+
+#: ../screentest.ui.h:9
+msgid "Select Background color"
+msgstr "Wähle Hintergrundfarbe"
+
+#: ../screentest.ui.h:10
 msgid "Select Foreground color"
 msgstr "Wähle Vordergrundfarbe"
 
-#: screentest.glade:180
-msgid "Select Background color"
-msgstr "Wähle Hintergrundfarbe"
+#: ../screentest.ui.h:11
+msgid "Text"
+msgstr "Text"
+
+#: ../screentest.ui.h:12
+msgid "Vertical"
+msgstr "Vertikal"
+
+#: ../screentest.ui.h:13
+msgid "gtk-cancel"
+msgstr ""
+
+#: ../screentest.ui.h:14
+msgid "gtk-help"
+msgstr ""
+
+#: ../screentest.ui.h:15
+msgid "gtk-ok"
+msgstr ""

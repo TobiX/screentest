@@ -21,8 +21,8 @@
 #ifndef _MAIN_H
 #define _MAIN_H 1
 
-#include <glade/glade.h>
+#include <gtk/gtk.h>
 
-extern GladeXML *glade;
+extern GtkBuilder *builder;
 
 #endif /* _MAIN_H */
