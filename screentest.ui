@@ -6,6 +6,9 @@
     <property name="app_paintable">True</property>
     <property name="events">GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK</property>
     <property name="title" translatable="yes">Screen test</property>
+    <accel-groups>
+      <group name="accelgroup1"/>
+    </accel-groups>
     <signal name="expose_event" handler="on_mainwin_expose_event"/>
     <signal name="button_press_event" handler="on_mainwin_button_press_event"/>
     <signal name="realize" handler="on_mainwin_realize"/>
@@ -22,59 +25,27 @@
     <property name="transient_for">mainwin</property>
     <child internal-child="color_selection">
       <object class="GtkColorSelection" id="fg_color_selection">
-        <property name="visible">True</property>
         <property name="has_palette">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">fg_color_help</action-widget>
-      <action-widget response="0">fg_color_ok</action-widget>
-      <action-widget response="0">fg_color_cancel</action-widget>
-    </action-widgets>
     <child internal-child="help_button">
       <object class="GtkButton" id="fg_color_help">
-        <property name="label" translatable="yes">gtk-help</property>
-        <property name="can_focus">True</property>
-        <property name="can_default">True</property>
+        <property name="can_focus">False</property>
         <property name="receives_default">False</property>
-        <property name="use_stock">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">fg_color_help</action-widget>
-      <action-widget response="0">fg_color_ok</action-widget>
-      <action-widget response="0">fg_color_cancel</action-widget>
-    </action-widgets>
     <child internal-child="cancel_button">
       <object class="GtkButton" id="fg_color_cancel">
-        <property name="label" translatable="yes">gtk-cancel</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="can_default">True</property>
+        <property name="can_focus">False</property>
         <property name="receives_default">False</property>
-        <property name="use_stock">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">fg_color_help</action-widget>
-      <action-widget response="0">fg_color_ok</action-widget>
-      <action-widget response="0">fg_color_cancel</action-widget>
-    </action-widgets>
     <child internal-child="ok_button">
       <object class="GtkButton" id="fg_color_ok">
-        <property name="label" translatable="yes">gtk-ok</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="can_default">True</property>
+        <property name="can_focus">False</property>
         <property name="receives_default">False</property>
-        <property name="use_stock">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">fg_color_help</action-widget>
-      <action-widget response="0">fg_color_ok</action-widget>
-      <action-widget response="0">fg_color_cancel</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkColorSelectionDialog" id="bg_color_selector">
     <property name="title" translatable="yes">Select Background color</property>
@@ -84,60 +55,27 @@
     <property name="transient_for">mainwin</property>
     <child internal-child="color_selection">
       <object class="GtkColorSelection" id="bg_color_selection">
-        <property name="visible">True</property>
         <property name="has_palette">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">bg_color_help</action-widget>
-      <action-widget response="0">bg_color_ok</action-widget>
-      <action-widget response="0">bg_color_cancel</action-widget>
-    </action-widgets>
     <child internal-child="help_button">
       <object class="GtkButton" id="bg_color_help">
-        <property name="label" translatable="yes">gtk-help</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="can_default">True</property>
+        <property name="can_focus">False</property>
         <property name="receives_default">False</property>
-        <property name="use_stock">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">bg_color_help</action-widget>
-      <action-widget response="0">bg_color_ok</action-widget>
-      <action-widget response="0">bg_color_cancel</action-widget>
-    </action-widgets>
     <child internal-child="cancel_button">
       <object class="GtkButton" id="bg_color_cancel">
-        <property name="label" translatable="yes">gtk-cancel</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="can_default">True</property>
+        <property name="can_focus">False</property>
         <property name="receives_default">False</property>
-        <property name="use_stock">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">bg_color_help</action-widget>
-      <action-widget response="0">bg_color_ok</action-widget>
-      <action-widget response="0">bg_color_cancel</action-widget>
-    </action-widgets>
     <child internal-child="ok_button">
       <object class="GtkButton" id="bg_color_ok">
-        <property name="label" translatable="yes">gtk-ok</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="can_default">True</property>
+        <property name="can_focus">False</property>
         <property name="receives_default">False</property>
-        <property name="use_stock">True</property>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">bg_color_help</action-widget>
-      <action-widget response="0">bg_color_ok</action-widget>
-      <action-widget response="0">bg_color_cancel</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkMenu" id="popup">
     <property name="visible">True</property>
@@ -253,9 +191,9 @@
     <property name="visible">True</property>
     <property name="stock">gtk-select-color</property>
   </object>
-  <object class="GtkAccelGroup" id="accelgroup1"/>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="stock">gtk-select-color</property>
   </object>
+  <object class="GtkAccelGroup" id="accelgroup1"/>
 </interface>
