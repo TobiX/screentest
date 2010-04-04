@@ -97,21 +97,21 @@ of all your modifications. See the file COPYING for details.
 You must make the circle_test.c available, but you don't have to send it
 to the author of this program. However, author of this program kindly asks
 you to contribute any modifications. Please send your modifications
-to the author of screentest, Tobias Gruetzmacher <tobias@portfolio16.de>.
+to the author of screentest, Tobias Gruetzmacher <tobias-screentest@23.gs>.
 The preferred form of the contribution is an unified diff (see the diff(1)
 manual page. To make a unified diff, follow these steps:
 
 - rename your directory with modified sources (for example
-	mv screentest-1.0 screentest-1.0-circle).
+	mv screentest-2.0 screentest-2.0-circle).
 - run "make distclean" in this directory.
 - unpack the clean sources again:
-	zcat screentest-1.0.tar.gz | tar xvf -
+	zcat screentest-2.0.tar.gz | tar xvf -
 - create the patch with the following command:
-	diff -uNr screentest-1.0 screentest-1.0-circle >screentest-circle.patch
+	diff -uNr screentest-2.0 screentest-2.0-circle >screentest-circle.patch
 - mail the screentest-circle.patch to the author.
 
 	Thanks,
 
-- Tobias Gruetzmacher <tobias@portfolio16.de> (current maintainer)
+- Tobias Gruetzmacher <tobias-screentest@23.gs> (current maintainer)
 - Jan "Yenya" Kasprzak <kas@fi.muni.cz> (previous maintainer)
 
