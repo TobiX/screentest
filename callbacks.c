@@ -170,7 +170,7 @@ on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 			current_test = NULL;
 		}
 	} else {
-		const char *test_name = gtk_widget_get_name(GTK_WIDGET(menuitem));
+		const char *test_name = gtk_buildable_get_name(GTK_BUILDABLE(menuitem));
 		g_assert(test_name != NULL);
 		GModule *exe = g_module_open(NULL, 0);
 		g_assert(exe != NULL);
