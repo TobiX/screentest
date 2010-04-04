@@ -90,7 +90,7 @@ static void blink_close(G_GNUC_UNUSED GtkWidget * widget)
 	gtk_timeout_remove(timeout);
 }
 
-struct test_ops blink_ops = {
+G_MODULE_EXPORT struct test_ops blink_ops = {
 	init:blink_init,
 	draw:blink_draw,
 	cycle:blink_cycle,

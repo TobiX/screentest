@@ -61,7 +61,7 @@ static void horizontal_draw(GtkWidget * widget)
 		gdk_draw_line(win, gc, 0, i, w - 1, i);
 }
 
-struct test_ops horizontal_ops = {
+G_MODULE_EXPORT struct test_ops horizontal_ops = {
 	init:horizontal_init,
 	draw:horizontal_draw,
 	cycle:horizontal_cycle,

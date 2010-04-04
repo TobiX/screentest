@@ -62,7 +62,7 @@ static void grid_draw(GtkWidget * widget)
 		gdk_draw_line(win, gc, 0, i, w - 1, i);
 }
 
-struct test_ops grid_ops = {
+G_MODULE_EXPORT struct test_ops grid_ops = {
 	init:grid_init,
 	draw:grid_draw,
 	cycle:grid_cycle,

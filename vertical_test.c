@@ -60,7 +60,7 @@ static void vertical_draw(GtkWidget * widget)
 		gdk_draw_line(win, gc, i, 0, i, h - 1);
 }
 
-struct test_ops vertical_ops = {
+G_MODULE_EXPORT struct test_ops vertical_ops = {
 	init:vertical_init,
 	draw:vertical_draw,
 	cycle:vertical_cycle,

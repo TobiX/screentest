@@ -150,7 +150,7 @@ static void basic_close(G_GNUC_UNUSED GtkWidget * widget)
 	gdk_font_unref(font);
 }
 
-struct test_ops basic_ops = {
+G_MODULE_EXPORT struct test_ops basic_ops = {
 	init:basic_init,
 	draw:basic_draw,
 	cycle:NULL,
