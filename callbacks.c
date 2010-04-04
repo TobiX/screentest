@@ -187,7 +187,7 @@ on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 		}
 		free(test_struct);
 		g_module_close(exe);
-		if (current_test->init != NULL) {
+		if (current_test != NULL && current_test->init != NULL) {
 			current_test->init(mainwin);
 		}
 		on_mainwin_expose_event(mainwin, NULL, NULL);
