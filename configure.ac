@@ -30,6 +30,14 @@ if test "x$GCC" = "xyes"; then
   esac
 fi
 
+dnl Windows-detection
+case $host in
+  i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
+  *cygwin*) WIN32="yes" ;;
+  *) WIN32="no" ;;
+esac
+AM_CONDITIONAL([WIN32], test "x$WIN32" = "xyes")
+
 AC_CONFIG_FILES([Makefile po/Makefile.in])
 AC_OUTPUT
 
