@@ -41,7 +41,8 @@ int fg_count = COLOR_WHITE;
 static GtkWidget *mainwin = NULL;
 static struct test_ops *current_test = &basic_ops;
 
-void on_mainwin_realize(GtkWidget * widget, G_GNUC_UNUSED gpointer user_data)
+G_MODULE_EXPORT void
+on_mainwin_realize(GtkWidget * widget, G_GNUC_UNUSED gpointer user_data)
 {
 	gint i;
 
@@ -104,7 +105,7 @@ static void update_bg_color(void)
 	gdk_window_invalidate_rect(mainwin->window, NULL, FALSE);
 }
 
-gboolean
+G_MODULE_EXPORT gboolean
 on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
 		G_GNUC_UNUSED gpointer user_data)
 {
@@ -137,7 +138,7 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
  * FIXME: GTK_WINDOW_POPUP does not seem to be able to receive
  * KeyPress events. How to enable this?
  */
-gboolean
+G_MODULE_EXPORT gboolean
 on_mainwin_key_press_event(G_GNUC_UNUSED GtkWidget *widget,
 		G_GNUC_UNUSED GdkEventKey *event,
 		G_GNUC_UNUSED gpointer user_data)
@@ -146,7 +147,7 @@ on_mainwin_key_press_event(G_GNUC_UNUSED GtkWidget *widget,
 	return FALSE;
 }
 
-gboolean
+G_MODULE_EXPORT gboolean
 on_mainwin_expose_event(GtkWidget *widget, G_GNUC_UNUSED GdkEventExpose *event,
 		G_GNUC_UNUSED gpointer user_data)
 {
@@ -158,7 +159,8 @@ on_mainwin_expose_event(GtkWidget *widget, G_GNUC_UNUSED GdkEventExpose *event,
 	return TRUE;
 }
 
-void on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
+G_MODULE_EXPORT void
+on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 {
 	GtkCheckMenuItem *checkmenuitem = GTK_CHECK_MENU_ITEM(menuitem);
 
@@ -192,7 +194,8 @@ void on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 	}
 }
 
-void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
+G_MODULE_EXPORT void
+on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 		G_GNUC_UNUSED gpointer user_data)
 {
 	GtkColorSelection *colorsel;
@@ -217,7 +220,8 @@ void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 	gtk_widget_hide(GTK_WIDGET(fg_color_selector));
 }
 
-void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
+G_MODULE_EXPORT void
+on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 		G_GNUC_UNUSED gpointer user_data)
 {
 	GtkColorSelection *colorsel;
