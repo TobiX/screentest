@@ -50,7 +50,7 @@ static void grid_draw(GtkWidget * widget)
 	gint i;
 	gint d;
 
-	gdk_window_get_size(win, &w, &h);
+	gdk_drawable_get_size(win, &w, &h);
 
 	d = w / 4;
 	if (d > h / 4)

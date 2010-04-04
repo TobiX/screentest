@@ -77,7 +77,7 @@ static void basic_draw(GtkWidget * widget)
 		N_("Right Button - menu"),
 	};
 
-	gdk_window_get_size(win, &w, &h);
+	gdk_drawable_get_size(win, &w, &h);
 
 	for (i = ((w - 1) % BASIC_STEP) / 2; i < w; i += BASIC_STEP)
 		gdk_draw_line(win, gc, i, 0, i, h - 1);
