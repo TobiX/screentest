@@ -12,7 +12,7 @@ bin_PROGRAMS = screentest
 
 screentest_SOURCES = main.c main.h callbacks.c callbacks.h test_basic.c \
 		     test_blink.c test_grid.c test_horizontal.c test_text.c \
-		     test_vertical.c gettext.h
+		     test_vertical.c test_lcdalign.c gettext.h
 
 screentest_LDADD = $(GTK_LIBS)
 
