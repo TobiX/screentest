@@ -33,7 +33,7 @@ static gint blink_step;
 
 static void blink_draw(GtkWidget * widget)
 {
-	GdkWindow *win = widget->window;
+	GdkWindow *win = gtk_widget_get_window(widget);
 	gint w, h;
 	GdkGC *gc1, *gc2;
 

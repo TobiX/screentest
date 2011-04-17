@@ -63,7 +63,7 @@ static void draw_boxes(GdkWindow * win, GdkColor * colors, gint ncols,
 
 static void basic_draw(GtkWidget * widget)
 {
-	GdkWindow *win = widget->window;
+	GdkWindow *win = gtk_widget_get_window(widget);
 	gint w, h;
 	gint i, b, d;
 	gint maxwidth, maxheight;

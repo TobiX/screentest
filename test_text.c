@@ -71,7 +71,7 @@ static void text_init(GtkWidget * widget)
 
 static void text_draw(GtkWidget * widget)
 {
-	GdkWindow *win = widget->window;
+	GdkWindow *win = gtk_widget_get_window(widget);
 	gint w, h;
 	gint x, y;
 

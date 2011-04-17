@@ -45,7 +45,7 @@ static void vertical_cycle(G_GNUC_UNUSED GtkWidget * widget)
 
 static void vertical_draw(GtkWidget * widget)
 {
-	GdkWindow *win = widget->window;
+	GdkWindow *win = gtk_widget_get_window(widget);
 	gint w, h;
 	gint i;
 	gint d;

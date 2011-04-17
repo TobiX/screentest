@@ -81,8 +81,8 @@ on_mainwin_realize(GtkWidget * widget, G_GNUC_UNUSED gpointer user_data)
 
 	mainwin = widget;
 
-	gc = gdk_gc_new(mainwin->window);
-	backgc = gdk_gc_new(mainwin->window);
+	gc = gdk_gc_new(gtk_widget_get_window(mainwin));
+	backgc = gdk_gc_new(gtk_widget_get_window(mainwin));
 
 	if (current_test->init != NULL)
 		current_test->init(widget);
@@ -93,7 +93,7 @@ static void update_fg_color(void)
 	gdk_gc_set_rgb_fg_color(gc, fg_color);
 	gdk_gc_set_rgb_bg_color(backgc, fg_color);
 
-	gdk_window_invalidate_rect(mainwin->window, NULL, FALSE);
+	gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
 }
 
 static void update_bg_color(void)
@@ -102,7 +102,7 @@ static void update_bg_color(void)
 	gdk_gc_set_rgb_bg_color(gc, bg_color);
 	gdk_gc_set_rgb_fg_color(backgc, bg_color);
 
-	gdk_window_invalidate_rect(mainwin->window, NULL, FALSE);
+	gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
 }
 
 G_MODULE_EXPORT gboolean
@@ -115,7 +115,7 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
 	case 1:
 		if (current_test->cycle != NULL) {
 			current_test->cycle(widget);
-			gdk_window_invalidate_rect(mainwin->window, NULL, FALSE);
+			gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
 		}
 		break;
 	case 2:
@@ -151,8 +151,8 @@ G_MODULE_EXPORT gboolean
 on_mainwin_expose_event(GtkWidget *widget, G_GNUC_UNUSED GdkEventExpose *event,
 		G_GNUC_UNUSED gpointer user_data)
 {
-	gdk_window_set_background(widget->window, bg_color);
-	gdk_window_clear(widget->window);
+	gdk_window_set_background(gtk_widget_get_window(widget), bg_color);
+	gdk_window_clear(gtk_widget_get_window(widget));
 
 	if (current_test && current_test->draw)
 		current_test->draw(widget);
@@ -164,7 +164,7 @@ on_mode_change(GtkMenuItem *menuitem, G_GNUC_UNUSED gpointer user_data)
 {
 	GtkCheckMenuItem *checkmenuitem = GTK_CHECK_MENU_ITEM(menuitem);
 
-	if (!checkmenuitem->active) {
+	if (!gtk_check_menu_item_get_active(checkmenuitem)) {
 		if (current_test->close != NULL) {
 			current_test->close(mainwin);
 			current_test = NULL;
@@ -203,7 +203,7 @@ on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 
 	fg_color_selector = gtk_builder_get_object(builder, "fg_color_selector");
 
-	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(fg_color_selector)->colorsel);
+	colorsel = GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(fg_color_selector)));
 	gtk_color_selection_set_current_color(colorsel, fg_color);
 	switch (gtk_dialog_run(GTK_DIALOG(fg_color_selector))) {
 		case GTK_RESPONSE_OK:
@@ -229,7 +229,7 @@ on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 
 	bg_color_selector = gtk_builder_get_object(builder, "bg_color_selector");
 
-	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(bg_color_selector)->colorsel);
+	colorsel = GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(bg_color_selector)));
 	gtk_color_selection_set_current_color(colorsel, bg_color);
 	switch (gtk_dialog_run(GTK_DIALOG(bg_color_selector))) {
 		case GTK_RESPONSE_OK:

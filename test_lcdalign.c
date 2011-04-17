@@ -27,7 +27,7 @@
 
 static void lcdalign_draw(GtkWidget * widget)
 {
-	GdkWindow *win = widget->window;
+	GdkWindow *win = gtk_widget_get_window(widget);
 	GdkGC *linegc = gdk_gc_new(win);
 	gint w, h;
 	gint i;
