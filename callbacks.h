@@ -2,7 +2,7 @@
  *  Screentest - CRT/LCD monitor testing utility.
  *  http://screentest.sourceforge.net/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
- *  Copyright (C) 2006-2010 Tobias Gruetzmacher <tobias-screentest@23.gs>
+ *  Copyright (C) 2006-2011 Tobias Gruetzmacher <tobias-screentest@23.gs>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -27,8 +27,7 @@ struct test_ops {
 	void (*close) (GtkWidget * widget);
 };
 
-extern struct test_ops basic_ops, grid_ops, horizontal_ops, vertical_ops,
-    blink_ops, text_ops;
+extern struct test_ops basic_ops;
 
 enum test_color {
 	COLOR_WHITE,

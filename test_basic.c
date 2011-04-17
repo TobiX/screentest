@@ -2,7 +2,7 @@
  *  Screentest - CRT/LCD monitor testing utility.
  *  http://screentest.sourceforge.net/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
- *  Copyright (C) 2006-2010 Tobias Gruetzmacher <tobias-screentest@23.gs>
+ *  Copyright (C) 2006-2011 Tobias Gruetzmacher <tobias-screentest@23.gs>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -71,7 +71,7 @@ static void basic_draw(GtkWidget * widget)
 	static gchar *text[] = {
 		"Screentest v" VERSION,
 		"(C) 2001 Jan \"Yenya\" Kasprzak <kas@fi.muni.cz>",
-		"(C) 2006-2010 Tobias Gruetzmacher <tobias-screentest@23.gs>",
+		"(C) 2006-2011 Tobias Gruetzmacher <tobias-screentest@23.gs>",
 		N_("Left Button - param cycle, if any"),
 		N_("Middle Button - color cycle"),
 		N_("Right Button - menu"),
