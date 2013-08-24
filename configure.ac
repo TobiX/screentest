@@ -13,6 +13,8 @@ AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_HEADER_STDC
 
+# FIXME: earlier version?
+AM_PATH_GLIB_2_0(2.36.0,,,gmodule)
 AM_PATH_GTK_2_0(2.16.0)
 
 ALL_LINGUAS="de"
