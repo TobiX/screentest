@@ -1,0 +1,12 @@
+language: c
+sudo: false
+addons:
+  apt:
+    packages:
+      - automake
+      - intltool
+      - libgtk2.0-dev
+compiler:
+  - clang
+  - gcc
+script: ./autogen.sh && make
