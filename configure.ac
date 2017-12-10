@@ -1,7 +1,8 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(screentest, 2.1)
-AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_MACRO_DIR([build-aux])
+AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_SRCDIR([screentest.ui])
 AM_INIT_AUTOMAKE([foreign])
 AM_MAINTAINER_MODE

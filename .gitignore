@@ -1,22 +1,19 @@
 *.o
 *.tar.gz
-*.m4
 *.gmo
 *~
 
 # Autoconf cruft ;)
+/.deps/
+/aclocal.m4
+/autom4te.cache/
+/build-aux/
+/config.*
+/configure
+/libtool
+/po/POTFILES
+Makefile
 Makefile.in
-aclocal.m4
-autom4te.cache/
-config.guess
-config.h
-config.h.in
-config.sub
-configure
-depcomp
-install-sh
-ltmain.sh
-m4
-missing
-mkinstalldirs
+Makefile.in.in
+stamp-*
 

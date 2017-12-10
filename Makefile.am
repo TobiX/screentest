@@ -22,4 +22,4 @@ else
 screentest_LDFLAGS = -export-dynamic
 endif
 
-ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I build-aux
