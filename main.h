@@ -1,8 +1,8 @@
 /*
  *  Screentest - CRT/LCD monitor testing utility.
- *  http://screentest.sourceforge.net/
+ *  https://tobix.github.io/screentest/
  *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
- *  Copyright (C) 2006-2011 Tobias Gruetzmacher <tobias-screentest@23.gs>
+ *  Copyright (C) 2006-2017 Tobias Gruetzmacher <tobias-screentest@23.gs>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
