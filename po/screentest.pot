@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 13:52+0100\n"
+"POT-Creation-Date: 2017-12-10 15:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,9 +85,13 @@ msgid "LCD Alignment"
 msgstr ""
 
 #: ../screentest.ui.h:12
-msgid "Foreground Color"
+msgid "IT8 color target (beta)"
 msgstr ""
 
 #: ../screentest.ui.h:13
+msgid "Foreground Color"
+msgstr ""
+
+#: ../screentest.ui.h:14
 msgid "Background Color"
 msgstr ""

@@ -11,8 +11,8 @@ pkgdata_DATA = screentest.ui
 bin_PROGRAMS = screentest
 
 screentest_SOURCES = main.c main.h callbacks.c callbacks.h test_basic.c \
-		     test_blink.c test_grid.c test_horizontal.c test_text.c \
-		     test_vertical.c test_lcdalign.c gettext.h
+		     test_blink.c test_grid.c test_horizontal.c test_it8.c \
+		     test_text.c test_vertical.c test_lcdalign.c gettext.h
 
 screentest_LDADD = $(GLIB_LIBS) $(GTK_LIBS)
 
