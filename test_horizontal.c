@@ -62,8 +62,8 @@ static void horizontal_draw(GtkWidget * widget)
 }
 
 G_MODULE_EXPORT struct test_ops horizontal_ops = {
-	init:horizontal_init,
-	draw:horizontal_draw,
-	cycle:horizontal_cycle,
-	close:NULL
+	.init = horizontal_init,
+	.draw = horizontal_draw,
+	.cycle = horizontal_cycle,
+	.close = NULL
 };

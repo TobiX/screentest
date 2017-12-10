@@ -97,8 +97,8 @@ static void text_cycle(GtkWidget * widget)
 }
 
 G_MODULE_EXPORT struct test_ops text_ops = {
-	init:text_init,
-	draw:text_draw,
-	cycle:text_cycle,
-	close:text_close,
+	.init = text_init,
+	.draw = text_draw,
+	.cycle = text_cycle,
+	.close = text_close,
 };

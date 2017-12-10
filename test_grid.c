@@ -63,8 +63,8 @@ static void grid_draw(GtkWidget * widget)
 }
 
 G_MODULE_EXPORT struct test_ops grid_ops = {
-	init:grid_init,
-	draw:grid_draw,
-	cycle:grid_cycle,
-	close:NULL
+	.init = grid_init,
+	.draw = grid_draw,
+	.cycle = grid_cycle,
+	.close = NULL
 };

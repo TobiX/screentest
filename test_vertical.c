@@ -61,8 +61,8 @@ static void vertical_draw(GtkWidget * widget)
 }
 
 G_MODULE_EXPORT struct test_ops vertical_ops = {
-	init:vertical_init,
-	draw:vertical_draw,
-	cycle:vertical_cycle,
-	close:NULL
+	.init = vertical_init,
+	.draw = vertical_draw,
+	.cycle = vertical_cycle,
+	.close = NULL
 };

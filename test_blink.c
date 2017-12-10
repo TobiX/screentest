@@ -91,8 +91,8 @@ static void blink_close(G_GNUC_UNUSED GtkWidget * widget)
 }
 
 G_MODULE_EXPORT struct test_ops blink_ops = {
-	init:blink_init,
-	draw:blink_draw,
-	cycle:blink_cycle,
-	close:blink_close
+	.init = blink_init,
+	.draw = blink_draw,
+	.cycle = blink_cycle,
+	.close = blink_close
 };

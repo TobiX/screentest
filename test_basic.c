@@ -151,8 +151,8 @@ static void basic_close(G_GNUC_UNUSED GtkWidget * widget)
 }
 
 G_MODULE_EXPORT struct test_ops basic_ops = {
-	init:basic_init,
-	draw:basic_draw,
-	cycle:NULL,
-	close:basic_close
+	.init = basic_init,
+	.draw = basic_draw,
+	.cycle = NULL,
+	.close = basic_close
 };

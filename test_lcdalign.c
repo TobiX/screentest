@@ -52,8 +52,8 @@ static void lcdalign_draw(GtkWidget * widget)
 }
 
 G_MODULE_EXPORT struct test_ops lcdalign_ops = {
-	init: NULL,
-	draw: lcdalign_draw,
-	cycle: NULL,
-	close: NULL
+	.init = NULL,
+	.draw = lcdalign_draw,
+	.cycle = NULL,
+	.close = NULL
 };
