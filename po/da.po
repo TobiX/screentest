@@ -1,66 +1,66 @@
-# Translation of screentest to german.
-# Copyright (C) 2007-2017 Tobias Gruetzmacher <tobias-git@23.gs>
+# screentest translation.
+# Copyright (C) 2007 Tobias Gruetzmacher <tobias-git@23.gs>
 # This file is distributed under the same license as the screentest package.
-# Tobias Gruetzmacher <tobias-git@23.gs>, 2007-2017
+# Joe Hansen <joedalton2@yahoo.dk>, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: de\n"
+"Project-Id-Version: screentest 2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 13:52+0100\n"
-"PO-Revision-Date: 2017-12-10 14:15+0100\n"
-"Last-Translator: Tobias Gruetzmacher <tobias-git@23.gs>\n"
-"Language-Team: german <de@li.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2012-04-29 17:30+01:00\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org> \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
 
 #: ../main.c:52
+#, fuzzy
 msgid ""
 "The interface definition file was not found.\n"
 "Please make sure this program is installed correctly."
 msgstr ""
-"Die Interface-Definitions-Datei wurde nicht gefunden.\n"
-"Bitte stellen Sie sicher, dass dieses Programm korrekt installiert wurde."
+"Definitionsfilen for GLADE-grænsefladen blev ikke fundet.\n"
+"Sikr dig at dette program er korrekt installeret."
 
 #: ../callbacks.c:182
 #, c-format
 msgid "No implementation for the test \"%s\" found."
-msgstr "Keine Implementierung für den Test \"%s\" gefunden."
+msgstr "Ingen implementering for testen »%s« blev fundet."
 
 #: ../test_basic.c:75
 msgid "Left Button - param cycle, if any"
-msgstr "Linke Taste - Param. wechseln, wenn vorhanden"
+msgstr "Venstre knap - parametercyklus, hvis nogen"
 
 #: ../test_basic.c:76
 msgid "Middle Button - color cycle"
-msgstr "Mittlere Taste - Farbe wechseln"
+msgstr "Midterste knap - farvecyklus"
 
 #: ../test_basic.c:77
 msgid "Right Button - menu"
-msgstr "Rechte Taste - Menü"
+msgstr "Højre knap - menu"
 
 #: ../screentest.ui.h:1
 msgid "Screen test"
-msgstr "Bildschirmprüfung"
+msgstr "Skærmtest"
 
 #: ../screentest.ui.h:2
 msgid "Select Foreground color"
-msgstr "Wähle Vordergrundfarbe"
+msgstr "Vælg forgrundsfarve"
 
 #: ../screentest.ui.h:3
 msgid "Select Background color"
-msgstr "Wähle Hintergrundfarbe"
+msgstr "Vælg baggrundsfarve"
 
 #: ../screentest.ui.h:4
 msgid "Mode"
-msgstr "Modus"
+msgstr "Tilstand"
 
 #: ../screentest.ui.h:5
 msgid "Basic"
-msgstr "Einfach"
+msgstr "Basis"
 
 #: ../screentest.ui.h:6
 msgid "Grid"
@@ -68,28 +68,28 @@ msgstr "Gitter"
 
 #: ../screentest.ui.h:7
 msgid "Horizontal"
-msgstr "Horizontal"
+msgstr "Vandret"
 
 #: ../screentest.ui.h:8
 msgid "Vertical"
-msgstr "Vertikal"
+msgstr "Lodret"
 
 #: ../screentest.ui.h:9
 msgid "Blink"
-msgstr "Blinken"
+msgstr "Blink"
 
 #: ../screentest.ui.h:10
 msgid "Text"
-msgstr "Text"
+msgstr "Tekst"
 
 #: ../screentest.ui.h:11
 msgid "LCD Alignment"
-msgstr "LCD-Ausrichtung"
+msgstr ""
 
 #: ../screentest.ui.h:12
 msgid "Foreground Color"
-msgstr "Vordergrundfarbe"
+msgstr "Forgrundsfarve"
 
 #: ../screentest.ui.h:13
 msgid "Background Color"
-msgstr "Hintergrundfarbe"
+msgstr "Baggrundsfarve"

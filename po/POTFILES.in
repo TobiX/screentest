@@ -2,5 +2,5 @@
 
 main.c
 callbacks.c
-basic_test.c
+test_basic.c
 [type: gettext/glade] screentest.ui

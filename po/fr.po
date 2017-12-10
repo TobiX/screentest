@@ -1,70 +1,73 @@
-# Translation of screentest to german.
+# Translation of screentest to French.
 # Copyright (C) 2007-2017 Tobias Gruetzmacher <tobias-git@23.gs>
 # This file is distributed under the same license as the screentest package.
-# Tobias Gruetzmacher <tobias-git@23.gs>, 2007-2017
 #
+# Translator:
+# Mami Hicham <aladin29_86@hotmail.com>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: de\n"
+"Project-Id-Version: screentest 2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 13:52+0100\n"
-"PO-Revision-Date: 2017-12-10 14:15+0100\n"
-"Last-Translator: Tobias Gruetzmacher <tobias-git@23.gs>\n"
-"Language-Team: german <de@li.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2009-06-22 20:02+0200\n"
+"Last-Translator: Mami Hicham <aladin29_86@hotmail.com>\n"
+"Language-Team: french<debian-l10n-french@lists.debian.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 0.3.1\n"
 
 #: ../main.c:52
+#, fuzzy
 msgid ""
 "The interface definition file was not found.\n"
 "Please make sure this program is installed correctly."
 msgstr ""
-"Die Interface-Definitions-Datei wurde nicht gefunden.\n"
-"Bitte stellen Sie sicher, dass dieses Programm korrekt installiert wurde."
+"Le fichier de définition de l'interface de GLADE n'a pas été trouvé.\n"
+"Veuillez vérifier que le programme a été correctement installé."
 
 #: ../callbacks.c:182
 #, c-format
 msgid "No implementation for the test \"%s\" found."
-msgstr "Keine Implementierung für den Test \"%s\" gefunden."
+msgstr "Pas d'implémentation trouvée pour le test « %s »."
 
 #: ../test_basic.c:75
 msgid "Left Button - param cycle, if any"
-msgstr "Linke Taste - Param. wechseln, wenn vorhanden"
+msgstr "Bouton gauche - cycle de paramétrage, s'il y en a un"
 
 #: ../test_basic.c:76
 msgid "Middle Button - color cycle"
-msgstr "Mittlere Taste - Farbe wechseln"
+msgstr "Bouton du milieu - couleur du cycle"
 
 #: ../test_basic.c:77
 msgid "Right Button - menu"
-msgstr "Rechte Taste - Menü"
+msgstr "Bouton droit - menu"
 
 #: ../screentest.ui.h:1
 msgid "Screen test"
-msgstr "Bildschirmprüfung"
+msgstr "Test d'écran"
 
 #: ../screentest.ui.h:2
 msgid "Select Foreground color"
-msgstr "Wähle Vordergrundfarbe"
+msgstr "Définir la couleur de premier plan"
 
 #: ../screentest.ui.h:3
 msgid "Select Background color"
-msgstr "Wähle Hintergrundfarbe"
+msgstr "Définir la couleur d'arrière-plan"
 
 #: ../screentest.ui.h:4
 msgid "Mode"
-msgstr "Modus"
+msgstr "Mode"
 
 #: ../screentest.ui.h:5
 msgid "Basic"
-msgstr "Einfach"
+msgstr "Basique"
 
 #: ../screentest.ui.h:6
 msgid "Grid"
-msgstr "Gitter"
+msgstr "Grille"
 
 #: ../screentest.ui.h:7
 msgid "Horizontal"
@@ -72,24 +75,24 @@ msgstr "Horizontal"
 
 #: ../screentest.ui.h:8
 msgid "Vertical"
-msgstr "Vertikal"
+msgstr "Vertical"
 
 #: ../screentest.ui.h:9
 msgid "Blink"
-msgstr "Blinken"
+msgstr "Clignotant"
 
 #: ../screentest.ui.h:10
 msgid "Text"
-msgstr "Text"
+msgstr "Texte"
 
 #: ../screentest.ui.h:11
 msgid "LCD Alignment"
-msgstr "LCD-Ausrichtung"
+msgstr ""
 
 #: ../screentest.ui.h:12
 msgid "Foreground Color"
-msgstr "Vordergrundfarbe"
+msgstr "Couleur de premier plan"
 
 #: ../screentest.ui.h:13
 msgid "Background Color"
-msgstr "Hintergrundfarbe"
+msgstr "Couleur d'arrière-plan"
