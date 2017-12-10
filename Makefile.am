@@ -4,7 +4,7 @@ SUBDIRS = po
 
 AM_CPPFLAGS = $(GLIB_CFLAGS) $(GTK_CFLAGS) -DDATADIR=\"$(pkgdatadir)\"
 
-EXTRA_DIST =  screentest.ui NEW_TESTS
+EXTRA_DIST =  screentest.ui NEW_TESTS.md README.md
 
 pkgdata_DATA = screentest.ui
 

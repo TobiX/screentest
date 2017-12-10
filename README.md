@@ -4,7 +4,7 @@ This is a program for tesing the quality of CRT/LCD screens. It displays
 various patterns and allows you to estimate the quality of your CRT/LCD
 monitor.
 
-See the file NEW\_TESTS for details on adding a new test screens.
+See the file [NEW_TESTS.md](NEW_TESTS.md) for details on adding a new test screens.
 
 The homepage of this program is
 
