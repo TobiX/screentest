@@ -1,11 +1,13 @@
 language: c
-sudo: false
+os: linux
+dist: bionic
 addons:
   apt:
     packages:
       - automake
       - intltool
       - libgtk2.0-dev
+      - libtool-bin
 compiler:
   - clang
   - gcc
