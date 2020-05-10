@@ -76,7 +76,3 @@ verify their function by running them in the current directory (calling
 ### 3. INSTALLING
 
 Run "make install".
-
-
-- Tobias Gruetzmacher <tobias-screentest@23.gs> (current maintainer)
-- Jan "Yenya" Kasprzak (previous maintainer)
