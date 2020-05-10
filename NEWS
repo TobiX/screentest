@@ -1,3 +1,10 @@
+Version 2.1
+
+* Switches from Glade to GtkBuilder
+* Might compile under Windows
+* New test: LCD Alignment
+* Import translations from Debian
+
 Version 2.0
 
 * Major overhaul. Now uses GTK+ 2.x and libglade
