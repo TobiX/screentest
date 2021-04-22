@@ -157,6 +157,16 @@
                 <signal name="activate" handler="on_mode_change"/>
               </object>
             </child>
+            <child>
+              <object class="GtkRadioMenuItem" id="bright_pixels">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Bright Pixels</property>
+                <property name="use_underline">True</property>
+                <property name="draw_as_radio">True</property>
+                <property name="group">basic</property>
+                <signal name="activate" handler="on_mode_change"/>
+              </object>
+            </child>
           </object>
         </child>
       </object>
