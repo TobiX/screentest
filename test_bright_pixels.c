@@ -33,31 +33,31 @@ static int current_color_idx;
 
 static void bright_pixels_init(G_GNUC_UNUSED GtkWidget * widget)
 {
-    current_color_idx = 0;
+	current_color_idx = 0;
 }
 
 static void bright_pixels_cycle(G_GNUC_UNUSED GtkWidget * widget)
 {
-    current_color_idx++;
-    if(current_color_idx == COLOR_COUNT)
-        current_color_idx = 0;
+	current_color_idx++;
+	if(current_color_idx == COLOR_COUNT)
+		current_color_idx = 0;
 }
 
 static void bright_pixels_draw(GtkWidget * widget)
 {
-    GdkWindow *win = gtk_widget_get_window(widget);
-    gint w, h;
+	GdkWindow *win = gtk_widget_get_window(widget);
+	gint w, h;
 
-    gdk_drawable_get_size(win, &w, &h);
+	gdk_drawable_get_size(win, &w, &h);
+	gdk_gc_set_rgb_fg_color(gc, &fgcolors[color_cycle[current_color_idx]]);
+	gdk_draw_rectangle(win, gc, 1, 0, 0, w, h);
 
-    gdk_gc_set_rgb_fg_color(gc, &fgcolors[color_cycle[current_color_idx]]);
-
-    gdk_draw_rectangle(win, gc, 1, 0, 0, w, h);
+	gdk_gc_set_rgb_fg_color(gc, &fgcolors[COLOR_WHITE]);
 }
 
 G_MODULE_EXPORT struct test_ops bright_pixels_ops = {
-        .init = bright_pixels_init,
-        .draw = bright_pixels_draw,
-        .cycle = bright_pixels_cycle,
-        .close = NULL
+		.init = bright_pixels_init,
+		.draw = bright_pixels_draw,
+		.cycle = bright_pixels_cycle,
+		.close = NULL
 };
