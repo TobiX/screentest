@@ -68,12 +68,12 @@ static void basic_draw(GtkWidget * widget)
 	gint w, h;
 	gint i, b, d;
 	gint maxwidth, maxheight;
-        gint widths[7];
+	gint widths[7];
 	static gchar *text[] = {
 		"Screentest v" VERSION,
 		"(C) 2001 Jan \"Yenya\" Kasprzak <kas@fi.muni.cz>",
 		"(C) 2006-2017 Tobias Gruetzmacher <tobias-screentest@23.gs>",
-                "(C) 2021 Apr Thorsten Kattanek <thorsten.kattanek@gmx.de>",
+		"(C) 2021 Apr Thorsten Kattanek <thorsten.kattanek@gmx.de>",
 		N_("Left Button - param cycle, if any"),
 		N_("Middle Button - color cycle"),
 		N_("Right Button - menu"),
@@ -91,21 +91,21 @@ static void basic_draw(GtkWidget * widget)
 		d = h / 4;
 
 	maxheight = 0;
-        for (i = 0; i < 7; i++) {
+	for (i = 0; i < 7; i++) {
 		int x = gdk_string_height(font, gettext(text[i]));
 		if (x > maxheight)
 			maxheight = x;
 	}
 
 	maxwidth = 0;
-        for (i = 0; i < 7; i++) {
+	for (i = 0; i < 7; i++) {
 		widths[i] = gdk_string_width(font, gettext(text[i]));
 		if (widths[i] > maxwidth)
 			maxwidth = widths[i];
 	}
 
 	maxwidth += 20;
-        maxheight = 3 * maxheight / 2;
+	maxheight = 3 * maxheight / 2;
 	gdk_draw_rectangle(win, gc, FALSE, (w - maxwidth) / 2,
                            d / 2 - 2 * maxheight, maxwidth, 5 * maxheight);
 	gdk_draw_rectangle(win, gc, FALSE, (w - maxwidth) / 2,
@@ -113,10 +113,10 @@ static void basic_draw(GtkWidget * widget)
 			   4 * maxheight);
 	gdk_draw_rectangle(win, backgc, TRUE, (w - maxwidth) / 2 + 1,
 			   d / 2 - 2 * maxheight + 1, maxwidth - 1,
-                           5 * maxheight - 1);
+			   5 * maxheight - 1);
 	gdk_draw_rectangle(win, backgc, TRUE, (w - maxwidth) / 2 + 1,
 			   h - d / 2 - 2 * maxheight + 1, maxwidth - 1,
-                           4 * maxheight - 1);
+			   4 * maxheight - 1);
 
 	gdk_draw_string(win, font, gc, (w - widths[0]) / 2,
 			d / 2 - 2 * maxheight / 3, gettext(text[0]));
@@ -124,15 +124,15 @@ static void basic_draw(GtkWidget * widget)
 			d / 2 + maxheight / 3, gettext(text[1]));
 	gdk_draw_string(win, font, gc, (w - widths[2]) / 2,
 			d / 2 + 4 * maxheight / 3, gettext(text[2]));
-        gdk_draw_string(win, font, gc, (w - widths[3]) / 2,
-                        d / 2 + 7 * maxheight / 3, gettext(text[3]));
+	gdk_draw_string(win, font, gc, (w - widths[3]) / 2,
+			d / 2 + 7 * maxheight / 3, gettext(text[3]));
 
-        gdk_draw_string(win, font, gc, (w - widths[4]) / 2,
-                        h - d / 2 - 2 * maxheight / 3, gettext(text[4]));
-        gdk_draw_string(win, font, gc, (w - widths[5]) / 2,
-                        h - d / 2 + maxheight / 3, gettext(text[5]));
-        gdk_draw_string(win, font, gc, (w - widths[6]) / 2,
-                        h - d / 2 + 4 * maxheight / 3, gettext(text[6]));
+	gdk_draw_string(win, font, gc, (w - widths[4]) / 2,
+			h - d / 2 - 2 * maxheight / 3, gettext(text[4]));
+	gdk_draw_string(win, font, gc, (w - widths[5]) / 2,
+			h - d / 2 + maxheight / 3, gettext(text[5]));
+	gdk_draw_string(win, font, gc, (w - widths[6]) / 2,
+			h - d / 2 + 4 * maxheight / 3, gettext(text[6]));
 
 	b = 7 * d / 4;
 	draw_boxes(win, fgcolors, COLOR_MAX, (w - b) / 2,
