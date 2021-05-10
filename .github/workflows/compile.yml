@@ -1,0 +1,24 @@
+name: Compile
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    name: Build Linux
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install requirements
+        run: sudo apt-get install automake intltool libgtk2.0-dev libtool-bin
+
+      - name: Build
+        env:
+          CC: ${{ matrix.compiler }}
+        run: ./autogen.sh && make

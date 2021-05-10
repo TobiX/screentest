@@ -1,5 +1,7 @@
 # Screentest
 
+[![Compile](https://github.com/TobiX/screentest/actions/workflows/compile.yml/badge.svg)](https://github.com/TobiX/screentest/actions/workflows/compile.yml)
+
 This is a program for tesing the quality of CRT/LCD screens. It displays
 various patterns and allows you to estimate the quality of your CRT/LCD
 monitor.
