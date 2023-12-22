@@ -30,7 +30,8 @@ static void lcdalign_draw(GtkWidget *widget) {
   gint i;
   gint8 d[] = {1, 1};
 
-  gdk_drawable_get_size(win, &w, &h);
+  h = gdk_window_get_height(win);
+  w = gdk_window_get_width(win);
 
   /* Border */
   gdk_draw_line(win, gc, 0, 0, w - 1, 0);

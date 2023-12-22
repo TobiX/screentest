@@ -44,7 +44,9 @@ static void bright_pixels_draw(GtkWidget *widget) {
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
 
-  gdk_drawable_get_size(win, &w, &h);
+  h = gdk_window_get_height(win);
+  w = gdk_window_get_width(win);
+
   gdk_gc_set_rgb_fg_color(gc, &fgcolors[color_cycle[current_color_idx]]);
   gdk_draw_rectangle(win, gc, 1, 0, 0, w, h);
 

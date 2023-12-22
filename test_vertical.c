@@ -45,7 +45,8 @@ static void vertical_draw(GtkWidget *widget) {
   gint i;
   gint d;
 
-  gdk_drawable_get_size(win, &w, &h);
+  h = gdk_window_get_height(win);
+  w = gdk_window_get_width(win);
 
   d = w / 4;
   if (d > h / 4)

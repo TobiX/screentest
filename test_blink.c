@@ -34,7 +34,8 @@ static void blink_draw(GtkWidget *widget) {
   gint w, h;
   GdkGC *gc1, *gc2;
 
-  gdk_drawable_get_size(win, &w, &h);
+  h = gdk_window_get_height(win);
+  w = gdk_window_get_width(win);
 
   if (blink_step) {
     gc1 = backgc;
