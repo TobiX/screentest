@@ -49,6 +49,7 @@ screentest_srcs = [
 executable(
   meson.project_name(),
   'main.c',
+  c_args: '-DGTK_DISABLE_SINGLE_INCLUDES',
   dependencies: screentest_deps,
   install: true,
   sources: screentest_srcs,
