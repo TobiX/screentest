@@ -13,9 +13,7 @@ the file with copyright notice and #include statements from another source file
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#include <config.h>
 
 #include <stdio.h>
 #include <gtk/gtk.h>

@@ -18,9 +18,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#include <config.h>
 
 #include <stdlib.h>
 #include <gtk/gtk.h>
@@ -42,7 +40,7 @@ int main(int argc, char *argv[])
 	gtk_init(&argc, &argv);
 
 	builder = gtk_builder_new();
-	err = gtk_builder_add_from_file(builder, DATADIR "/screentest.ui", NULL);
+	err = gtk_builder_add_from_file(builder, DATADIR "/screentest/screentest.ui", NULL);
 	if (err == 0)
 		err = gtk_builder_add_from_file(builder, "screentest.ui", NULL);
 	if (err == 0) {

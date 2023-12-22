@@ -1,3 +1,7 @@
+Version 2.2 (Work in Progress)
+
+* Switch build system from Autotools to Meson
+
 Version 2.1
 
 * Switches from Glade to GtkBuilder
