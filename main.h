@@ -18,11 +18,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifndef _MAIN_H
-#define _MAIN_H 1
+#ifndef SCREENTEST_MAIN_H
+#define SCREENTEST_MAIN_H 1
 
 #include <gtk/gtk.h>
 
 extern GtkBuilder *builder;
 
-#endif /* _MAIN_H */
+#endif // SCREENTEST_MAIN_H
