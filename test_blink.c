@@ -67,13 +67,13 @@ static gboolean blink_timeout(gpointer data) {
 static void blink_init(GtkWidget *widget) {
   blink_type = 0;
   blink_step = 0;
-  timeout = gtk_timeout_add(1000, blink_timeout, widget);
+  timeout = g_timeout_add(1000, blink_timeout, widget);
 }
 
 void blink_cycle(G_GNUC_UNUSED GtkWidget *widget) { blink_type = !blink_type; }
 
 static void blink_close(G_GNUC_UNUSED GtkWidget *widget) {
-  gtk_timeout_remove(timeout);
+  g_source_remove(timeout);
 }
 
 G_MODULE_EXPORT struct test_ops blink_ops = {.init = blink_init,
