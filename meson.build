@@ -2,8 +2,8 @@ project(
   'screentest',
   'c',
   license: 'GPL-2.0-only',
-  license_files: ['COPYING'],
-  meson_version: '>= 1.1',
+  # license_files: ['COPYING'], -- needs Meson 1.1, Ubuntu 22.04 is too old
+  meson_version: '>= 0.61',
   version: '2.2-dev',
 )
 
