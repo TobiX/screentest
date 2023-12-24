@@ -1,3 +1,4 @@
+---
 name: Compile
 on:
   - push
@@ -16,9 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install requirements
-        run: sudo apt-get install automake intltool libgtk2.0-dev libtool-bin
+        run: sudo apt-get install intltool libgtk2.0-dev libtool-bin meson
 
       - name: Build
         env:
           CC: ${{ matrix.compiler }}
-        run: ./autogen.sh && make
+        run: meson setup builddir && ninja -C builddir
