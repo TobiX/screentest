@@ -43,14 +43,9 @@ static void horizontal_draw(GtkWidget *widget) {
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
   gint i;
-  gint d;
 
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
-
-  d = w / 4;
-  if (d > h / 4)
-    d = h / 4;
 
   for (i = ((h - 1) % horizontal_step) / 2; i < h; i += horizontal_step)
     gdk_draw_line(win, gc, 0, i, w - 1, i);
