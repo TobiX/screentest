@@ -9,6 +9,7 @@ project(
 
 i18n = import('i18n')
 
+cairo_dep = dependency('cairo', version: '>= 1.0')
 gmodule_dep = dependency('gmodule-2.0', version: '>= 1.1.3')
 gtk_dep = dependency('gtk+-2.0', version: '>= 2.24')
 screentest_deps = [

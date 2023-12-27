@@ -51,4 +51,7 @@ extern GdkColor fgcolors[];
 extern GdkColor *fg_color;
 extern GdkColor grays[];
 
+void set_color_bg(cairo_t *cr);
+void set_color_fg(cairo_t *cr);
+
 #endif // SCREENTEST_CALLBACKS_H
