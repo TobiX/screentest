@@ -65,16 +65,14 @@ Unpack the distribution using the following command:
 Change the directory to the source directory:
     cd screentest-<version>
 Set it up for your system:
-    ./configure
-You can run "./configure --help" for details of the configuration process.
+    meson setup builddir
 
 ### 2. COMPILING THE PROGRAM
 
-Run "make" (On BSD systems, you might want to use "gmake"). This will compile
-the "screentest" program. Since the program is mostly standalone, you can now
-verify their function by running them in the current directory (calling
-"./screentest").
+Run "meson compile". This will compile the "screentest" program. Since the
+program is mostly standalone, you can now verify their function by running them
+in the current directory (calling "./screentest").
 
 ### 3. INSTALLING
 
-Run "make install".
+Run "meson install".
