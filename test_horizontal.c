@@ -29,39 +29,33 @@
 
 static gint horizontal_step;
 
-static void horizontal_init(G_GNUC_UNUSED GtkWidget * widget)
-{
-	horizontal_step = GRID_STEP;
+static void horizontal_init(G_GNUC_UNUSED GtkWidget *widget) {
+  horizontal_step = GRID_STEP;
 }
 
-static void horizontal_cycle(G_GNUC_UNUSED GtkWidget * widget)
-{
-	horizontal_step /= 2;
-	if (horizontal_step < GRID_STEP_MIN)
-		horizontal_step = GRID_STEP;
+static void horizontal_cycle(G_GNUC_UNUSED GtkWidget *widget) {
+  horizontal_step /= 2;
+  if (horizontal_step < GRID_STEP_MIN)
+    horizontal_step = GRID_STEP;
 }
 
-static void horizontal_draw(GtkWidget * widget)
-{
-	GdkWindow *win = gtk_widget_get_window(widget);
-	gint w, h;
-	gint i;
-	gint d;
+static void horizontal_draw(GtkWidget *widget) {
+  GdkWindow *win = gtk_widget_get_window(widget);
+  gint w, h;
+  gint i;
+  gint d;
 
-	gdk_drawable_get_size(win, &w, &h);
+  gdk_drawable_get_size(win, &w, &h);
 
-	d = w / 4;
-	if (d > h / 4)
-		d = h / 4;
+  d = w / 4;
+  if (d > h / 4)
+    d = h / 4;
 
-	for (i = ((h - 1) % horizontal_step) / 2; i < h;
-	     i += horizontal_step)
-		gdk_draw_line(win, gc, 0, i, w - 1, i);
+  for (i = ((h - 1) % horizontal_step) / 2; i < h; i += horizontal_step)
+    gdk_draw_line(win, gc, 0, i, w - 1, i);
 }
 
-G_MODULE_EXPORT struct test_ops horizontal_ops = {
-	.init = horizontal_init,
-	.draw = horizontal_draw,
-	.cycle = horizontal_cycle,
-	.close = NULL
-};
+G_MODULE_EXPORT struct test_ops horizontal_ops = {.init = horizontal_init,
+                                                  .draw = horizontal_draw,
+                                                  .cycle = horizontal_cycle,
+                                                  .close = NULL};

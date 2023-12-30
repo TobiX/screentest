@@ -29,40 +29,33 @@
 
 static gint grid_step;
 
-static void grid_init(G_GNUC_UNUSED GtkWidget * widget)
-{
-	grid_step = GRID_STEP;
+static void grid_init(G_GNUC_UNUSED GtkWidget *widget) {
+  grid_step = GRID_STEP;
 }
 
-static void grid_cycle(G_GNUC_UNUSED GtkWidget * widget)
-{
-	grid_step /= 2;
-	if (grid_step < GRID_STEP_MIN)
-		grid_step = GRID_STEP;
+static void grid_cycle(G_GNUC_UNUSED GtkWidget *widget) {
+  grid_step /= 2;
+  if (grid_step < GRID_STEP_MIN)
+    grid_step = GRID_STEP;
 }
 
-static void grid_draw(GtkWidget * widget)
-{
-	GdkWindow *win = gtk_widget_get_window(widget);
-	gint w, h;
-	gint i;
-	gint d;
+static void grid_draw(GtkWidget *widget) {
+  GdkWindow *win = gtk_widget_get_window(widget);
+  gint w, h;
+  gint i;
+  gint d;
 
-	gdk_drawable_get_size(win, &w, &h);
+  gdk_drawable_get_size(win, &w, &h);
 
-	d = w / 4;
-	if (d > h / 4)
-		d = h / 4;
+  d = w / 4;
+  if (d > h / 4)
+    d = h / 4;
 
-	for (i = ((w - 1) % grid_step) / 2; i < w; i += grid_step)
-		gdk_draw_line(win, gc, i, 0, i, h - 1);
-	for (i = ((h - 1) % grid_step) / 2; i < h; i += grid_step)
-		gdk_draw_line(win, gc, 0, i, w - 1, i);
+  for (i = ((w - 1) % grid_step) / 2; i < w; i += grid_step)
+    gdk_draw_line(win, gc, i, 0, i, h - 1);
+  for (i = ((h - 1) % grid_step) / 2; i < h; i += grid_step)
+    gdk_draw_line(win, gc, 0, i, w - 1, i);
 }
 
 G_MODULE_EXPORT struct test_ops grid_ops = {
-	.init = grid_init,
-	.draw = grid_draw,
-	.cycle = grid_cycle,
-	.close = NULL
-};
+    .init = grid_init, .draw = grid_draw, .cycle = grid_cycle, .close = NULL};

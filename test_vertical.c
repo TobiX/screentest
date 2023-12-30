@@ -29,38 +29,33 @@
 
 static gint vertical_step;
 
-static void vertical_init(G_GNUC_UNUSED GtkWidget * widget)
-{
-	vertical_step = GRID_STEP;
+static void vertical_init(G_GNUC_UNUSED GtkWidget *widget) {
+  vertical_step = GRID_STEP;
 }
 
-static void vertical_cycle(G_GNUC_UNUSED GtkWidget * widget)
-{
-	vertical_step /= 2;
-	if (vertical_step < GRID_STEP_MIN)
-		vertical_step = GRID_STEP;
+static void vertical_cycle(G_GNUC_UNUSED GtkWidget *widget) {
+  vertical_step /= 2;
+  if (vertical_step < GRID_STEP_MIN)
+    vertical_step = GRID_STEP;
 }
 
-static void vertical_draw(GtkWidget * widget)
-{
-	GdkWindow *win = gtk_widget_get_window(widget);
-	gint w, h;
-	gint i;
-	gint d;
+static void vertical_draw(GtkWidget *widget) {
+  GdkWindow *win = gtk_widget_get_window(widget);
+  gint w, h;
+  gint i;
+  gint d;
 
-	gdk_drawable_get_size(win, &w, &h);
+  gdk_drawable_get_size(win, &w, &h);
 
-	d = w / 4;
-	if (d > h / 4)
-		d = h / 4;
+  d = w / 4;
+  if (d > h / 4)
+    d = h / 4;
 
-	for (i = ((w - 1) % vertical_step) / 2; i < w; i += vertical_step)
-		gdk_draw_line(win, gc, i, 0, i, h - 1);
+  for (i = ((w - 1) % vertical_step) / 2; i < w; i += vertical_step)
+    gdk_draw_line(win, gc, i, 0, i, h - 1);
 }
 
-G_MODULE_EXPORT struct test_ops vertical_ops = {
-	.init = vertical_init,
-	.draw = vertical_draw,
-	.cycle = vertical_cycle,
-	.close = NULL
-};
+G_MODULE_EXPORT struct test_ops vertical_ops = {.init = vertical_init,
+                                                .draw = vertical_draw,
+                                                .cycle = vertical_cycle,
+                                                .close = NULL};

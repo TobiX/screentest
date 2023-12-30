@@ -21,24 +21,24 @@
 #include <gtk/gtk.h>
 
 struct test_ops {
-	void (*init) (GtkWidget * widget);
-	void (*draw) (GtkWidget * widget);
-	void (*cycle) (GtkWidget * widget);
-	void (*close) (GtkWidget * widget);
+  void (*init)(GtkWidget *widget);
+  void (*draw)(GtkWidget *widget);
+  void (*cycle)(GtkWidget *widget);
+  void (*close)(GtkWidget *widget);
 };
 
 extern struct test_ops basic_ops;
 
 enum test_color {
-	COLOR_WHITE,
-	COLOR_RED,
-	COLOR_GREEN,
-	COLOR_BLUE,
-	COLOR_CYAN,
-	COLOR_MAGENTA,
-	COLOR_YELLOW,
-	COLOR_BLACK,
-	COLOR_MAX
+  COLOR_WHITE,
+  COLOR_RED,
+  COLOR_GREEN,
+  COLOR_BLUE,
+  COLOR_CYAN,
+  COLOR_MAGENTA,
+  COLOR_YELLOW,
+  COLOR_BLACK,
+  COLOR_MAX
 };
 
 #define GRAYS_MAX COLOR_MAX
