@@ -20,43 +20,43 @@
 
 #include <config.h>
 
-#include <stdlib.h>
 #include <gtk/gtk.h>
+#include <stdlib.h>
 
-#include "main.h"
 #include "gettext.h"
+#include "main.h"
 #define _(String) gettext(String)
 
 GtkBuilder *builder;
 
-int main(int argc, char *argv[])
-{
-	guint err;
+int main(int argc, char *argv[]) {
+  guint err;
 
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	bind_textdomain_codeset(PACKAGE, "UTF-8");
-	textdomain(PACKAGE);
+  bindtextdomain(PACKAGE, LOCALEDIR);
+  bind_textdomain_codeset(PACKAGE, "UTF-8");
+  textdomain(PACKAGE);
 
-	gtk_init(&argc, &argv);
+  gtk_init(&argc, &argv);
 
-	builder = gtk_builder_new();
-	err = gtk_builder_add_from_file(builder, DATADIR "/screentest/screentest.ui", NULL);
-	if (err == 0)
-		err = gtk_builder_add_from_file(builder, "screentest.ui", NULL);
-	if (err == 0) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL,
-			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
-			_("The interface definition file was not found.\n"
-			"Please make sure this program is installed correctly."));
-		gtk_window_set_title(GTK_WINDOW(dialog), PACKAGE_NAME);
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		exit(1);
-	}
+  builder = gtk_builder_new();
+  err = gtk_builder_add_from_file(builder, DATADIR "/screentest/screentest.ui",
+                                  NULL);
+  if (err == 0)
+    err = gtk_builder_add_from_file(builder, "screentest.ui", NULL);
+  if (err == 0) {
+    GtkWidget *dialog = gtk_message_dialog_new(
+        NULL, GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+        GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
+        _("The interface definition file was not found.\n"
+          "Please make sure this program is installed correctly."));
+    gtk_window_set_title(GTK_WINDOW(dialog), PACKAGE_NAME);
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    exit(1);
+  }
 
-	gtk_builder_connect_signals(builder, NULL);
+  gtk_builder_connect_signals(builder, NULL);
 
-	gtk_widget_show_all(GTK_WIDGET(gtk_builder_get_object(builder, "mainwin")));
-	gtk_main();
-	return 0;
+  gtk_widget_show_all(GTK_WIDGET(gtk_builder_get_object(builder, "mainwin")));
+  gtk_main();
+  return 0;
 }
