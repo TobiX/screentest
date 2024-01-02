@@ -9,6 +9,7 @@ project(
 
 i18n = import('i18n')
 
+cairo_dep = dependency('cairo', version: '>= 1.0')
 gmodule_dep = dependency('gmodule-2.0', version: '>= 1.1.3')
 gtk_dep = dependency('gtk+-2.0', version: '>= 2.24')
 screentest_deps = [
@@ -49,6 +50,7 @@ screentest_srcs = [
 executable(
   meson.project_name(),
   'main.c',
+  c_args: '-DGSEAL_ENABLE -DGTK_DISABLE_DEPRECATED -DGTK_DISABLE_SINGLE_INCLUDES',
   dependencies: screentest_deps,
   install: true,
   sources: screentest_srcs,

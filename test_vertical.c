@@ -40,19 +40,27 @@ static void vertical_cycle(G_GNUC_UNUSED GtkWidget *widget) {
 }
 
 static void vertical_draw(GtkWidget *widget) {
+  cairo_t *cr;
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
   gint i;
-  gint d;
 
-  gdk_drawable_get_size(win, &w, &h);
+  h = gdk_window_get_height(win);
+  w = gdk_window_get_width(win);
 
-  d = w / 4;
-  if (d > h / 4)
-    d = h / 4;
+  cr = gdk_cairo_create(gtk_widget_get_window(widget));
 
-  for (i = ((w - 1) % vertical_step) / 2; i < w; i += vertical_step)
-    gdk_draw_line(win, gc, i, 0, i, h - 1);
+  set_color_bg(cr);
+  cairo_paint(cr);
+
+  set_color_fg(cr);
+  for (i = ((w - 1) % vertical_step) / 2; i < w; i += vertical_step) {
+    cairo_rectangle(cr, i, 0, 1, w - 1);
+    cairo_fill(cr);
+  }
+
+  cairo_destroy(cr);
+  cr = NULL;
 }
 
 G_MODULE_EXPORT struct test_ops vertical_ops = {.init = vertical_init,

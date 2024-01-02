@@ -41,14 +41,19 @@ static void bright_pixels_cycle(G_GNUC_UNUSED GtkWidget *widget) {
 }
 
 static void bright_pixels_draw(GtkWidget *widget) {
-  GdkWindow *win = gtk_widget_get_window(widget);
-  gint w, h;
+  GdkColor *col;
+  cairo_t *cr;
 
-  gdk_drawable_get_size(win, &w, &h);
-  gdk_gc_set_rgb_fg_color(gc, &fgcolors[color_cycle[current_color_idx]]);
-  gdk_draw_rectangle(win, gc, 1, 0, 0, w, h);
+  cr = gdk_cairo_create(gtk_widget_get_window(widget));
 
-  gdk_gc_set_rgb_fg_color(gc, &fgcolors[COLOR_WHITE]);
+  col = &fgcolors[color_cycle[current_color_idx]];
+  cairo_set_source_rgb(cr, col->red / (double)UINT16_MAX,
+                       col->green / (double)UINT16_MAX,
+                       col->blue / (double)UINT16_MAX);
+  cairo_paint(cr);
+
+  cairo_destroy(cr);
+  cr = NULL;
 }
 
 G_MODULE_EXPORT struct test_ops bright_pixels_ops = {.init = bright_pixels_init,

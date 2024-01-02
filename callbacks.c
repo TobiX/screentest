@@ -231,3 +231,15 @@ G_MODULE_EXPORT void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
   }
   gtk_widget_hide(GTK_WIDGET(bg_color_selector));
 }
+
+void set_color_bg(cairo_t *cr) {
+  cairo_set_source_rgb(cr, bg_color->red / (double)UINT16_MAX,
+                       bg_color->green / (double)UINT16_MAX,
+                       bg_color->blue / (double)UINT16_MAX);
+}
+
+void set_color_fg(cairo_t *cr) {
+  cairo_set_source_rgb(cr, fg_color->red / (double)UINT16_MAX,
+                       fg_color->green / (double)UINT16_MAX,
+                       fg_color->blue / (double)UINT16_MAX);
+}

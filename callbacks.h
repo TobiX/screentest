@@ -18,6 +18,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
+#ifndef SCREENTEST_CALLBACKS_H
+#define SCREENTEST_CALLBACKS_H
+
 #include <gtk/gtk.h>
 
 struct test_ops {
@@ -47,3 +50,8 @@ extern GdkGC *gc, *backgc;
 extern GdkColor fgcolors[];
 extern GdkColor *fg_color;
 extern GdkColor grays[];
+
+void set_color_bg(cairo_t *cr);
+void set_color_fg(cairo_t *cr);
+
+#endif // SCREENTEST_CALLBACKS_H

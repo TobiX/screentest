@@ -67,7 +67,8 @@ static void text_draw(GtkWidget *widget) {
   gint w, h;
   gint x, y;
 
-  gdk_drawable_get_size(win, &w, &h);
+  h = gdk_window_get_height(win);
+  w = gdk_window_get_width(win);
 
   x = w + textwidth;
   for (y = 0; y < h; y += baselineskip)

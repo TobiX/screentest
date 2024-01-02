@@ -29,31 +29,58 @@ static guint timeout;
 static gint blink_type;
 static gint blink_step;
 
+void (*set_color1)(cairo_t *cr);
+void (*set_color2)(cairo_t *cr);
+
 static void blink_draw(GtkWidget *widget) {
+  cairo_t *cr;
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
-  GdkGC *gc1, *gc2;
 
-  gdk_drawable_get_size(win, &w, &h);
+  h = gdk_window_get_height(win);
+  w = gdk_window_get_width(win);
 
   if (blink_step) {
-    gc1 = backgc;
-    gc2 = gc;
+    set_color1 = set_color_bg;
+    set_color2 = set_color_fg;
   } else {
-    gc1 = gc;
-    gc2 = backgc;
+    set_color1 = set_color_fg;
+    set_color2 = set_color_bg;
   }
 
+  cr = gdk_cairo_create(gtk_widget_get_window(widget));
+
+  set_color_fg(cr);
+  cairo_paint(cr);
+
+  set_color_bg(cr);
+  cairo_rectangle(cr, 1, 1, w - 2, h - 2);
+  cairo_fill(cr);
+
   if (blink_type) {
-    gdk_draw_rectangle(win, gc1, TRUE, 5, 5, w / 3 - 5, h - 10);
-    gdk_draw_rectangle(win, gc2, TRUE, w / 3, 5, w / 3, h - 10);
-    gdk_draw_rectangle(win, gc1, TRUE, 2 * w / 3, 5, w / 3 - 5, h - 10);
+    set_color1(cr);
+    cairo_rectangle(cr, 5, 5, w / 3 - 5, h - 10);
+    cairo_fill(cr);
+    set_color2(cr);
+    cairo_rectangle(cr, w / 3, 5, w / 3, h - 10);
+    cairo_fill(cr);
+    set_color1(cr);
+    cairo_rectangle(cr, 2 * w / 3, 5, w / 3 - 5, h - 10);
+    cairo_fill(cr);
   } else {
-    gdk_draw_rectangle(win, gc1, TRUE, 5, 5, w - 10, h / 3 - 5);
-    gdk_draw_rectangle(win, gc2, TRUE, 5, h / 3, w - 10, h / 3);
-    gdk_draw_rectangle(win, gc1, TRUE, 5, 2 * h / 3, w - 10, h / 3 - 5);
+    set_color1(cr);
+    cairo_rectangle(cr, 5, 5, w - 10, h / 3 - 5);
+    cairo_fill(cr);
+    set_color2(cr);
+    cairo_rectangle(cr, 5, h / 3, w - 10, h / 3);
+    cairo_fill(cr);
+    set_color1(cr);
+    cairo_rectangle(cr, 5, 2 * h / 3, w - 10, h / 3 - 5);
+    cairo_fill(cr);
   }
-  gdk_draw_rectangle(win, gc, FALSE, 0, 0, w - 1, h - 1);
+
+  cairo_destroy(cr);
+  cr = NULL;
 }
 
 static gboolean blink_timeout(gpointer data) {
@@ -66,13 +93,13 @@ static gboolean blink_timeout(gpointer data) {
 static void blink_init(GtkWidget *widget) {
   blink_type = 0;
   blink_step = 0;
-  timeout = gtk_timeout_add(1000, blink_timeout, widget);
+  timeout = g_timeout_add(1000, blink_timeout, widget);
 }
 
 void blink_cycle(G_GNUC_UNUSED GtkWidget *widget) { blink_type = !blink_type; }
 
 static void blink_close(G_GNUC_UNUSED GtkWidget *widget) {
-  gtk_timeout_remove(timeout);
+  g_source_remove(timeout);
 }
 
 G_MODULE_EXPORT struct test_ops blink_ops = {.init = blink_init,

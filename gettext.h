@@ -15,8 +15,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef _LIBGETTEXT_H
-#define _LIBGETTEXT_H 1
+#ifndef SCREENTEST_LIBGETTEXT_H
+#define SCREENTEST_LIBGETTEXT_H 1
 
 /* NLS can be disabled through the configure --disable-nls option.  */
 #if ENABLE_NLS
@@ -279,4 +279,4 @@ inline
   return (n == 1 ? msgid : msgid_plural);
 }
 
-#endif /* _LIBGETTEXT_H */
+#endif // SCREENTEST_LIBGETTEXT_H
