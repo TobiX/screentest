@@ -120,11 +120,9 @@ G_MODULE_EXPORT gboolean on_mainwin_key_press_event(
   return FALSE;
 }
 
-G_MODULE_EXPORT gboolean
-on_mainwin_expose_event(GtkWidget *widget, G_GNUC_UNUSED GdkEventExpose *event,
-                        G_GNUC_UNUSED gpointer user_data) {
+G_MODULE_EXPORT gboolean on_mainwin_draw_event(
+    GtkWidget *widget, cairo_t *cr, G_GNUC_UNUSED gpointer user_data) {
   gdk_window_set_background(gtk_widget_get_window(widget), bg_color);
-  gdk_window_clear(gtk_widget_get_window(widget));
 
   if (current_test && current_test->draw)
     current_test->draw(widget);
@@ -161,7 +159,7 @@ G_MODULE_EXPORT void on_mode_change(GtkMenuItem *menuitem,
     if (current_test != NULL && current_test->init != NULL) {
       current_test->init(mainwin);
     }
-    on_mainwin_expose_event(mainwin, NULL, NULL);
+    gtk_widget_queue_draw(mainwin);
   }
 }
 

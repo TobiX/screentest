@@ -9,7 +9,7 @@
     <accel-groups>
       <group name="accelgroup1"/>
     </accel-groups>
-    <signal name="expose_event" handler="on_mainwin_expose_event"/>
+    <signal name="draw" handler="on_mainwin_draw_event"/>
     <signal name="button_press_event" handler="on_mainwin_button_press_event"/>
     <signal name="realize" handler="on_mainwin_realize"/>
     <signal name="delete_event" handler="gtk_main_quit"/>

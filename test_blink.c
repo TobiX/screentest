@@ -86,7 +86,9 @@ static void blink_draw(GtkWidget *widget) {
 static gboolean blink_timeout(gpointer data) {
   GtkWidget *widget = (GtkWidget *)data;
   blink_step = !blink_step;
-  blink_draw(widget);
+
+  gtk_widget_queue_draw(widget);
+
   return TRUE;
 }
 
