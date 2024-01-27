@@ -55,7 +55,7 @@ static void horizontal_draw(GtkWidget *widget) {
 
   set_color_fg(cr);
   for (i = ((h - 1) % horizontal_step) / 2; i < h; i += horizontal_step) {
-    cairo_rectangle(cr, 0, i, w - 1, 1);
+    cairo_rectangle(cr, 0, i, w, 1);
     cairo_fill(cr);
   }
 
