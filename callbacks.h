@@ -46,9 +46,9 @@ enum test_color {
 
 #define GRAYS_MAX COLOR_MAX
 
-extern GdkColor fgcolors[];
-extern GdkColor *fg_color;
-extern GdkColor grays[];
+extern GdkRGBA fgcolors[];
+extern GdkRGBA *fg_color;
+extern GdkRGBA grays[];
 
 void set_color_bg(cairo_t *cr);
 void set_color_fg(cairo_t *cr);

@@ -31,16 +31,14 @@
 
 #define BASIC_STEP 40
 
-static void draw_boxes(cairo_t *cr, GdkColor *colors, gint ncols, gint x,
-                       gint y, gint d) {
-  GdkColor *col;
+static void draw_boxes(cairo_t *cr, GdkRGBA *colors, gint ncols, gint x, gint y,
+                       gint d) {
+  GdkRGBA *col;
   int i;
 
   for (i = 0; i < ncols; i++) {
     col = &colors[i];
-    cairo_set_source_rgb(cr, col->red / (double)UINT16_MAX,
-                         col->green / (double)UINT16_MAX,
-                         col->blue / (double)UINT16_MAX);
+    cairo_set_source_rgb(cr, col->red, col->green, col->blue);
 
     cairo_rectangle(cr, x, y, d, d);
     cairo_fill(cr);

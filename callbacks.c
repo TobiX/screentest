@@ -30,9 +30,9 @@
 #include "main.h"
 #define _(String) gettext(String)
 
-GdkColor fgcolors[COLOR_MAX];
-GdkColor *fg_color, *bg_color;
-GdkColor grays[GRAYS_MAX];
+GdkRGBA fgcolors[COLOR_MAX];
+GdkRGBA *fg_color, *bg_color;
+GdkRGBA grays[GRAYS_MAX];
 int fg_count = COLOR_WHITE;
 
 static GtkWidget *mainwin = NULL;
@@ -46,34 +46,38 @@ G_MODULE_EXPORT void on_mainwin_realize(GtkWidget *widget,
   gtk_window_fullscreen(GTK_WINDOW(widget));
 #endif
 
-  memset(fgcolors, 0, COLOR_MAX * sizeof(GdkColor));
+  memset(fgcolors, 0, COLOR_MAX * sizeof(GdkRGBA));
 
   fgcolors[COLOR_WHITE].red = fgcolors[COLOR_WHITE].green =
-      fgcolors[COLOR_WHITE].blue = 65535;
+      fgcolors[COLOR_WHITE].blue = fgcolors[COLOR_WHITE].alpha = 1.0;
 
-  fgcolors[COLOR_RED].red = 65535;
+  fgcolors[COLOR_RED].red = fgcolors[COLOR_RED].alpha = 1.0;
 
-  fgcolors[COLOR_GREEN].green = 65535;
+  fgcolors[COLOR_GREEN].green = fgcolors[COLOR_GREEN].alpha = 1.0;
 
-  fgcolors[COLOR_BLUE].blue = 65535;
+  fgcolors[COLOR_BLUE].blue = fgcolors[COLOR_BLUE].alpha = 1.0;
 
-  fgcolors[COLOR_CYAN].green = 65535;
-  fgcolors[COLOR_CYAN].blue = 65535;
+  fgcolors[COLOR_CYAN].green = 1.0;
+  fgcolors[COLOR_CYAN].blue = 1.0;
+  fgcolors[COLOR_CYAN].alpha = 1.0;
 
-  fgcolors[COLOR_MAGENTA].red = 65535;
-  fgcolors[COLOR_MAGENTA].blue = 65535;
+  fgcolors[COLOR_MAGENTA].red = 1.0;
+  fgcolors[COLOR_MAGENTA].blue = 1.0;
+  fgcolors[COLOR_MAGENTA].alpha = 1.0;
 
-  fgcolors[COLOR_YELLOW].red = 65535;
-  fgcolors[COLOR_YELLOW].green = 65535;
+  fgcolors[COLOR_YELLOW].red = 1.0;
+  fgcolors[COLOR_YELLOW].green = 1.0;
+  fgcolors[COLOR_YELLOW].alpha = 1.0;
 
-  /* COLOR_BLACK is 0 already */
+  fgcolors[COLOR_BLACK].alpha = 1.0; // The other fields are 0 already
 
-  fg_color = gdk_color_copy(&fgcolors[COLOR_WHITE]);
-  bg_color = gdk_color_copy(&fgcolors[COLOR_BLACK]);
+  fg_color = gdk_rgba_copy(&fgcolors[COLOR_WHITE]);
+  bg_color = gdk_rgba_copy(&fgcolors[COLOR_BLACK]);
 
-  for (i = 0; i < GRAYS_MAX; i++)
-    grays[i].red = grays[i].green = grays[i].blue =
-        i * ((1 << 16) - 1) / (GRAYS_MAX - 1);
+  for (i = 0; i < GRAYS_MAX; i++) {
+    grays[i].red = grays[i].green = grays[i].blue = i / (float)(GRAYS_MAX - 1);
+    grays[i].alpha = 1.0;
+  }
 
   mainwin = widget;
 
@@ -96,8 +100,8 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
   case 2:
     if (++fg_count >= COLOR_MAX)
       fg_count = COLOR_WHITE;
-    gdk_color_free(fg_color);
-    fg_color = gdk_color_copy(&fgcolors[fg_count]);
+    gdk_rgba_free(fg_color);
+    fg_color = gdk_rgba_copy(&fgcolors[fg_count]);
     gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case 3:
@@ -122,7 +126,7 @@ G_MODULE_EXPORT gboolean on_mainwin_key_press_event(
 
 G_MODULE_EXPORT gboolean on_mainwin_draw_event(
     GtkWidget *widget, cairo_t *cr, G_GNUC_UNUSED gpointer user_data) {
-  gdk_window_set_background(gtk_widget_get_window(widget), bg_color);
+  gdk_window_set_background_rgba(gtk_widget_get_window(widget), bg_color);
 
   if (current_test && current_test->draw)
     current_test->draw(widget);
@@ -172,10 +176,10 @@ G_MODULE_EXPORT void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 
   colorsel = GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_color_selection(
       GTK_COLOR_SELECTION_DIALOG(fg_color_selector)));
-  gtk_color_selection_set_current_color(colorsel, fg_color);
+  gtk_color_selection_set_current_rgba(colorsel, fg_color);
   switch (gtk_dialog_run(GTK_DIALOG(fg_color_selector))) {
   case GTK_RESPONSE_OK:
-    gtk_color_selection_get_current_color(colorsel, fg_color);
+    gtk_color_selection_get_current_rgba(colorsel, fg_color);
     gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case GTK_RESPONSE_CANCEL:
@@ -196,10 +200,10 @@ G_MODULE_EXPORT void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 
   colorsel = GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_color_selection(
       GTK_COLOR_SELECTION_DIALOG(bg_color_selector)));
-  gtk_color_selection_set_current_color(colorsel, bg_color);
+  gtk_color_selection_set_current_rgba(colorsel, bg_color);
   switch (gtk_dialog_run(GTK_DIALOG(bg_color_selector))) {
   case GTK_RESPONSE_OK:
-    gtk_color_selection_get_current_color(colorsel, bg_color);
+    gtk_color_selection_get_current_rgba(colorsel, bg_color);
     gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case GTK_RESPONSE_CANCEL:
@@ -212,13 +216,9 @@ G_MODULE_EXPORT void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 }
 
 void set_color_bg(cairo_t *cr) {
-  cairo_set_source_rgb(cr, bg_color->red / (double)UINT16_MAX,
-                       bg_color->green / (double)UINT16_MAX,
-                       bg_color->blue / (double)UINT16_MAX);
+  cairo_set_source_rgb(cr, bg_color->red, bg_color->green, bg_color->blue);
 }
 
 void set_color_fg(cairo_t *cr) {
-  cairo_set_source_rgb(cr, fg_color->red / (double)UINT16_MAX,
-                       fg_color->green / (double)UINT16_MAX,
-                       fg_color->blue / (double)UINT16_MAX);
+  cairo_set_source_rgb(cr, fg_color->red, fg_color->green, fg_color->blue);
 }
