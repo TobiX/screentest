@@ -46,7 +46,6 @@ enum test_color {
 
 #define GRAYS_MAX COLOR_MAX
 
-extern GdkGC *gc, *backgc;
 extern GdkColor fgcolors[];
 extern GdkColor *fg_color;
 extern GdkColor grays[];
