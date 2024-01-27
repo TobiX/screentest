@@ -42,12 +42,18 @@ static void lcdalign_draw(GtkWidget *widget) {
   /* Pattern */
   set_color_bg(cr);
   cairo_set_line_width(cr, 1.0);
-  for (i = 1; i < h - 1; i += 1) {
-    cairo_set_dash(cr, d, 1, (i % 2) + 1);
+  cairo_set_dash(cr, d, 1, 0);
+  for (i = 1; i < h - 1; i += 2) {
     cairo_move_to(cr, 1, i + 0.5);
     cairo_line_to(cr, w - 1, i + 0.5);
-    cairo_stroke(cr);
   }
+  cairo_stroke(cr);
+  cairo_set_dash(cr, d, 1, 1);
+  for (i = 2; i < h - 1; i += 2) {
+    cairo_move_to(cr, 1, i + 0.5);
+    cairo_line_to(cr, w - 1, i + 0.5);
+  }
+  cairo_stroke(cr);
 
   cairo_destroy(cr);
   cr = NULL;
