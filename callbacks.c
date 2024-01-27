@@ -106,8 +106,12 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
     break;
   case 3:
     popup = gtk_builder_get_object(builder, "popup");
+#if GTK_CHECK_VERSION(3, 22, 0)
+    gtk_menu_popup_at_pointer(GTK_MENU(popup), (GdkEvent *)event);
+#else  // GTK_CHECK_VERSION(3,22,0)
     gtk_menu_popup(GTK_MENU(popup), NULL, NULL, NULL, NULL, event->button,
                    event->time);
+#endif // GTK_CHECK_VERSION(3,22,0)
     break;
   }
   return TRUE;
