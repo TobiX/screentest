@@ -169,17 +169,15 @@ G_MODULE_EXPORT void on_mode_change(GtkMenuItem *menuitem,
 
 G_MODULE_EXPORT void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
                                           G_GNUC_UNUSED gpointer user_data) {
-  GtkColorSelection *colorsel;
   GObject *fg_color_selector;
 
   fg_color_selector = gtk_builder_get_object(builder, "fg_color_selector");
 
-  colorsel = GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_color_selection(
-      GTK_COLOR_SELECTION_DIALOG(fg_color_selector)));
-  gtk_color_selection_set_current_rgba(colorsel, fg_color);
+  gtk_color_chooser_set_use_alpha(GTK_COLOR_CHOOSER(fg_color_selector), FALSE);
+  gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(fg_color_selector), fg_color);
   switch (gtk_dialog_run(GTK_DIALOG(fg_color_selector))) {
   case GTK_RESPONSE_OK:
-    gtk_color_selection_get_current_rgba(colorsel, fg_color);
+    gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(fg_color_selector), fg_color);
     gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case GTK_RESPONSE_CANCEL:
@@ -193,17 +191,14 @@ G_MODULE_EXPORT void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
 
 G_MODULE_EXPORT void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
                                           G_GNUC_UNUSED gpointer user_data) {
-  GtkColorSelection *colorsel;
   GObject *bg_color_selector;
 
   bg_color_selector = gtk_builder_get_object(builder, "bg_color_selector");
-
-  colorsel = GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_color_selection(
-      GTK_COLOR_SELECTION_DIALOG(bg_color_selector)));
-  gtk_color_selection_set_current_rgba(colorsel, bg_color);
+  gtk_color_chooser_set_use_alpha(GTK_COLOR_CHOOSER(bg_color_selector), FALSE);
+  gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(bg_color_selector), bg_color);
   switch (gtk_dialog_run(GTK_DIALOG(bg_color_selector))) {
   case GTK_RESPONSE_OK:
-    gtk_color_selection_get_current_rgba(colorsel, bg_color);
+    gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(bg_color_selector), bg_color);
     gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case GTK_RESPONSE_CANCEL:
