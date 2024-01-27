@@ -48,8 +48,7 @@ static void draw_boxes(cairo_t *cr, GdkRGBA *colors, gint ncols, gint x, gint y,
   set_color_fg(cr);
 }
 
-static void basic_draw(GtkWidget *widget) {
-  cairo_t *cr;
+static void basic_draw(GtkWidget *widget, cairo_t *cr) {
   PangoLayout *pl;
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
@@ -70,7 +69,6 @@ static void basic_draw(GtkWidget *widget) {
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
 
-  cr = gdk_cairo_create(gtk_widget_get_window(widget));
   cairo_set_line_width(cr, 1.0);
 
   pl = pango_cairo_create_layout(cr);
@@ -162,9 +160,6 @@ static void basic_draw(GtkWidget *widget) {
   cairo_new_sub_path(cr);
   cairo_arc(cr, w / 2, h / 2, d, 0, 2 * G_PI);
   cairo_stroke(cr);
-
-  cairo_destroy(cr);
-  cr = NULL;
 }
 
 G_MODULE_EXPORT struct test_ops basic_ops = {

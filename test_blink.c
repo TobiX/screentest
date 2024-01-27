@@ -32,8 +32,7 @@ static gint blink_step;
 void (*set_color1)(cairo_t *cr);
 void (*set_color2)(cairo_t *cr);
 
-static void blink_draw(GtkWidget *widget) {
-  cairo_t *cr;
+static void blink_draw(GtkWidget *widget, cairo_t *cr) {
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
 
@@ -47,8 +46,6 @@ static void blink_draw(GtkWidget *widget) {
     set_color1 = set_color_fg;
     set_color2 = set_color_bg;
   }
-
-  cr = gdk_cairo_create(gtk_widget_get_window(widget));
 
   set_color_fg(cr);
   cairo_paint(cr);
@@ -78,9 +75,6 @@ static void blink_draw(GtkWidget *widget) {
     cairo_rectangle(cr, 5, 2 * h / 3, w - 10, h / 3 - 5);
     cairo_fill(cr);
   }
-
-  cairo_destroy(cr);
-  cr = NULL;
 }
 
 static gboolean blink_timeout(gpointer data) {

@@ -39,16 +39,13 @@ static void horizontal_cycle(G_GNUC_UNUSED GtkWidget *widget) {
     horizontal_step = GRID_STEP;
 }
 
-static void horizontal_draw(GtkWidget *widget) {
-  cairo_t *cr;
+static void horizontal_draw(GtkWidget *widget, cairo_t *cr) {
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
   gint i;
 
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
-
-  cr = gdk_cairo_create(gtk_widget_get_window(widget));
 
   set_color_bg(cr);
   cairo_paint(cr);
@@ -58,9 +55,6 @@ static void horizontal_draw(GtkWidget *widget) {
     cairo_rectangle(cr, 0, i, w, 1);
   }
   cairo_fill(cr);
-
-  cairo_destroy(cr);
-  cr = NULL;
 }
 
 G_MODULE_EXPORT struct test_ops horizontal_ops = {.init = horizontal_init,

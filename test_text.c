@@ -34,8 +34,7 @@ static gchar text[] =
 
 static void text_init(GtkWidget *widget) { font_size_num = 1; }
 
-static void text_draw(GtkWidget *widget) {
-  cairo_t *cr;
+static void text_draw(GtkWidget *widget, cairo_t *cr) {
   PangoFontDescription *pft;
   PangoLayout *pl;
   GdkWindow *win = gtk_widget_get_window(widget);
@@ -48,7 +47,6 @@ static void text_draw(GtkWidget *widget) {
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
 
-  cr = gdk_cairo_create(gtk_widget_get_window(widget));
   cairo_set_line_width(cr, 1.0);
 
   pft = pango_font_description_new();
@@ -78,9 +76,6 @@ static void text_draw(GtkWidget *widget) {
   }
   pango_layout_set_text(pl, dtext->str, -1);
   pango_cairo_show_layout(cr, pl);
-
-  cairo_destroy(cr);
-  cr = NULL;
 
   pango_font_description_free(pft);
   pft = NULL;

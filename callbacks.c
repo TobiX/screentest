@@ -133,7 +133,7 @@ G_MODULE_EXPORT gboolean on_mainwin_draw_event(
   gdk_window_set_background_rgba(gtk_widget_get_window(widget), bg_color);
 
   if (current_test && current_test->draw)
-    current_test->draw(widget);
+    current_test->draw(widget, cr);
   return TRUE;
 }
 

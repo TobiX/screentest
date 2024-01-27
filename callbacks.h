@@ -25,7 +25,7 @@
 
 struct test_ops {
   void (*init)(GtkWidget *widget);
-  void (*draw)(GtkWidget *widget);
+  void (*draw)(GtkWidget *widget, cairo_t *cr);
   void (*cycle)(GtkWidget *widget);
   void (*close)(GtkWidget *widget);
 };
