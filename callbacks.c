@@ -33,7 +33,6 @@
 GdkColor fgcolors[COLOR_MAX];
 GdkColor *fg_color, *bg_color;
 GdkColor grays[GRAYS_MAX];
-GdkGC *gc, *backgc;
 int fg_count = COLOR_WHITE;
 
 static GtkWidget *mainwin = NULL;
@@ -78,26 +77,8 @@ G_MODULE_EXPORT void on_mainwin_realize(GtkWidget *widget,
 
   mainwin = widget;
 
-  gc = gdk_gc_new(gtk_widget_get_window(mainwin));
-  backgc = gdk_gc_new(gtk_widget_get_window(mainwin));
-
   if (current_test->init != NULL)
     current_test->init(widget);
-}
-
-static void update_fg_color(void) {
-  gdk_gc_set_rgb_fg_color(gc, fg_color);
-  gdk_gc_set_rgb_bg_color(backgc, fg_color);
-
-  gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
-}
-
-static void update_bg_color(void) {
-  gdk_rgb_find_color(gtk_widget_get_colormap(GTK_WIDGET(mainwin)), bg_color);
-  gdk_gc_set_rgb_bg_color(gc, bg_color);
-  gdk_gc_set_rgb_fg_color(backgc, bg_color);
-
-  gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
 }
 
 G_MODULE_EXPORT gboolean
@@ -117,7 +98,7 @@ on_mainwin_button_press_event(GtkWidget *widget, GdkEventButton *event,
       fg_count = COLOR_WHITE;
     gdk_color_free(fg_color);
     fg_color = gdk_color_copy(&fgcolors[fg_count]);
-    update_fg_color();
+    gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case 3:
     popup = gtk_builder_get_object(builder, "popup");
@@ -197,7 +178,7 @@ G_MODULE_EXPORT void on_fg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
   switch (gtk_dialog_run(GTK_DIALOG(fg_color_selector))) {
   case GTK_RESPONSE_OK:
     gtk_color_selection_get_current_color(colorsel, fg_color);
-    update_fg_color();
+    gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case GTK_RESPONSE_CANCEL:
   case GTK_RESPONSE_DELETE_EVENT:
@@ -221,7 +202,7 @@ G_MODULE_EXPORT void on_bg_color_activate(G_GNUC_UNUSED GtkMenuItem *menuitem,
   switch (gtk_dialog_run(GTK_DIALOG(bg_color_selector))) {
   case GTK_RESPONSE_OK:
     gtk_color_selection_get_current_color(colorsel, bg_color);
-    update_bg_color();
+    gdk_window_invalidate_rect(gtk_widget_get_window(mainwin), NULL, FALSE);
     break;
   case GTK_RESPONSE_CANCEL:
   case GTK_RESPONSE_DELETE_EVENT:

@@ -31,37 +31,32 @@
 
 #define BASIC_STEP 40
 
-static gchar fontname[] =
-    "-adobe-helvetica-bold-r-normal-*-14-*-*-*-p-*-iso8859-1";
-static GdkFont *font;
-
-static void basic_init(G_GNUC_UNUSED GtkWidget *widget) {
-  font = gdk_font_load(fontname);
-
-  if (!font) {
-    printf("Cannot load font %s, trying 'fixed'.\n", fontname);
-    font = gdk_font_load("fixed");
-  }
-}
-
-static void draw_boxes(GdkWindow *win, GdkColor *colors, gint ncols, gint x,
+static void draw_boxes(cairo_t *cr, GdkColor *colors, gint ncols, gint x,
                        gint y, gint d) {
+  GdkColor *col;
   int i;
 
   for (i = 0; i < ncols; i++) {
-    gdk_gc_set_rgb_fg_color(gc, &colors[i]);
+    col = &colors[i];
+    cairo_set_source_rgb(cr, col->red / (double)UINT16_MAX,
+                         col->green / (double)UINT16_MAX,
+                         col->blue / (double)UINT16_MAX);
 
-    gdk_draw_rectangle(win, gc, TRUE, x, y, d, d);
+    cairo_rectangle(cr, x, y, d, d);
+    cairo_fill(cr);
     x += d;
   }
 
-  gdk_gc_set_rgb_fg_color(gc, fg_color);
+  set_color_fg(cr);
 }
 
 static void basic_draw(GtkWidget *widget) {
+  cairo_t *cr;
+  PangoLayout *pl;
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
   gint i, b, d;
+  PangoRectangle ink_rect;
   gint maxwidth, maxheight;
   gint widths[7];
   static gchar *text[] = {
@@ -77,76 +72,102 @@ static void basic_draw(GtkWidget *widget) {
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
 
+  cr = gdk_cairo_create(gtk_widget_get_window(widget));
+  cairo_set_line_width(cr, 1.0);
+
+  pl = pango_cairo_create_layout(cr);
+
+  set_color_bg(cr);
+  cairo_paint(cr);
+
+  set_color_fg(cr);
+
   for (i = ((w - 1) % BASIC_STEP) / 2; i < w; i += BASIC_STEP)
-    gdk_draw_line(win, gc, i, 0, i, h - 1);
+    cairo_rectangle(cr, i, 0, 1, h);
   for (i = ((h - 1) % BASIC_STEP) / 2; i < h; i += BASIC_STEP)
-    gdk_draw_line(win, gc, 0, i, w - 1, i);
+    cairo_rectangle(cr, 0, i, w, 1);
+  cairo_fill(cr);
 
   d = w / 4;
   if (d > h / 4)
     d = h / 4;
 
   maxheight = 0;
-  for (i = 0; i < 7; i++) {
-    int x = gdk_string_height(font, gettext(text[i]));
-    if (x > maxheight)
-      maxheight = x;
-  }
-
   maxwidth = 0;
   for (i = 0; i < 7; i++) {
-    widths[i] = gdk_string_width(font, gettext(text[i]));
+    pango_layout_set_text(pl, gettext(text[i]), -1);
+    pango_layout_get_extents(pl, &ink_rect, NULL);
+    double x = pango_units_to_double(ink_rect.height);
+    if (x > maxheight)
+      maxheight = x;
+    widths[i] = pango_units_to_double(ink_rect.width);
     if (widths[i] > maxwidth)
       maxwidth = widths[i];
   }
 
   maxwidth += 20;
   maxheight = 3 * maxheight / 2;
-  gdk_draw_rectangle(win, gc, FALSE, (w - maxwidth) / 2, d / 2 - 2 * maxheight,
-                     maxwidth, 5 * maxheight);
-  gdk_draw_rectangle(win, gc, FALSE, (w - maxwidth) / 2,
-                     h - d / 2 - 2 * maxheight, maxwidth, 4 * maxheight);
-  gdk_draw_rectangle(win, backgc, TRUE, (w - maxwidth) / 2 + 1,
-                     d / 2 - 2 * maxheight + 1, maxwidth - 1,
-                     5 * maxheight - 1);
-  gdk_draw_rectangle(win, backgc, TRUE, (w - maxwidth) / 2 + 1,
-                     h - d / 2 - 2 * maxheight + 1, maxwidth - 1,
-                     4 * maxheight - 1);
 
-  gdk_draw_string(win, font, gc, (w - widths[0]) / 2, d / 2 - 2 * maxheight / 3,
-                  gettext(text[0]));
-  gdk_draw_string(win, font, gc, (w - widths[1]) / 2, d / 2 + maxheight / 3,
-                  gettext(text[1]));
-  gdk_draw_string(win, font, gc, (w - widths[2]) / 2, d / 2 + 4 * maxheight / 3,
-                  gettext(text[2]));
-  gdk_draw_string(win, font, gc, (w - widths[3]) / 2, d / 2 + 7 * maxheight / 3,
-                  gettext(text[3]));
+  cairo_rectangle(cr, (w - maxwidth) / 2 + 0.5, d / 2 - 2 * maxheight + 0.5,
+                  maxwidth, 5 * maxheight);
+  cairo_rectangle(cr, (w - maxwidth) / 2 + 0.5, h - d / 2 - 2 * maxheight + 0.5,
+                  maxwidth, 4 * maxheight);
+  cairo_stroke(cr);
 
-  gdk_draw_string(win, font, gc, (w - widths[4]) / 2,
-                  h - d / 2 - 2 * maxheight / 3, gettext(text[4]));
-  gdk_draw_string(win, font, gc, (w - widths[5]) / 2, h - d / 2 + maxheight / 3,
-                  gettext(text[5]));
-  gdk_draw_string(win, font, gc, (w - widths[6]) / 2,
-                  h - d / 2 + 4 * maxheight / 3, gettext(text[6]));
+  set_color_bg(cr);
+  cairo_rectangle(cr, (w - maxwidth) / 2 + 1, d / 2 - 2 * maxheight + 1,
+                  maxwidth - 1, 5 * maxheight - 1);
+  cairo_rectangle(cr, (w - maxwidth) / 2 + 1, h - d / 2 - 2 * maxheight + 1,
+                  maxwidth - 1, 4 * maxheight - 1);
+  cairo_fill(cr);
+
+  set_color_fg(cr);
+
+  cairo_move_to(cr, (w - widths[0]) / 2, d / 2 - 4 * maxheight / 3);
+  pango_layout_set_text(pl, gettext(text[0]), -1);
+  pango_cairo_show_layout(cr, pl);
+  cairo_move_to(cr, (w - widths[1]) / 2, d / 2 - maxheight / 3);
+  pango_layout_set_text(pl, gettext(text[1]), -1);
+  pango_cairo_show_layout(cr, pl);
+  cairo_move_to(cr, (w - widths[2]) / 2, d / 2 + 2 * maxheight / 3);
+  pango_layout_set_text(pl, gettext(text[2]), -1);
+  pango_cairo_show_layout(cr, pl);
+  cairo_move_to(cr, (w - widths[3]) / 2, d / 2 + 5 * maxheight / 3);
+  pango_layout_set_text(pl, gettext(text[3]), -1);
+  pango_cairo_show_layout(cr, pl);
+  cairo_move_to(cr, (w - widths[4]) / 2, h - d / 2 - 4 * maxheight / 3);
+  pango_layout_set_text(pl, gettext(text[4]), -1);
+  pango_cairo_show_layout(cr, pl);
+  cairo_move_to(cr, (w - widths[5]) / 2, h - d / 2 - maxheight / 3);
+  pango_layout_set_text(pl, gettext(text[5]), -1);
+  pango_cairo_show_layout(cr, pl);
+  cairo_move_to(cr, (w - widths[6]) / 2, h - d / 2 + 2 * maxheight / 3);
+  pango_layout_set_text(pl, gettext(text[6]), -1);
+  pango_cairo_show_layout(cr, pl);
 
   b = 7 * d / 4;
-  draw_boxes(win, fgcolors, COLOR_MAX, (w - b) / 2, h / 2 - b / COLOR_MAX,
+  draw_boxes(cr, fgcolors, COLOR_MAX, (w - b) / 2, h / 2 - b / COLOR_MAX,
              b / COLOR_MAX);
-  draw_boxes(win, grays, GRAYS_MAX, (w - b) / 2, h / 2, b / GRAYS_MAX);
-  w--;
-  h--;
-  gdk_draw_arc(win, gc, FALSE, 0, 0, d, d, 0, 360 * 64);
-  gdk_draw_arc(win, gc, FALSE, 0, h - d, d, d, 0, 360 * 64);
-  gdk_draw_arc(win, gc, FALSE, w - d, h - d, d, d, 0, 360 * 64);
-  gdk_draw_arc(win, gc, FALSE, w - d, 0, d, d, 0, 360 * 64);
-  gdk_draw_arc(win, gc, FALSE, w / 2 - d, h / 2 - d, d * 2, d * 2, 0, 360 * 64);
+  draw_boxes(cr, grays, GRAYS_MAX, (w - b) / 2, h / 2, b / GRAYS_MAX);
+
+  cairo_arc(cr, 0 + d / 2 + 0.5, 0 + d / 2 + 0.5, d / 2, 0,
+            2 * G_PI); // Upper left
+  cairo_new_sub_path(cr);
+  cairo_arc(cr, 0 + d / 2 + 0.5, h - d / 2 - 0.5, d / 2, 0,
+            2 * G_PI); // Lower left
+  cairo_new_sub_path(cr);
+  cairo_arc(cr, w - d / 2 - 0.5, h - d / 2 - 0.5, d / 2, 0,
+            2 * G_PI); // Lower right
+  cairo_new_sub_path(cr);
+  cairo_arc(cr, w - d / 2 - 0.5, 0 + d / 2 + 0.5, d / 2, 0,
+            2 * G_PI); // Upper right
+  cairo_new_sub_path(cr);
+  cairo_arc(cr, w / 2, h / 2, d, 0, 2 * G_PI);
+  cairo_stroke(cr);
+
+  cairo_destroy(cr);
+  cr = NULL;
 }
 
-static void basic_close(G_GNUC_UNUSED GtkWidget *widget) {
-  gdk_font_unref(font);
-}
-
-G_MODULE_EXPORT struct test_ops basic_ops = {.init = basic_init,
-                                             .draw = basic_draw,
-                                             .cycle = NULL,
-                                             .close = basic_close};
+G_MODULE_EXPORT struct test_ops basic_ops = {
+    .init = NULL, .draw = basic_draw, .cycle = NULL, .close = NULL};
