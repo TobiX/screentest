@@ -1,6 +1,7 @@
 Version 2.2 (Work in Progress)
 
 * Switch build system from Autotools to Meson
+* Upgrade from GTK+ 2 to 3
 
 Version 2.1
 

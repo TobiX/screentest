@@ -10,7 +10,7 @@ project(
 i18n = import('i18n')
 
 gmodule_dep = dependency('gmodule-2.0', version: '>= 1.1.3')
-gtk_dep = dependency('gtk+-2.0', version: '>= 2.24')
+gtk_dep = dependency('gtk+-3.0', version: '>= 3.4')
 screentest_deps = [
   gmodule_dep,
   gtk_dep,

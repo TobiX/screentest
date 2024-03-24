@@ -23,8 +23,7 @@
 
 #include "callbacks.h"
 
-static void lcdalign_draw(GtkWidget *widget) {
-  cairo_t *cr;
+static void lcdalign_draw(GtkWidget *widget, cairo_t *cr) {
   GdkWindow *win = gtk_widget_get_window(widget);
   gint w, h;
   gint i;
@@ -32,8 +31,6 @@ static void lcdalign_draw(GtkWidget *widget) {
 
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
-
-  cr = gdk_cairo_create(gtk_widget_get_window(widget));
 
   /* Background/Border */
   set_color_fg(cr);
@@ -54,9 +51,6 @@ static void lcdalign_draw(GtkWidget *widget) {
     cairo_line_to(cr, w - 1, i + 0.5);
   }
   cairo_stroke(cr);
-
-  cairo_destroy(cr);
-  cr = NULL;
 }
 
 G_MODULE_EXPORT struct test_ops lcdalign_ops = {

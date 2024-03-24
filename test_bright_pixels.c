@@ -40,20 +40,12 @@ static void bright_pixels_cycle(G_GNUC_UNUSED GtkWidget *widget) {
     current_color_idx = 0;
 }
 
-static void bright_pixels_draw(GtkWidget *widget) {
-  GdkColor *col;
-  cairo_t *cr;
-
-  cr = gdk_cairo_create(gtk_widget_get_window(widget));
+static void bright_pixels_draw(GtkWidget *widget, cairo_t *cr) {
+  GdkRGBA *col;
 
   col = &fgcolors[color_cycle[current_color_idx]];
-  cairo_set_source_rgb(cr, col->red / (double)UINT16_MAX,
-                       col->green / (double)UINT16_MAX,
-                       col->blue / (double)UINT16_MAX);
+  cairo_set_source_rgb(cr, col->red, col->green, col->blue);
   cairo_paint(cr);
-
-  cairo_destroy(cr);
-  cr = NULL;
 }
 
 G_MODULE_EXPORT struct test_ops bright_pixels_ops = {.init = bright_pixels_init,
