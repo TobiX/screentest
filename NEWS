@@ -1,5 +1,6 @@
 Version 2.2 (Work in Progress)
 
+* New test: fullscreen color gradients
 * Switch build system from Autotools to Meson
 * Upgrade from GTK+ 2 to 3
 

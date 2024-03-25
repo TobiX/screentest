@@ -39,6 +39,7 @@ screentest_srcs = [
   'test_basic.c',
   'test_blink.c',
   'test_bright_pixels.c',
+  'test_gradient.c',
   'test_grid.c',
   'test_horizontal.c',
   'test_lcdalign.c',

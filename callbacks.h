@@ -48,6 +48,7 @@ enum test_color {
 
 extern GdkRGBA fgcolors[];
 extern GdkRGBA *fg_color;
+extern GdkRGBA *bg_color;
 extern GdkRGBA grays[];
 
 void set_color_bg(cairo_t *cr);
