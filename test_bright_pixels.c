@@ -24,10 +24,12 @@
 #include <stdio.h>
 
 #include "callbacks.h"
+#include "screentest_colors.h"
 
 #define COLOR_COUNT 5
-static const int color_cycle[COLOR_COUNT] = {COLOR_RED, COLOR_GREEN, COLOR_BLUE,
-                                             COLOR_WHITE, COLOR_BLACK};
+static const int color_cycle[COLOR_COUNT] = {
+    SCREENTEST_COLORS_RED, SCREENTEST_COLORS_GREEN, SCREENTEST_COLORS_BLUE,
+    SCREENTEST_COLORS_WHITE, SCREENTEST_COLORS_BLACK};
 static int current_color_idx;
 
 static void bright_pixels_init(G_GNUC_UNUSED GtkWidget *widget) {
@@ -41,7 +43,7 @@ static void bright_pixels_cycle(G_GNUC_UNUSED GtkWidget *widget) {
 }
 
 static void bright_pixels_draw(GtkWidget *widget, cairo_t *cr) {
-  GdkRGBA *col;
+  const GdkRGBA *col;
 
   col = &fgcolors[color_cycle[current_color_idx]];
   cairo_set_source_rgb(cr, col->red, col->green, col->blue);

@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 
 #include "callbacks.h"
+#include "screentest_colors.h"
 
 #define GRID_STEP 64
 #define GRID_STEP_MIN 2
@@ -47,10 +48,10 @@ static void horizontal_draw(GtkWidget *widget, cairo_t *cr) {
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
 
-  set_color_bg(cr);
+  screentest_set_color_bg(cr);
   cairo_paint(cr);
 
-  set_color_fg(cr);
+  screentest_set_color_fg(cr);
   for (i = ((h - 1) % horizontal_step) / 2; i < h; i += horizontal_step) {
     cairo_rectangle(cr, 0, i, w, 1);
   }
