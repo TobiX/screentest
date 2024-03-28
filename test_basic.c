@@ -26,14 +26,15 @@
 
 #include "callbacks.h"
 #include "gettext.h"
+#include "screentest_colors.h"
 #define _(String) gettext(String)
 #define N_(String) gettext_noop(String)
 
 #define BASIC_STEP 40
 
-static void draw_boxes(cairo_t *cr, GdkRGBA *colors, gint ncols, gint x, gint y,
-                       gint d) {
-  GdkRGBA *col;
+static void draw_boxes(cairo_t *cr, const GdkRGBA *colors, gint ncols, gint x,
+                       gint y, gint d) {
+  const GdkRGBA *col;
   int i;
 
   for (i = 0; i < ncols; i++) {
@@ -45,7 +46,7 @@ static void draw_boxes(cairo_t *cr, GdkRGBA *colors, gint ncols, gint x, gint y,
     x += d;
   }
 
-  set_color_fg(cr);
+  screentest_set_color_fg(cr);
 }
 
 static void basic_draw(GtkWidget *widget, cairo_t *cr) {
@@ -73,10 +74,10 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
 
   pl = pango_cairo_create_layout(cr);
 
-  set_color_bg(cr);
+  screentest_set_color_bg(cr);
   cairo_paint(cr);
 
-  set_color_fg(cr);
+  screentest_set_color_fg(cr);
 
   for (i = ((w - 1) % BASIC_STEP) / 2; i < w; i += BASIC_STEP)
     cairo_rectangle(cr, i, 0, 1, h);
@@ -110,14 +111,14 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
                   maxwidth, 4 * maxheight);
   cairo_stroke(cr);
 
-  set_color_bg(cr);
+  screentest_set_color_bg(cr);
   cairo_rectangle(cr, (w - maxwidth) / 2 + 1, d / 2 - 2 * maxheight + 1,
                   maxwidth - 1, 5 * maxheight - 1);
   cairo_rectangle(cr, (w - maxwidth) / 2 + 1, h - d / 2 - 2 * maxheight + 1,
                   maxwidth - 1, 4 * maxheight - 1);
   cairo_fill(cr);
 
-  set_color_fg(cr);
+  screentest_set_color_fg(cr);
 
   cairo_move_to(cr, (w - widths[0]) / 2, d / 2 - 4 * maxheight / 3);
   pango_layout_set_text(pl, gettext(text[0]), -1);
@@ -142,9 +143,10 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
   pango_cairo_show_layout(cr, pl);
 
   b = 7 * d / 4;
-  draw_boxes(cr, fgcolors, COLOR_MAX, (w - b) / 2, h / 2 - b / COLOR_MAX,
-             b / COLOR_MAX);
-  draw_boxes(cr, grays, GRAYS_MAX, (w - b) / 2, h / 2, b / GRAYS_MAX);
+  draw_boxes(cr, fgcolors, SCREENTEST_COLORS_MAX, (w - b) / 2,
+             h / 2 - b / SCREENTEST_COLORS_MAX, b / SCREENTEST_COLORS_MAX);
+  draw_boxes(cr, grays, SCREENTEST_GRAYS_MAX, (w - b) / 2, h / 2,
+             b / SCREENTEST_GRAYS_MAX);
 
   cairo_arc(cr, 0 + d / 2 + 0.5, 0 + d / 2 + 0.5, d / 2, 0,
             2 * G_PI); // Upper left
