@@ -39,7 +39,7 @@ with using the command line:
 You will need the following to compile this program:
 
 - Meson >= 0.61 (tested with 1.4)
-- GTK+3 >= 3.4 (tested on 3.24)
+- GTK3 >= 3.4 (tested on 3.24)
 - glib >= 2.0 (tested on 2.80)
 
 You will need both the libraries (either in static or dynamic form),
