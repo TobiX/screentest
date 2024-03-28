@@ -36,24 +36,22 @@ with using the command line:
 
 ### 0. PREREQUISITIES
 
-You will need the following libraries to compile this program:
+You will need the following to compile this program:
 
-- GTK+ >= 2.0 (tested on 2.10.13)
-- glib >= 2.0 (tested on 2.12.13)
+- Meson >= 0.61 (tested with 1.4)
+- GTK+3 >= 3.4 (tested on 3.24)
+- glib >= 2.0 (tested on 2.80)
 
 You will need both the libraries (either in static or dynamic form),
 and their header files (which may not be installed on your system
-by default; for example, check for gtk+-devel, glib-devel and XFree86-devel
-packages on Red Hat Linux or Mandrake Linux). This also assumes that the
-"pkg-config" command is in your PATH.
+by default.
 
 The source of screentest is available at the GitHub release page:
     https://github.com/TobiX/screentest/releases
 
 You will also need the ISO C9x-compliant C compiler. This program uses
 ISO C9x-style structure initializers, so this is a NECESSARY CONDITION.
-You can use for example gcc-3 or later, which is available on most
-Unices.
+You can use for example gcc or clang, which is available on most Unices.
 
 The build process has been tested on Debian unstable (www.debian.org),
 but should work on any recent version of UNIX-compatible system.
@@ -61,7 +59,7 @@ but should work on any recent version of UNIX-compatible system.
 ### 1. PREPARING THE SOURCES
 
 Unpack the distribution using the following command:
-    tar xvzf screentest-<version>.tar.gz
+    tar xvaf screentest-<version>.tar.xz
 Change the directory to the source directory:
     cd screentest-<version>
 Set it up for your system:
