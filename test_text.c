@@ -24,6 +24,7 @@
 #include <stdio.h>
 
 #include "callbacks.h"
+#include "screentest_colors.h"
 
 static gint font_sizes[] = {8, 10, 12, 14, 18, 24};
 
@@ -58,10 +59,10 @@ static void text_draw(GtkWidget *widget, cairo_t *cr) {
   pango_layout_set_justify(pl, TRUE);
   pango_layout_set_width(pl, pango_units_from_double(w));
 
-  set_color_bg(cr);
+  screentest_set_color_bg(cr);
   cairo_paint(cr);
 
-  set_color_fg(cr);
+  screentest_set_color_fg(cr);
 
   pango_layout_set_text(pl, text, -1);
   pango_layout_get_extents(pl, &ink_rect, NULL);

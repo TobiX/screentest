@@ -20,6 +20,7 @@
  */
 
 #include "callbacks.h"
+#include "screentest_colors.h"
 
 enum GRADIENT_ORIENTATION {
   GO_TOP_LEFT_TO_RIGHT_BOTTOM,

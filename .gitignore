@@ -10,6 +10,7 @@
 /build-aux/
 /config.*
 /configure
+/doc/html/
 /libtool
 /po/POTFILES
 Makefile

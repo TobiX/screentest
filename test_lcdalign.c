@@ -22,6 +22,7 @@
 #include <gtk/gtk.h>
 
 #include "callbacks.h"
+#include "screentest_colors.h"
 
 static void lcdalign_draw(GtkWidget *widget, cairo_t *cr) {
   GdkWindow *win = gtk_widget_get_window(widget);
@@ -33,11 +34,11 @@ static void lcdalign_draw(GtkWidget *widget, cairo_t *cr) {
   w = gdk_window_get_width(win);
 
   /* Background/Border */
-  set_color_fg(cr);
+  screentest_set_color_fg(cr);
   cairo_paint(cr);
 
   /* Pattern */
-  set_color_bg(cr);
+  screentest_set_color_bg(cr);
   cairo_set_line_width(cr, 1.0);
   cairo_set_dash(cr, d, 1, 0);
   for (i = 1; i < h - 1; i += 2) {

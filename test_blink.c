@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 
 #include "callbacks.h"
+#include "screentest_colors.h"
 
 static guint timeout;
 
@@ -40,17 +41,17 @@ static void blink_draw(GtkWidget *widget, cairo_t *cr) {
   w = gdk_window_get_width(win);
 
   if (blink_step) {
-    set_color1 = set_color_bg;
-    set_color2 = set_color_fg;
+    set_color1 = screentest_set_color_bg;
+    set_color2 = screentest_set_color_fg;
   } else {
-    set_color1 = set_color_fg;
-    set_color2 = set_color_bg;
+    set_color1 = screentest_set_color_fg;
+    set_color2 = screentest_set_color_bg;
   }
 
-  set_color_fg(cr);
+  screentest_set_color_fg(cr);
   cairo_paint(cr);
 
-  set_color_bg(cr);
+  screentest_set_color_bg(cr);
   cairo_rectangle(cr, 1, 1, w - 2, h - 2);
   cairo_fill(cr);
 

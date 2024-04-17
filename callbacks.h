@@ -32,26 +32,4 @@ struct test_ops {
 
 extern struct test_ops basic_ops;
 
-enum test_color {
-  COLOR_WHITE,
-  COLOR_RED,
-  COLOR_GREEN,
-  COLOR_BLUE,
-  COLOR_CYAN,
-  COLOR_MAGENTA,
-  COLOR_YELLOW,
-  COLOR_BLACK,
-  COLOR_MAX
-};
-
-#define GRAYS_MAX COLOR_MAX
-
-extern GdkRGBA fgcolors[];
-extern GdkRGBA *fg_color;
-extern GdkRGBA *bg_color;
-extern GdkRGBA grays[];
-
-void set_color_bg(cairo_t *cr);
-void set_color_fg(cairo_t *cr);
-
 #endif // SCREENTEST_CALLBACKS_H
