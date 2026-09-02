@@ -1,8 +1,7 @@
 /*
  *  Screentest - CRT/LCD monitor testing utility.
  *  https://tobix.github.io/screentest/
- *  Copyright (C) 2001 Jan "Yenya" Kasprzak <kas@fi.muni.cz>
- *  Copyright (C) 2006-2017 Tobias Gruetzmacher <tobias-screentest@23.gs>
+ *  Copyright (C) 2025 Markus Prasser
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -18,18 +17,15 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#include "screentest_app.h"
+#ifndef SCREENTEST_APP_H
+#define SCREENTEST_APP_H
 
-GtkBuilder *builder;
+#include <gtk/gtk.h>
 
-int main(int argc, char *argv[]) {
-  ScreentestApp *app;
-  int status;
+#define SCREENTEST_APP_TYPE (screentest_app_get_type())
+G_DECLARE_FINAL_TYPE(ScreentestApp, screentest_app, SCREENTEST, APP,
+                     GtkApplication)
 
-  app = screentest_app_new();
-  status = g_application_run(G_APPLICATION(app), argc, argv);
-  g_object_unref(app);
-  app = NULL;
+ScreentestApp *screentest_app_new(void);
 
-  return status;
-}
+#endif // SCREENTEST_APP_H

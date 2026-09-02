@@ -36,6 +36,7 @@ subdir('po')
 
 screentest_srcs = [
   'callbacks.c',
+  'screentest_app.c',
   'screentest_colors.c',
   'test_basic.c',
   'test_blink.c',
