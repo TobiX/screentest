@@ -48,6 +48,8 @@ static void blink_draw(GtkWidget *widget, cairo_t *cr) {
     set_color2 = screentest_set_color_bg;
   }
 
+  cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
+
   screentest_set_color_fg(cr);
   cairo_paint(cr);
 

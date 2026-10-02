@@ -33,6 +33,8 @@ static void lcdalign_draw(GtkWidget *widget, cairo_t *cr) {
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
 
+  cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
+
   /* Background/Border */
   screentest_set_color_fg(cr);
   cairo_paint(cr);

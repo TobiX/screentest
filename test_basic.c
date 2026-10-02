@@ -77,11 +77,15 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
 
   screentest_set_color_fg(cr);
 
+  cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
+
   for (i = ((w - 1) % BASIC_STEP) / 2; i < w; i += BASIC_STEP)
     cairo_rectangle(cr, i, 0, 1, h);
   for (i = ((h - 1) % BASIC_STEP) / 2; i < h; i += BASIC_STEP)
     cairo_rectangle(cr, 0, i, w, 1);
   cairo_fill(cr);
+
+  cairo_set_antialias(cr, CAIRO_ANTIALIAS_DEFAULT);
 
   d = w / 4;
   if (d > h / 4)
