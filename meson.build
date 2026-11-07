@@ -53,9 +53,7 @@ executable(
   meson.project_name(),
   'main.c',
   c_args: [
-    '-DGSEAL_ENABLE',
     '-DGTK_DISABLE_DEPRECATED',
-    '-DGTK_DISABLE_SINGLE_INCLUDES',
   ],
   dependencies: screentest_deps,
   install: true,
