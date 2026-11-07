@@ -54,7 +54,6 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
   gint i, b, d;
   PangoRectangle ink_rect;
   gint maxwidth, maxheight;
-  gint widths[7];
   static const gchar *const text[] = {
       "Screentest v" VERSION,
       "(C) 2001 Jan \"Yenya\" Kasprzak <kas@fi.muni.cz>",
@@ -64,6 +63,7 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
       N_("Middle Button - color cycle"),
       N_("Right Button - menu"),
   };
+  gint widths[G_N_ELEMENTS(text)];
 
   h = gdk_window_get_height(win);
   w = gdk_window_get_width(win);
@@ -94,7 +94,7 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
 
   maxheight = 0;
   maxwidth = 0;
-  for (i = 0; i < 7; i++) {
+  for (i = 0; i < G_N_ELEMENTS(text); i++) {
     pango_layout_set_text(pl, _(text[i]), -1);
     pango_layout_get_extents(pl, &ink_rect, NULL);
     double x = pango_units_to_double(ink_rect.height);
