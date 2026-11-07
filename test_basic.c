@@ -55,7 +55,7 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
   PangoRectangle ink_rect;
   gint maxwidth, maxheight;
   gint widths[7];
-  static gchar *text[] = {
+  static const gchar *const text[] = {
       "Screentest v" VERSION,
       "(C) 2001 Jan \"Yenya\" Kasprzak <kas@fi.muni.cz>",
       "(C) 2006-2017 Tobias Gruetzmacher <tobias-screentest@23.gs>",
