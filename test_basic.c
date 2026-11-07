@@ -79,6 +79,7 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
 
   cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
 
+  // Draw the background lines
   for (i = ((w - 1) % BASIC_STEP) / 2; i < w; i += BASIC_STEP)
     cairo_rectangle(cr, i, 0, 1, h);
   for (i = ((h - 1) % BASIC_STEP) / 2; i < h; i += BASIC_STEP)
@@ -107,12 +108,14 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
   maxwidth += 20;
   maxheight = 3 * maxheight / 2;
 
+  // Draw text boxes
   cairo_rectangle(cr, (w - maxwidth) / 2 + 0.5, d / 2 - 2 * maxheight + 0.5,
                   maxwidth, 5 * maxheight);
   cairo_rectangle(cr, (w - maxwidth) / 2 + 0.5, h - d / 2 - 2 * maxheight + 0.5,
                   maxwidth, 4 * maxheight);
   cairo_stroke(cr);
 
+  // Fill background of text boxes
   screentest_set_color_bg(cr);
   cairo_rectangle(cr, (w - maxwidth) / 2 + 1, d / 2 - 2 * maxheight + 1,
                   maxwidth - 1, 5 * maxheight - 1);
@@ -122,6 +125,7 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
 
   screentest_set_color_fg(cr);
 
+  // Write the texts into the boxes
   cairo_move_to(cr, (w - widths[0]) / 2, d / 2 - 4 * maxheight / 3);
   pango_layout_set_text(pl, _(text[0]), -1);
   pango_cairo_show_layout(cr, pl);
@@ -150,6 +154,7 @@ static void basic_draw(GtkWidget *widget, cairo_t *cr) {
   draw_boxes(cr, grays, SCREENTEST_GRAYS_MAX, (w - b) / 2, h / 2,
              b / SCREENTEST_GRAYS_MAX);
 
+  // Draw the four circles in the edges
   cairo_arc(cr, 0 + d / 2 + 0.5, 0 + d / 2 + 0.5, d / 2, 0,
             2 * G_PI); // Upper left
   cairo_new_sub_path(cr);
