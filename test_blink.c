@@ -30,8 +30,8 @@ static guint timeout;
 static gint blink_type;
 static gint blink_step;
 
-void (*set_color1)(cairo_t *cr);
-void (*set_color2)(cairo_t *cr);
+static void (*set_color1)(cairo_t *cr);
+static void (*set_color2)(cairo_t *cr);
 
 static void blink_draw(GtkWidget *widget, cairo_t *cr) {
   GdkWindow *win = gtk_widget_get_window(widget);
@@ -95,7 +95,9 @@ static void blink_init(GtkWidget *widget) {
   timeout = g_timeout_add(1000, blink_timeout, widget);
 }
 
-void blink_cycle(G_GNUC_UNUSED GtkWidget *widget) { blink_type = !blink_type; }
+static void blink_cycle(G_GNUC_UNUSED GtkWidget *widget) {
+  blink_type = !blink_type;
+}
 
 static void blink_close(G_GNUC_UNUSED GtkWidget *widget) {
   g_source_remove(timeout);
