@@ -124,7 +124,8 @@ G_MODULE_EXPORT void on_mode_change(GtkMenuItem *menuitem,
       dialog = NULL;
       gtk_main_quit();
     }
-    free(test_struct);
+    g_free(test_struct);
+    test_struct = NULL;
     g_module_close(exe);
     if (current_test != NULL && current_test->init != NULL) {
       current_test->init(mainwin);
