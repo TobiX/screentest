@@ -90,10 +90,16 @@ G_MODULE_EXPORT gboolean on_mainwin_key_press_event(
 
 G_MODULE_EXPORT gboolean on_mainwin_draw_event(
     GtkWidget *widget, cairo_t *cr, G_GNUC_UNUSED gpointer user_data) {
-  gdk_window_set_background_rgba(gtk_widget_get_window(widget), bg_color);
+  // Guarantee defined contents even if a test leaves areas unpainted
+  screentest_set_color_bg(cr);
+  cairo_paint(cr);
 
-  if (current_test && current_test->draw)
+  if (current_test && current_test->draw) {
+    cairo_save(cr);
     current_test->draw(widget, cr);
+    cairo_restore(cr);
+  }
+
   return TRUE;
 }
 
@@ -124,7 +130,8 @@ G_MODULE_EXPORT void on_mode_change(GtkMenuItem *menuitem,
       dialog = NULL;
       gtk_main_quit();
     }
-    free(test_struct);
+    g_free(test_struct);
+    test_struct = NULL;
     g_module_close(exe);
     if (current_test != NULL && current_test->init != NULL) {
       current_test->init(mainwin);
